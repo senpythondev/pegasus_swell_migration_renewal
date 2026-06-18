@@ -1,0 +1,83 @@
+# ============================================================================
+#  pegasus-renewal / WordPress Docker staging
+#  Tracks: docker-compose.yml, nginx.conf, uploads.ini, wp-content/themes/swell_child/
+#  Excludes everything else (WordPress core, secrets, third-party, media, backups)
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Project-level: backups, OS, IDE, editor, logs
+# ---------------------------------------------------------------------------
+backup/
+*.log
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.code-workspace
+.env
+.env.*
+
+# Docker named-volume mount point (if ever bind-mounted)
+db_data/
+wp_data/db_data/
+
+# ---------------------------------------------------------------------------
+# wp_data/ root: ignore EVERYTHING by default, re-include only wp-content/
+# (covers WP core: wp-admin, wp-includes, wp-*.php, xmlrpc.php, .htaccess,
+#  license.txt, readme.html, AND the sensitive wp-config.php* files)
+# ---------------------------------------------------------------------------
+wp_data/*
+!wp_data/wp-content/
+
+# ---------------------------------------------------------------------------
+# wp-content/  — exclude everything by default
+# ---------------------------------------------------------------------------
+# WP-generated noise
+wp_data/wp-content/index.php
+wp_data/wp-content/index.php-old
+wp_data/wp-content/.htaccess
+wp_data/wp-content/cache/
+wp_data/wp-content/wpo-cache/
+wp_data/wp-content/upgrade/
+wp_data/wp-content/upgrade-temp-backup/
+wp_data/wp-content/languages/
+wp_data/wp-content/languages-old/
+wp_data/wp-content/mu-plugins-old/
+wp_data/wp-content/plugins-old/
+wp_data/wp-content/themes-old/
+wp_data/wp-content/uploads/
+wp_data/wp-content/uploads-old/
+wp_data/wp-content/uploads-old-old/
+
+# UpdraftPlus backups (large, may contain DB dumps with secrets)
+wp_data/wp-content/updraft/
+
+# Debug / error logs
+wp_data/wp-content/debug.log
+wp_data/wp-content/error_log
+
+# ---------------------------------------------------------------------------
+# Third-party plugins: exclude every plugin
+# ---------------------------------------------------------------------------
+wp_data/wp-content/plugins/
+
+# ---------------------------------------------------------------------------
+# Themes: exclude all by default, then re-include the child theme
+# ---------------------------------------------------------------------------
+wp_data/wp-content/themes/*
+!wp_data/wp-content/themes/swell_child/
+# (SWELL parent theme is a paid product — never commit)
+
+# ---------------------------------------------------------------------------
+# Node / build artifacts (if frontend tooling is added later)
+# ---------------------------------------------------------------------------
+node_modules/
+dist/
+build/
+.cache/
+__pycache__/
+*.pyc

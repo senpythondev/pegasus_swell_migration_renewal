@@ -1,0 +1,77 @@
+services:
+  # ===== データベース (本番に合わせて MySQL 5.7) =====
+  db:
+    image: mysql:5.7
+    container_name: pegasus_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass_change_me
+      MYSQL_DATABASE: pegasus_wp
+      MYSQL_USER: pegasus
+      MYSQL_PASSWORD: pegasus_pass_change_me
+    volumes:
+      - db_data:/var/lib/mysql
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
+    networks:
+      - pegasus_net
+
+  # ===== PHP + WordPress 本体 =====
+  wordpress:
+    image: wordpress:php8.1-fpm
+    container_name: pegasus_wp
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: pegasus_wp
+      WORDPRESS_DB_USER: pegasus
+      WORDPRESS_DB_PASSWORD: pegasus_pass_change_me
+      # 本番と同じテーブル接頭辞に合わせる(重要)
+      WORDPRESS_TABLE_PREFIX: wp04447a
+      WORDPRESS_DEBUG: "0"
+    volumes:
+      - ./wp_data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - pegasus_net
+
+  # ===== Nginx (Webサーバー) =====
+  nginx:
+    image: nginx:latest
+    container_name: pegasus_nginx
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    ports:
+      # ホストの 8080 番ポートで公開(既存案件と衝突しないよう8080を使用)
+      - "8080:80"
+    volumes:
+      - ./wp_data:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - pegasus_net
+
+  # ===== phpMyAdmin (DB操作用・任意) =====
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pegasus_pma
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      UPLOAD_LIMIT: 256M
+    ports:
+      - "8081:80"
+    networks:
+      - pegasus_net
+
+volumes:
+  db_data:
+
+networks:
+  pegasus_net:
+    driver: bridge
