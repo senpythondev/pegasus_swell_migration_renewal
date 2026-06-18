@@ -1,0 +1,4 @@
+source,target,regex,code
+/user-dicision1/,/user-decision1/,0,301
+/category/user-dicision/,/category/user-decision/,0,301
+/news_category/infomation/,/news_category/information/,0,301
