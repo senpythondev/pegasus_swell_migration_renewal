@@ -112,7 +112,63 @@ WordPress 側は次のいずれかで mailpit:1025 へ送信:
 
 ---
 
-## 6. まとめ
+## 6. まとめ（第一段階）
 - CF7フォーム2件（4803お問い合わせ / 4804説明会申込）を設計どおり作成。宛先・From/Reply-To・自動返信・確認欄検証まで設定・確認済み。
 - 既存MW WP Form・DAE・Redirectionは無変更で並存。本番切替は未実施。
 - メール実送信は環境未整備（MTAなし）→ mailpit 導入を推奨し、送信テストは次段階へ。
+
+---
+
+# 第二段階（mailpit導入・送信テスト・Flamingo・確認画面301転送）
+
+**実施日:** 2026年6月24日
+
+## A. mailpit 導入（Docker構成変更）
+- 変更前 `docker-compose.yml` を `backup/docker-compose.yml.pre_mailpit_20260624` に保全。
+- `docker-compose.yml` に **mailpit サービス**追加（`axllent/mailpit`、SMTP 1025 / Web UI 8025、`pegasus_net` に配置）。既存サービスのブロックは一切変更せず**追記のみ**。
+- `docker compose up -d --no-recreate mailpit` で **mailpit のみ起動**。
+- **既存サービスへの影響なしを確認**:
+  - db / nginx / phpmyadmin = **Up 3 weeks（無停止）**、wordpress = **Up 6 days（無停止）**＝再作成されていない。
+  - サイト全ページ200（/・/contact/・/application/・/homeworker/・/news/・/reports/）。
+  - mailpit Web UI（http://localhost:8025/）= 200、wordpress→`mailpit:1025` SMTP 疎通OK。
+- WordPress→mailpit 送信は **Code Snippets** で実装（id=6「テスト用SMTP送信(mailpit)」/ scope=global / active）。`phpmailer_init` で `mailpit:1025` へ。**※本番では無効化必須**（説明をスニペットに明記）。
+- `wp_mail()` テスト → mailpit 受信を確認（基盤OK）。
+
+## B. メール送信テスト（CF7実送信・mailpitで目視）
+| テスト | 結果 |
+|---|---|
+| お問い合わせ(4803) 正常送信 | status=mail_sent。**管理通知 To=`info@[managed-domain]`**、自動返信 To=入力アドレス |
+| 説明会申込(4804) 正常送信 | status=mail_sent。**管理通知 To=`setsumei-kai@[managed-domain]`**、自動返信 To=入力アドレス |
+| 宛先取り違え | ✅ **なし**（お問い合わせ=info / 説明会=setsumei-kai、mailpitで目視確認） |
+| From / Reply-To | ✅ From=サイトドメイン、**Reply-To=入力アドレス**（管理通知ヘッダで確認） |
+| メール確認欄 不一致 | ✅ status=**validation_failed**、`your-email-confirm`にエラー、**mailpit受信0件（送信されない）** |
+
+## C. Flamingo 導入（送信データ保存）
+- Flamingo（CF7作者製・wordpress.org版）を `wp-content/plugins/flamingo` に配置 → 有効化（`is_plugin_active`=yes）。サイト200維持。
+- CF7テスト送信 → **flamingo_inbound 投稿が作成**され、`_field_your-name / _field_your-email / _field_your-message / _from` が保存されることを確認。
+- 備考（軽微）: 受信タイトルが `[your-subject]` 表示。フォームに `your-subject` 項目が無いためで、**データ本体は各フィールドに正しく保存**。必要なら Flamingo のタイトルマッピングを後日調整。
+- ※ Flamingo はサードパーティのため Git 非対象（`wp-content/plugins/` 除外）。
+
+## D. 確認画面の301転送（Redirection 4件追加）
+- 実施前に `backup/redirection_pre_4urls_20260624.sql`（items/groups）を保全。
+- group **pegasus-renewal（id=3）** に4件追加（既存3件とは別・衝突なし）:
+
+| 旧URL | → | 推移 |
+|---|---|---|
+| /contact/contact-confirm/ | /contact/ | 301 → 最終200 |
+| /contact/contact-thanks/ | /contact/ | 301 → 最終200 |
+| /application/confirm/ | /application/ | 301 → 最終200 |
+| /application/thanks/ | /application/ | 301 → 最終200 |
+
+- **既存3件（タイポ修正）維持**: /user-dicision1/・/category/user-dicision/・/news_category/infomation/ すべて301継続。
+- 追加後も **CF7メール送信は正常**（mail_sent・2通）。
+- ※ 入力ページ /contact/・/application/ は**まだMWショートコードのまま**（本番切替=ショートコード差し替えは次段階）。確認/完了URLが先に転送される「移行途中の状態」だが、ステージングでの想定どおり。
+
+## E. 第二段階 後の状態
+- コンテナ: db/nginx/pma/wordpress 無停止 ＋ mailpit（healthy）。
+- データ: **MW=5（無変更）/ CF7=3（既定1＋移行2）/ Redirection=7（3＋4）/ Flamingo保存=2件**。
+- 既存 MW WP Form・Download After Email（停止中）は**無変更で並存**。本番切替は未実施。
+
+## F. 第二段階で追加した「本番移行時に戻す/無効化すべきもの」
+- Code Snippets id=6「テスト用SMTP送信(mailpit)」… **本番では無効化**（本番は実SMTP/サーバMTAを使用）。
+- mailpit サービス … ステージング専用。本番compose には載せない。

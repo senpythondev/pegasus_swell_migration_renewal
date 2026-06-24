@@ -69,6 +69,17 @@ services:
     networks:
       - pegasus_net
 
+  # ===== mailpit (テスト用SMTP・実配信せず捕捉) =====
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: pegasus_mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"   # Web UI(受信メール閲覧)
+      - "1025:1025"   # SMTP(WordPress から mailpit:1025 で送信)
+    networks:
+      - pegasus_net
+
 volumes:
   db_data:
 
