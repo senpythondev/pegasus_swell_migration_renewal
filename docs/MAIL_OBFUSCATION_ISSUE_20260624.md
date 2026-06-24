@@ -134,3 +134,51 @@ DB全体（revision/attachment 除く・全post_status）を複数シグネチ�
 - **テーマ移行が引き金**：本番(TCD)は `<script>` で動作、SWELL移行時の保存でscript剥がれ＋符号化。本番もSWELL切替時に同事象が起きる見込み（要・移行チェックリスト反映）。
 - **影響:1ページのみ（/application/）。**
 - **推奨:** 案A（クリーンmailto、必要なら軽難読化はサーバ側ショートコード）。実装は方針確定後に別途。
+
+---
+
+## 7. 修正の実施記録（2026年6月25日・案A適用）
+
+**ステータス:** ステージングで修正完了。本番は無変更。
+
+### 採用方式：サーバー側ショートコード（KSES耐性）
+- Code Snippets にショートコード **`[pega_setsumei_mail]`**（id=7「メールリンク(個別説明会・antispambot)」/ scope=global / active）を追加。
+- 出力：`<a href="mailto:（antispambot符号化アドレス）?subject=個別説明会希望">ここをクリックすると直接メールが送れます</a>`
+  - WordPress標準 `antispambot()` で**メールアドレスをHTMLエンティティ符号化**（JS不要・確実に動作・軽いスパム対策）。
+  - 件名は `個別説明会希望` を `rawurlencode`。
+- post 151 の本文：壊れた `<!-- wp:html -->…<!-- /wp:html -->` ブロック**のみ**を、`<!-- wp:shortcode -->[pega_setsumei_mail]<!-- /wp:shortcode -->` に置換。CF7（id=4804）・案内文「件名に『個別説明会希望』…」・見出し等の他要素は無変更。
+- **生のメールアドレス／`<script>` を post_content に保存しない**ため、Gutenbergで再保存しても KSES に壊されない。
+
+### なぜ直書きでなくショートコードか
+- 直書き `mailto:` は post_content にメールアドレスが露出し、再保存時に整形され得る。サーバー側組み立てなら、本文には `[pega_setsumei_mail]` のみ＝KSESの影響を受けず、アドレスは PHP（スニペット）側に一元管理。
+
+### 動作確認結果（ステージング）
+| 項目 | 結果 |
+|---|---|
+| /application/ HTTP | 200 |
+| 難読化コードのテキスト表示 | **消滅**（function converter / charCodeAt / `&lt;!--` = 各0） |
+| mailto リンク出力 | ✅ `href="mailto:…(antispambot)…?subject=個別説明会希望"`、文言「ここをクリックすると直接メールが送れます」 |
+| ショートコードのリテラル残り | 0（実行済み） |
+| 案内文「件名に『個別説明会希望』」 | 維持 |
+| CF7 申込フォーム（f4804・venue） | ✅ 引き続き正常表示 |
+| post_content の安全性 | 生メール=0 / converter=0 / `[pega_setsumei_mail]`=1（KSES耐性） |
+| サイト無破損 | /application/・/contact/・/・/homeworker/・/news/ すべて200 |
+| 全DBの難読化残存 | **0件** |
+
+- 実施前バックアップ：`backup/application_page_pre_mailfix_20260625.sql`（post 151 本文・gitignore対象）。
+
+---
+
+## 8. 本番カットオーバー用 手順（移行チェックリスト項目）
+
+> 本番(TCD NANO)では現在 `<script>` 直書きで正常動作しているが、**本番を SWELL へ切り替えると /application/ の同ブロックが script 剥がれ＋エンティティ符号化で壊れる**。本番移行時に必ず以下を適用すること。
+
+**チェックリスト項目（/application/ メールリンク）**
+1. 本番DBを SWELL 用に移行後、`/application/`（該当 post）に難読化スクリプトが**テキスト表示されていないか**を確認（`function converter` / `&lt;!--` の有無）。
+2. ショートコード方式を本番にも適用：
+   - 本ステージングの Code Snippets スニペット「メールリンク(個別説明会・antispambot)」を**本番にもインポート/作成**（コードは本書 §7 のとおり。アドレスは `setsumei-kai@[managed-domain]`）。
+   - 本番 `/application/` 本文の壊れた `wp:html` ブロックを `<!-- wp:shortcode -->[pega_setsumei_mail]<!-- /wp:shortcode -->` に置換。
+3. 動作確認：難読化テキスト非表示・mailtoリンク動作・CF7表示・ページ200。
+4. 併せて、他ページに同種ブロックが無いか再走査（移行時点のDBで `function converter` 等を検索。本調査時点ではステージング上 /application/ のみ）。
+
+> 補足：このスニペットは汎用化容易（宛先・件名・文言を引数化すれば他フォーム/拠点にも転用可）。本番では必要に応じてパラメータ化を検討。
