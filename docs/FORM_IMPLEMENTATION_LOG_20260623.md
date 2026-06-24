@@ -172,3 +172,40 @@ WordPress 側は次のいずれかで mailpit:1025 へ送信:
 ## F. 第二段階で追加した「本番移行時に戻す/無効化すべきもの」
 - Code Snippets id=6「テスト用SMTP送信(mailpit)」… **本番では無効化**（本番は実SMTP/サーバMTAを使用）。
 - mailpit サービス … ステージング専用。本番compose には載せない。
+
+---
+
+# 第三段階の前段：入力ページのCF7切替（ステージング内）
+
+**実施日:** 2026年6月24日
+**範囲:** /contact/・/application/ の入力フォームを MW WP Form → CF7 に差替（ステージングのみ・本番無変更）。MW WP Form 定義は**削除せず保持**。
+
+## A. 差替内容（フォームのショートコードのみ・他要素は不変）
+| ページ | 旧（MW） | 新（CF7） |
+|---|---|---|
+| /contact/（155） | `[mwform_formkey key="1352"]` | `[contact-form-7 id="4803"]`（お問い合わせ） |
+| /application/（151） | `[mwform_formkey key="1369"]` | `[contact-form-7 id="4804"]`（説明会申込） |
+
+- 各ページとも旧ショートコードの出現は**1箇所のみ**を確認のうえ、その1箇所だけを置換（説明文・見出し等は無変更）。
+- 実施前に本文を保全: `backup/contact_application_pages_pre_cf7_20260624.sql`（151/155 の post_content）。
+
+## B. 動作確認結果
+| 項目 | 結果 |
+|---|---|
+| /contact/ 表示 | ✅ CF7（f4803）描画、**MW痕跡なし**、`your-message` 等のフィールドあり |
+| /application/ 表示 | ✅ CF7（f4804）描画、**MW痕跡なし**、`venue`（会場）フィールドあり |
+| /contact/ 送信 | ✅ mail_sent。管理通知 **To=`info@[managed-domain]`**、自動返信→入力アドレス |
+| /application/ 送信 | ✅ mail_sent。管理通知 **To=`setsumei-kai@[managed-domain]`**、自動返信→入力アドレス |
+| 宛先取り違え | ✅ なし（mailpitで4通を目視確認） |
+| メール確認欄 不一致 | ✅ validation_failed・**送信0件** |
+| 確認/完了URL 301転送 | ✅ 4件すべて 301 → 最終200（継続動作） |
+| サイト全ページ200 | ✅ /・/contact/・/application/・/homeworker/・/news/・/reports/・/column/・/about/ |
+| MW WP Form 定義 | ✅ **5件保持（1352/1369含む・削除していない）** |
+
+## C. 完了後の状態
+- ステージングで、お問い合わせ・説明会申込が **CF7で完全動作**：入力(CF7)→送信→メール(mailpit)→Flamingo保存、確認/完了URLは301転送でURL保全。
+- MW WP Form（5件）・Download After Email（停止中）は**無変更で温存**。完全削除は Phase 4（プラグイン整理）で本番安定後に実施予定。
+- **本番（pegasus-job.com）には一切触れていない。**
+
+## 次段階
+- **第三段階：資料請求システム（PDF保護＋トークン認証）** … 別設計書 DOWNLOAD_SYSTEM_DESIGN に従い、別途実装。
