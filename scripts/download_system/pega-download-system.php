@@ -118,7 +118,8 @@ function pega_dl_cf7_issue( $cf7 ) {
 	if ( ! $sub ) { return; }
 	$data  = $sub->get_posted_data();
 	$email = isset( $data['your-email'] ) ? sanitize_email( $data['your-email'] ) : '';
-	$rid   = isset( $data['resource_id'] ) ? (int) $data['resource_id'] : 566;
+	// 空文字や0は無効値として既定資料(566)にフォールバック（CF7 hidden が空値で来ても /download-secure の id=0 を防ぐ）。
+	$rid   = ! empty( $data['resource_id'] ) ? (int) $data['resource_id'] : 566;
 	if ( ! $email ) { return; }
 
 	$token = pega_dl_issue_token( $email, $rid );
