@@ -55,6 +55,11 @@
   - [ ] （CPT定義に **Custom Post Type UI** を使う場合）CPTUI
 - [ ] バージョンはステージングと揃える（互換性確保）。
 
+### 1-4. siteurl / home（サイトURL）
+- [ ] DB `wp_options` の **`siteurl` / `home` を本番URL `https://pegasus-job.com` に設定**（ステージングのIP:8080から変更）。`wp-config.php` で `WP_SITEURL`/`WP_HOME` を定義する方法でも可。
+- [ ] 本番が標準ポート（443/80）単独なら、ステージングで発生した「nginx のポート欠落による wp-admin 404」（`SITEURL_FIX_20260626.md`）は起きない。ただし**リバースプロキシ/コンテナ/非標準ポート構成の場合は `absolute_redirect off`（または `port_in_redirect`/プロキシヘッダ）で対処**。
+- [ ] HTTPS強制（`FORCE_SSL_ADMIN` 等）と整合を確認。混在コンテンツ（http→https）がないか確認。
+
 ---
 
 ## フェーズ2：CPT再構築（news / reports / works ＋ タクソノミー）
