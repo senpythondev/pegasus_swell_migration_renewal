@@ -47,6 +47,7 @@ services:
       - wordpress
     ports:
       # ホストの 8080 番ポートで公開(既存案件と衝突しないよう8080を使用)
+      # ※ 当VPSは上位ファイアウォールで 8080 のみ外部許可。mailpitは 8080 のサブパス /mailpit/ で公開する。
       - "8080:80"
     volumes:
       - ./wp_data:/var/www/html
@@ -77,6 +78,10 @@ services:
     image: axllent/mailpit:latest
     container_name: pegasus_mailpit
     restart: unless-stopped
+    environment:
+      # 検収用: nginx の /mailpit/ サブパス公開に合わせ、mailpit のUI/API/WebSocketを
+      # /mailpit 配下で配信(アセットの絶対パス・WSがサブパス下でも正しく解決される)。
+      MP_WEBROOT: /mailpit
     ports:
       # Web UI: 外部非公開・ループバック限定(SSHトンネル経由でのみアクセス)
       - "127.0.0.1:8025:8025"
