@@ -82,3 +82,6 @@ build/
 __pycache__/
 *.pyc
 .htpasswd
+
+# 稼働 mu-plugin はデプロイ複製（ソースは scripts/download_system/ を追跡）
+wp_data/wp-content/mu-plugins/
