@@ -85,3 +85,7 @@ __pycache__/
 
 # 稼働 mu-plugin はデプロイ複製（ソースは scripts/download_system/ を追跡）
 wp_data/wp-content/mu-plugins/
+
+# 参照用の過去資料(提案書・URL棚卸し等)。クライアントPIIを含む可能性があり Git 対象外。
+# ファイル自体はローカルに保持。docs/ の作業ドキュメントは対象外(そのまま追跡)。
+last_docs/
