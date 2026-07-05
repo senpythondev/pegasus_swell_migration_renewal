@@ -15,12 +15,90 @@
 /* =========================================================
    ペガサス ブランドカラー（Phase 5/7）
    各ページ制作で var(--pega-*) として使い回す共通変数。
-   - base   : ベースカラー（青／サイトキーカラー。SWELLメインカラーと同値）
-   - second : セカンドカラー（コーラル）
-   - accent : アクセントカラー（黄緑）
    ========================================================= */
 :root {
-    --pega-base:   #1067D6;
-    --pega-second: #FD757C;
-    --pega-accent: #8DC73C;
+	--pega-base:   #1067D6;  /* ベース（青／サイトキーカラー） */
+	--pega-second: #FD757C;  /* セカンド（コーラル） */
+	--pega-accent: #8DC73C;  /* アクセント（黄緑） */
+	/* 明るい背景に小さめ文字を載せる時のAA確保用に、ベース青の濃いシェード（友本様3色からの濃淡） */
+	--pega-base-ink: #0a4aa8;
+}
+
+/* =========================================================
+   トップページ ヒーロー（FV）  Phase 5/7 セクション1
+   - 低刺激の淡い青グラデ背景＋濃色文字（AA）
+   - 3層コピー / 2段階CTA / 信頼指標2件 / レスポンシブ
+   ========================================================= */
+.home #top_title_area { display: none; }          /* フロントのページタイトル帯は非表示 */
+.pega-hero-wrap { margin-top: 0; margin-bottom: 0; padding: 0; }
+
+.pega-hero {
+	background: linear-gradient(160deg, #eef5fe 0%, #dcebfc 55%, #cbe0fb 100%);
+	padding: clamp(28px, 6vw, 68px) 0 0;
+	overflow: hidden;
+}
+.pega-hero__inner {
+	max-width: 1160px; margin: 0 auto;
+	padding: 0 clamp(16px, 4vw, 32px);
+	display: flex; align-items: center; gap: clamp(24px, 4vw, 56px);
+}
+.pega-hero__copy { flex: 1 1 54%; min-width: 0; }
+.pega-hero__media { flex: 1 1 46%; display: flex; justify-content: center; }
+
+.pega-hero__eyebrow {
+	color: var(--pega-base-ink); font-weight: 800;
+	font-size: clamp(15px, 2.2vw, 19px); letter-spacing: .04em; margin: 0 0 12px;
+}
+.pega-hero__title {
+	color: #14243b; font-weight: 800;
+	font-size: clamp(28px, 5.2vw, 46px); line-height: 1.34;
+	letter-spacing: .01em; margin: 0 0 18px;
+}
+.pega-hero__desc {
+	color: #3a4657; font-weight: 500;
+	font-size: clamp(15px, 2.3vw, 18px); line-height: 1.85; margin: 0 0 28px;
+}
+
+.pega-hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.pega-btn {
+	display: inline-flex; align-items: center; justify-content: center; gap: .35em;
+	min-height: 60px; padding: 14px 26px; border-radius: 12px;
+	font-weight: 700; font-size: clamp(15px, 2.2vw, 18px); line-height: 1.4;
+	text-decoration: none; box-shadow: 0 3px 10px rgba(20,36,59,.12);
+	transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.pega-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(20,36,59,.18); filter: brightness(1.03); }
+.pega-btn:focus-visible { outline: 3px solid #14243b; outline-offset: 3px; }
+.pega-btn__arrow { font-weight: 700; }
+.pega-btn--primary   { background: var(--pega-accent); color: #14243b; }  /* 在宅型を詳しく見る（緑・濃色文字でAA） */
+.pega-btn--secondary { background: var(--pega-base);   color: #ffffff; }  /* 個別説明会に申し込む（ブランド青） */
+
+.pega-hero__img {
+	width: 100%; max-width: 560px; height: auto; display: block;
+	border-radius: 18px; border: 4px solid #ffffff;
+	box-shadow: 0 12px 30px rgba(16,103,214,.20);
+}
+
+/* 信頼指標バー */
+.pega-trust { margin-top: clamp(26px, 5vw, 52px); background: rgba(255,255,255,.72); }
+.pega-trust__inner {
+	max-width: 1160px; margin: 0 auto;
+	padding: clamp(18px, 3vw, 26px) clamp(16px, 4vw, 32px);
+	display: flex; flex-wrap: wrap; gap: clamp(14px, 4vw, 48px); justify-content: center;
+}
+.pega-trust__item { display: flex; align-items: baseline; gap: 10px; flex: 1 1 260px; justify-content: center; }
+.pega-trust__num { color: var(--pega-base); font-weight: 800; font-size: clamp(30px, 6vw, 46px); line-height: 1; }
+.pega-trust__suffix { font-size: .5em; font-weight: 700; margin-left: 2px; }
+.pega-trust__label { color: #3a4657; font-weight: 600; font-size: clamp(13px, 1.8vw, 15px); }
+
+/* モバイル（横スクロール防止・大きなタップ領域・画像を上に） */
+@media (max-width: 782px) {
+	.pega-hero__inner { flex-direction: column; }
+	.pega-hero__media { order: -1; width: 100%; }
+	.pega-hero__img { max-width: 440px; }
+	.pega-hero__copy { width: 100%; }
+	.pega-hero__actions { width: 100%; }
+	.pega-btn { width: 100%; }
+	.pega-br-pc { display: none; }
+	.pega-trust__item { flex: 1 1 100%; }
 }
