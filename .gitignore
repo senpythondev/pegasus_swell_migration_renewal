@@ -90,3 +90,6 @@ wp_data/wp-content/mu-plugins/
 # ファイル自体はローカルに保持。docs/ の作業ドキュメントは対象外(そのまま追跡)。
 last_docs/
 design_reference/
+
+# Code Snippets Pro ZIP・ライセンス等の作業用一時ファイル(コミット禁止)
+tmp/
