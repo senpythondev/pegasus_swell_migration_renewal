@@ -14,91 +14,3959 @@
 
 /* =========================================================
    ペガサス ブランドカラー（Phase 5/7）
-   各ページ制作で var(--pega-*) として使い回す共通変数。
    ========================================================= */
 :root {
-	--pega-base:   #1067D6;  /* ベース（青／サイトキーカラー） */
-	--pega-second: #FD757C;  /* セカンド（コーラル） */
-	--pega-accent: #8DC73C;  /* アクセント（黄緑） */
-	/* 明るい背景に小さめ文字を載せる時のAA確保用に、ベース青の濃いシェード（友本様3色からの濃淡） */
-	--pega-base-ink: #0a4aa8;
+	--pega-base:        #1067D6;
+	--pega-second:      #FD757C;
+	--pega-accent:      #8DC73C;
+	--pega-base-ink:    #0a4aa8;
+	--pega-base-dark:   #0b3d8a;
+	--pega-text:        #1A1A1A;
+	--pega-text-sub:    #4a5568;
+	--pega-font:        "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+	--pega-header-h:    72px;
+
+	/* 柔らかい派生色（広い面・背景用） */
+	--pega-soft-bg:     #f7f9fc;
+	--pega-soft-blue:   #eef3f9;
+	--pega-soft-green:  #f4f8ef;
+	--pega-border:      rgba(16, 103, 214, 0.14);
+	--pega-border-strong: rgba(16, 103, 214, 0.24);
+	--pega-card-shadow: 0 2px 8px rgba(16, 103, 214, 0.08);
+	--pega-card-radius: 12px;
+	--pega-card-padding: clamp(18px, 3vw, 24px);
+
+	/* SWELL 準拠レイアウト — 全セクション同一幅 */
+	--pega-section-px:  clamp(16px, 4vw, var(--swl-pad_container, 48px));
+	--pega-section-py:  clamp(56px, 7vw, 80px);
+	--pega-section-py-sm: clamp(32px, 4vw, 48px);
+	--pega-wrap-content: min(960px, 100%);
+	--pega-wrap-narrow: var(--pega-wrap-content);
+	--pega-wrap-wide:   var(--pega-wrap-content);
+	--pega-wrap-banner: var(--pega-wrap-content);
+
+	/* 見出し階層（SWELL post_content 基準） */
+	--pega-h2:          clamp(24px, 4vw, 1.75rem);
+	--pega-h3:          clamp(18px, 2.6vw, 1.25rem);
+	--pega-lead:        clamp(15px, 2.1vw, 17px);
+	--pega-body:        clamp(14px, 2vw, 16px);
+}
+
+@media (min-width: 960px) {
+	:root {
+		--pega-header-h: 84px;
+	}
+	.pega-br-pc {
+		display: inline;
+	}
 }
 
 /* =========================================================
-   トップページ ヒーロー（FV）  Phase 5/7 セクション1
-   - 低刺激の淡い青グラデ背景＋濃色文字（AA）
-   - 3層コピー / 2段階CTA / 信頼指標2件 / レスポンシブ
+   トップページ共通
    ========================================================= */
-.home #top_title_area { display: none; }          /* フロントのページタイトル帯は非表示 */
-.pega-hero-wrap { margin-top: 0; margin-bottom: 0; padding: 0; }
+.home #top_title_area {
+	display: none;
+}
 
-.pega-hero {
-	background: linear-gradient(160deg, #eef5fe 0%, #dcebfc 55%, #cbe0fb 100%);
-	padding: clamp(28px, 6vw, 68px) 0 0;
+.home #content {
+	padding-top: 0 !important;
+}
+
+.home #body_wrap {
+	overflow-x: hidden;
+}
+
+/* =========================================================
+   ヘッダー（トップページ）— 1本化
+   SWELL は #header + #fix_header の2要素構成。
+   トップでは fix_header を非表示。header は relative（先頭のみ表示）。
+   ========================================================= */
+.home #fix_header {
+	display: none !important;
+}
+
+.home #header {
+	position: relative;
+	top: auto;
+	left: auto;
+	right: auto;
+	z-index: 20;
+	background: var(--pega-base);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	box-shadow: 0 2px 12px rgba(8, 40, 100, 0.14);
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.home #header .l-header__inner {
+	background: transparent;
+	max-width: none;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-bottom: none;
+}
+
+.home #header .l-header__inner.l-container {
+	padding-left: clamp(16px, 3vw, 52px);
+	padding-right: clamp(16px, 3vw, 52px);
+}
+
+/* ロゴ：白背景を外し、ドロップシャドウでグラデーション上でも視認性を確保 */
+.home #header .l-header__logo {
+	background: transparent;
+	padding: 0;
+	margin-right: clamp(16px, 2.5vw, 36px);
+	flex-shrink: 0;
+}
+
+.home #header .c-headLogo__link {
+	display: inline-flex;
+	align-items: center;
+	background: transparent;
+	padding: 0;
+	border-radius: 0;
+	font-family: var(--pega-font);
+	font-weight: 700;
+	color: #fff;
+}
+
+.home #header .c-headLogo__img {
+	display: block;
+	max-height: 46px;
+	width: auto;
+	max-width: min(240px, 32vw);
+	object-fit: contain;
+	filter:
+		drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55))
+		drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35))
+		drop-shadow(0 0 1px rgba(255, 255, 255, 0.85));
+}
+
+.home #header .c-gnav > li > a .ttl {
+	font-family: var(--pega-font);
+	font-weight: 600;
+	color: #fff;
+}
+
+.home #header .c-gnav > li > a::after {
+	background: var(--pega-accent);
+}
+
+.home #header .c-iconBtn,
+.home #header .c-iconBtn__icon {
+	color: #fff !important;
+}
+
+.home #header .c-gnav > li.menu-item-1206 > a .ttl {
+	color: var(--pega-accent) !important;
+	font-weight: 700;
+}
+
+/* ドロップダウン：白文字×白背景を避け、ヘッダーと調和する配色 */
+.home #header .c-gnav .sub-menu {
+	background: rgba(255, 255, 255, 0.97);
+	border: 1px solid rgba(16, 103, 214, 0.14);
+	border-radius: 8px;
+	box-shadow: 0 10px 28px rgba(8, 40, 100, 0.14);
 	overflow: hidden;
+	padding: 6px 0;
 }
-.pega-hero__inner {
-	max-width: 1160px; margin: 0 auto;
-	padding: 0 clamp(16px, 4vw, 32px);
-	display: flex; align-items: center; gap: clamp(24px, 4vw, 56px);
+
+.home #header .c-gnav .sub-menu a,
+.home #header .c-gnav .sub-menu a .ttl {
+	color: var(--pega-text) !important;
+	font-weight: 500;
 }
-.pega-hero__copy { flex: 1 1 54%; min-width: 0; }
-.pega-hero__media { flex: 1 1 46%; display: flex; justify-content: center; }
+
+.home #header .c-gnav .sub-menu a:hover,
+.home #header .c-gnav .sub-menu a:hover .ttl {
+	background: rgba(16, 103, 214, 0.08) !important;
+	color: var(--pega-base) !important;
+}
+
+.home #header .l-header__bar {
+	display: none;
+}
+
+/* ハンバーガー表示時の連絡先（全ページ: ~959px / トップ: 960–1349px）
+   ロゴ左・連絡先右（1行）。連絡先内はテキスト左・ボタン右。 */
+.pega-header-contact {
+	display: none;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	gap: clamp(8px, 2vw, 14px);
+	margin: 0 0 0 auto;
+	font-family: var(--pega-font);
+	flex-shrink: 1;
+	min-width: 0;
+}
+
+.pega-header-contact__info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 1px;
+	min-width: 0;
+	text-align: right;
+}
+
+.pega-header-contact__hours,
+.pega-header-contact__tel {
+	margin: 0;
+	font-size: 10px;
+	line-height: 1.45;
+	color: rgba(255, 255, 255, 0.92);
+	white-space: nowrap;
+}
+
+.pega-header-contact__label {
+	display: inline-block;
+	margin-right: 4px;
+	padding: 1px 5px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.16);
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+}
+
+.pega-header-contact__tel a {
+	color: #fff;
+	font-weight: 700;
+	font-size: clamp(12px, 3.2vw, 14px);
+	text-decoration: none;
+	letter-spacing: 0.03em;
+}
+
+.pega-header-contact__tel a:hover {
+	text-decoration: underline;
+}
+
+.pega-header-contact__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	margin: 0;
+	padding: 8px 12px;
+	border-radius: 999px;
+	background: var(--pega-accent);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none;
+	line-height: 1.3;
+	white-space: nowrap;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.pega-header-contact__link:hover {
+	filter: brightness(1.06);
+}
+
+@media (max-width: 600px) {
+	.pega-header-contact {
+		display: none !important;
+	}
+
+	#header .l-header__logo {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		min-width: 0;
+		margin-right: 0;
+	}
+
+	#header .c-headLogo__link {
+		max-width: min(200px, 58vw);
+	}
+
+	#header .c-headLogo__img {
+		max-height: 42px;
+	}
+}
+
+@media (min-width: 601px) and (max-width: 959px) {
+	#header .l-header__logo {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: clamp(6px, 2vw, 12px);
+		min-width: 0;
+		margin-right: 0;
+	}
+
+	#header .c-headLogo__link {
+		flex-shrink: 0;
+		max-width: min(140px, 38vw);
+	}
+
+	#header .c-headLogo__img {
+		max-height: 38px;
+		max-width: 100%;
+	}
+
+	.pega-header-contact {
+		display: flex;
+	}
+}
+
+@media (min-width: 960px) and (max-width: 1349px) {
+	.home #header .l-header__logo {
+		flex: 1;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-right: 0;
+		min-width: 0;
+	}
+
+	.home #header .c-headLogo__link {
+		flex-shrink: 0;
+		max-width: min(200px, 28vw);
+	}
+
+	.home .pega-header-contact {
+		display: flex;
+	}
+}
+
+@media (max-width: 380px) {
+	.pega-header-contact__hours {
+		font-size: 9px;
+	}
+
+	.pega-header-contact__link {
+		padding: 7px 10px;
+		font-size: 10px;
+	}
+}
+
+/* ハンバーガーメニュー — 白系パネル＋ブランド色テキスト（SWELL 標準に近い見慣れた構成） */
+#sp_menu.p-spMenu {
+	color: var(--pega-text) !important;
+}
+
+.p-spMenu__inner {
+	background-color: #f8f9fb !important;
+	color: var(--pega-text) !important;
+	box-shadow: 0 0 24px rgba(8, 40, 100, 0.16) !important;
+}
+
+/* SWELL 既定の ::before をパネル用オーバーレイとして活用（白〜薄グレーの面） */
+.p-spMenu__inner::before {
+	display: block !important;
+	content: "" !important;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.98) 0%,
+		rgba(248, 249, 251, 0.96) 100%
+	) !important;
+	opacity: 1 !important;
+}
+
+.p-spMenu__body,
+.p-spMenu__nav,
+.p-spMenu .c-listMenu.c-spnav {
+	background: transparent !important;
+	color: var(--pega-text) !important;
+}
+
+.p-spMenu__body {
+	position: relative;
+	z-index: 1;
+}
+
+/* SWELL 既定: .c-listMenu { min-height:8em; overflow-y:auto!important } が
+   ドロワー内で高さを抑え、HOME だけ見える状態になるため上書き */
+.p-spMenu .c-listMenu.c-spnav {
+	min-height: 0 !important;
+	height: auto !important;
+	max-height: none !important;
+	overflow: visible !important;
+}
+
+.p-spMenu .c-widget__title.-spmenu {
+	margin: 0 -4vw 1.25em;
+	padding: 14px 4vw;
+	background: var(--pega-base) !important;
+	color: #fff !important;
+	font-family: var(--pega-font);
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.14em;
+	text-align: center;
+	border-bottom: none;
+}
+
+.p-spMenu .c-spnav a,
+.p-spMenu .c-listMenu a,
+.p-spMenu a {
+	color: var(--pega-text) !important;
+	background: transparent !important;
+	border-bottom-color: rgba(26, 26, 26, 0.08) !important;
+	font-family: var(--pega-font);
+	font-weight: 500;
+}
+
+.p-spMenu .c-spnav a:hover,
+.p-spMenu .c-listMenu a:hover {
+	background: rgba(16, 103, 214, 0.08) !important;
+	color: var(--pega-base) !important;
+}
+
+.p-spMenu .c-spnav .current-menu-item > a,
+.p-spMenu .c-listMenu .current-menu-item > a {
+	color: var(--pega-base-ink) !important;
+	background: rgba(141, 199, 60, 0.12) !important;
+	box-shadow: inset 3px 0 0 var(--pega-accent);
+}
+
+.p-spMenu .c-submenuToggleBtn {
+	color: var(--pega-base) !important;
+}
+
+.p-spMenu .c-submenuToggleBtn.is-opened {
+	color: var(--pega-base-ink) !important;
+}
+
+.p-spMenu .sub-menu {
+	position: relative;
+	transform: none;
+	width: auto;
+	box-shadow: none;
+	padding-left: 0;
+	background: #f0f2f5 !important;
+}
+
+.p-spMenu .sub-menu a {
+	font-size: 0.92em;
+	color: var(--pega-text-sub) !important;
+	border-bottom-color: rgba(26, 26, 26, 0.06) !important;
+}
+
+.p-spMenu .sub-menu a:hover {
+	color: var(--pega-base) !important;
+	background: rgba(16, 103, 214, 0.06) !important;
+}
+
+.p-spMenu__closeBtn .c-iconBtn,
+.p-spMenu__closeBtn .c-iconBtn__icon {
+	color: var(--pega-base) !important;
+}
+
+/* 背面: 画面全体を白くせず、元画像を残したままぼかし＋薄いトーン */
+.p-spMenu__overlay {
+	background: rgba(8, 30, 70, 0.22) !important;
+	opacity: 1 !important;
+	backdrop-filter: blur(8px) saturate(1.05);
+	-webkit-backdrop-filter: blur(8px) saturate(1.05);
+}
+
+#header .l-header__menuBtn .c-iconBtn,
+#header .l-header__menuBtn .c-iconBtn__icon,
+#header .l-header__customBtn .c-iconBtn,
+#header .l-header__customBtn .c-iconBtn__icon {
+	color: #fff !important;
+}
+
+/* 960〜1349px：ナビ項目数が多いためハンバーガー表示。
+   SWELL の DOM 順: logo → gnav → customBtn → menuBtn
+   Grid の自動配置はカーソルが戻れないため、flex + order で並べ直す */
+@media (min-width: 960px) and (max-width: 1349px) {
+	/* SWELL PC CSS が .p-spMenu { display:none } のため、タブレット幅で開閉不能になる */
+	.home #sp_menu.p-spMenu {
+		display: block !important;
+	}
+
+	.home #header .l-header__inner {
+		display: flex !important;
+		align-items: center;
+	}
+
+	.home #header .l-header__gnav.c-gnavWrap {
+		display: none !important;
+	}
+
+	/* ハンバーガー: DOM 最後だが order: -1 で最左に */
+	.home #header .l-header__menuBtn.sp_ {
+		display: flex !important;
+		order: -1;
+		flex-shrink: 0;
+		position: relative;
+		z-index: 25;
+		touch-action: manipulation;
+	}
+
+	.home #header .l-header__menuBtn .c-iconBtn {
+		min-width: 44px;
+		min-height: 44px;
+	}
+
+	/* ロゴ左・連絡先右（1行） */
+	.home #header .l-header__logo {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-right: 0;
+		min-width: 0;
+	}
+
+	/* カスタムボタン（検索等）: 最右 */
+	.home #header .l-header__customBtn.sp_ {
+		order: 1;
+		flex-shrink: 0;
+	}
+
+	.home #header .c-headLogo__link {
+		max-width: min(300px, 54vw);
+	}
+}
+
+/* 1350px以上：フルナビ表示 */
+@media (min-width: 1350px) {
+	/* nav の <br> を非表示にして1行化 */
+	.home #header .c-gnav .ttl br {
+		display: none;
+	}
+
+	.home #header .c-gnav > li > a {
+		font-size: 12.5px;
+		padding-left: 0.6em;
+		padding-right: 0.6em;
+		white-space: nowrap;
+	}
+
+	.home #header .c-headLogo__link {
+		font-size: 14px;
+	}
+}
+
+@media (min-width: 1440px) {
+	.home #header .c-gnav > li > a {
+		font-size: 13.5px;
+		padding-left: 0.8em;
+		padding-right: 0.8em;
+	}
+}
+
+@media (min-width: 1600px) {
+	.home #header .c-gnav > li > a {
+		font-size: 14px;
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+}
+
+@media (min-width: 1440px) {
+	.home #header .l-header__inner.l-container {
+		max-width: 1560px;
+		margin: 0 auto;
+	}
+
+	.home #header .c-headLogo__img {
+		max-height: 50px;
+		max-width: 260px;
+	}
+}
+
+@media (min-width: 1920px) {
+	.home #header .l-header__inner.l-container {
+		max-width: 1760px;
+	}
+
+	.home #header .c-gnav > li > a {
+		font-size: 15px;
+		padding-left: 1.2em;
+		padding-right: 1.2em;
+	}
+}
+
+/* pega-br-pc: PC(960px+)のみ改行を表示 */
+.pega-br-pc {
+	display: none;
+}
+
+/* =========================================================
+   ヒーロー（FV）— SWELL フルワイドブロック + 子テーマCSS
+   ========================================================= */
+.pega-hero-wrap {
+	margin: 0 !important;
+	padding: 0;
+	overflow: hidden;
+	font-family: var(--pega-font);
+}
+
+.pega-hero-wrap > .wp-block-group__inner-container {
+	max-width: none !important;
+	padding: 0 !important;
+	margin: 0;
+}
+
+/* ヘッダー下端グラデの下にヒーローを重ね、自然に融合 */
+.home .pega-hero-wrap {
+	padding-top: 0;
+	margin-top: 0 !important;
+}
+
+/* SWELL loos/full-wide をフルスクリーンFVに */
+.pega-hero-wrap .swell-block-fullWide,
+.pega-hero-wrap .wp-block-loos-full-wide,
+.pega-hero-wrap .pega-hero-fv-bg {
+	position: relative;
+	min-height: min(88vh, 820px);
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	margin: 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	background-color: #e8eef5;
+	background-image: url("/wp-content/uploads/2026/07/pega-hero-fv.jpg") !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: 28% 32%;
+}
+
+/* SWELL has-bg-img の :before（bgColor継承）が画像を覆うため無効化 */
+.pega-hero-wrap .swell-block-fullWide.has-bg-img::before,
+.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::before {
+	display: none !important;
+	content: none !important;
+}
+
+.pega-hero-wrap .swell-block-fullWide__inner.l-full {
+	width: 100%;
+	max-width: none;
+	padding: 0;
+	position: relative;
+	z-index: 2;
+}
+
+/* 右側コピー可読性：右寄せグラデ（::after で SWELL の :before と共存） */
+.pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
+.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: linear-gradient(
+		270deg,
+	 rgba(18, 28, 42, 0.78) 0%,
+	 rgba(18, 28, 42, 0.55) 26%,
+	 rgba(18, 28, 42, 0.14) 46%,
+	 transparent 62%
+	);
+}
+
+.pega-hero__content > .wp-block-group__inner-container,
+.pega-hero__copy > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-hero__content {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	box-sizing: border-box;
+	padding: clamp(24px, 5vh, 56px) clamp(20px, 4vw, 40px) clamp(36px, 6vh, 72px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(24px, 4vh, 36px);
+}
+
+.pega-hero__copy {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 640px;
+	text-align: center;
+}
+
+.pega-hero__copy > .wp-block-group__inner-container {
+	display: flex;
+	flex-direction: column;
+	align-items: inherit;
+	width: 100%;
+}
+
+.pega-hero__title,
+.pega-hero__eyebrow,
+.pega-hero__desc {
+	display: block;
+	width: 100%;
+}
+
+/* タイポ：ブレークポイント別（clamp だけに頼らない） */
+.pega-hero__title {
+	margin: 0 0 14px;
+	color: #fff;
+	font-weight: 800;
+	font-size: 33px;
+	line-height: 1.42;
+	letter-spacing: 0.03em;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+}
 
 .pega-hero__eyebrow {
-	color: var(--pega-base-ink); font-weight: 800;
-	font-size: clamp(15px, 2.2vw, 19px); letter-spacing: .04em; margin: 0 0 12px;
+	margin: 0 0 12px;
+	color: rgba(255, 255, 255, 0.96);
+	font-weight: 700;
+	font-size: 22px;
+	line-height: 1.65;
+	letter-spacing: 0.05em;
 }
-.pega-hero__title {
-	color: #14243b; font-weight: 800;
-	font-size: clamp(28px, 5.2vw, 46px); line-height: 1.34;
-	letter-spacing: .01em; margin: 0 0 18px;
-}
+
 .pega-hero__desc {
-	color: #3a4657; font-weight: 500;
-	font-size: clamp(15px, 2.3vw, 18px); line-height: 1.85; margin: 0 0 28px;
+	margin: 0 0 36px;
+	color: rgba(255, 255, 255, 0.92);
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.8;
+	max-width: 32em;
 }
 
-.pega-hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
-.pega-btn {
-	display: inline-flex; align-items: center; justify-content: center; gap: .35em;
-	min-height: 60px; padding: 14px 26px; border-radius: 12px;
-	font-weight: 700; font-size: clamp(15px, 2.2vw, 18px); line-height: 1.4;
-	text-decoration: none; box-shadow: 0 3px 10px rgba(20,36,59,.12);
-	transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+@media (min-width: 600px) {
+	.pega-hero__title { font-size: 39px; }
+	.pega-hero__eyebrow { font-size: 24px; }
+	.pega-hero__desc { font-size: 21px; margin-bottom: 32px; }
 }
-.pega-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(20,36,59,.18); filter: brightness(1.03); }
-.pega-btn:focus-visible { outline: 3px solid #14243b; outline-offset: 3px; }
-.pega-btn__arrow { font-weight: 700; }
-.pega-btn--primary   { background: var(--pega-accent); color: #14243b; }  /* 在宅型を詳しく見る（緑・濃色文字でAA） */
-.pega-btn--secondary { background: var(--pega-base);   color: #ffffff; }  /* 個別説明会に申し込む（ブランド青） */
 
-.pega-hero__img {
-	width: 100%; max-width: 560px; height: auto; display: block;
-	border-radius: 18px; border: 4px solid #ffffff;
-	box-shadow: 0 12px 30px rgba(16,103,214,.20);
+/* 600px〜：タブレット以上は右側にコピー配置 */
+@media (min-width: 600px) {
+	.pega-hero__content {
+		align-items: stretch;
+	}
+
+	.pega-hero__copy {
+		width: min(420px, 54%);
+		margin-left: auto;
+		margin-right: 0;
+		align-items: flex-end;
+		text-align: right;
+	}
+}
+
+/* 768px〜959px：タブレット */
+@media (min-width: 768px) and (max-width: 959px) {
+	.pega-hero__title { font-size: 41px; }
+	.pega-hero__eyebrow { font-size: 25px; }
+	.pega-hero__desc { font-size: 20px; }
+}
+
+@media (min-width: 960px) {
+	.pega-hero-wrap .swell-block-fullWide,
+	.pega-hero-wrap .wp-block-loos-full-wide,
+	.pega-hero-wrap .pega-hero-fv-bg {
+		min-height: min(90vh, 860px);
+	}
+
+	.pega-hero__title { font-size: 51px; margin-bottom: 18px; }
+	.pega-hero__eyebrow { font-size: 28px; margin-bottom: 14px; }
+	.pega-hero__desc { font-size: 22px; margin-bottom: 0; }
+
+	/* コピーブロックを右半分に固定幅で配置（margin-left: auto で右寄せ） */
+	.pega-hero__content {
+		align-items: stretch;
+		padding-right: clamp(24px, 4vw, 64px);
+	}
+
+	.pega-hero__copy {
+		/* 固定幅 + margin-left: auto で右側に確実に収める */
+		width: 420px;
+		max-width: 42%;
+		margin-left: auto;
+		margin-right: 0;
+		align-items: flex-start;
+		text-align: left;
+		/* コピーとCTAの間の余白 */
+		margin-bottom: clamp(56px, 8vh, 84px);
+	}
+}
+
+@media (min-width: 1200px) {
+	.pega-hero__title { font-size: 57px; }
+	.pega-hero__eyebrow { font-size: 30px; }
+	.pega-hero__desc { font-size: 23px; }
+	.pega-hero__copy { width: 480px; max-width: 40%; margin-bottom: clamp(64px, 9vh, 92px); }
+}
+
+@media (min-width: 1440px) {
+	.pega-br-pc {
+		display: none;
+	}
+
+	.pega-hero__title { font-size: 63px; }
+	.pega-hero__eyebrow { font-size: 33px; }
+	.pega-hero__desc { font-size: 25px; max-width: none; }
+	.pega-hero__copy {
+		width: max-content;
+		max-width: none;
+		margin-bottom: clamp(72px, 10vh, 100px);
+	}
+	.pega-hero__copy > .wp-block-group__inner-container {
+		width: max-content;
+	}
+	.pega-hero__title,
+	.pega-hero__eyebrow,
+	.pega-hero__desc {
+		width: max-content;
+		max-width: none;
+		white-space: nowrap;
+	}
+}
+
+@media (min-width: 1600px) {
+	.pega-hero__title { font-size: 67px; }
+	.pega-hero__eyebrow { font-size: 34px; }
+	.pega-hero__desc { font-size: 26px; }
+}
+
+@media (min-width: 1920px) {
+	.pega-hero__title { font-size: 71px; }
+	.pega-hero__eyebrow { font-size: 35px; }
+	.pega-hero__desc { font-size: 27px; }
+}
+
+.pega-hero__actions {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 14px;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: clamp(12px, 2.5vh, 24px) 0 0;
+}
+
+.pega-hero__actions > .wp-block-group__inner-container,
+.pega-hero__actions.is-layout-flex {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 14px;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.pega-hero__actions .swell-block-button {
+	margin: 0;
+	width: auto;
+}
+
+.pega-hero__actions .swell-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35em;
+	min-height: 52px;
+	min-width: 44px;
+	padding: 16px 28px;
+	border-radius: 999px;
+	font-family: var(--pega-font);
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 1.4;
+	text-decoration: none;
+	border: 2px solid transparent;
+	white-space: nowrap;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link {
+	background: var(--pega-base);
+	color: #fff;
+	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.35);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link:hover {
+	box-shadow: 0 8px 24px rgba(16, 103, 214, 0.45);
+}
+
+.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link {
+	background: var(--pega-accent);
+	color: #fff;
+	box-shadow: 0 4px 18px rgba(141, 199, 60, 0.42);
+	border-color: rgba(255, 255, 255, 0.25);
+}
+
+.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link:hover {
+	box-shadow: 0 8px 24px rgba(141, 199, 60, 0.52);
+}
+
+.pega-hero__actions .swell-block-button__link:hover {
+	transform: translateY(-2px);
+	filter: brightness(1.04);
+}
+
+.pega-hero__actions .swell-block-button__link:focus-visible {
+	outline: 3px solid #fff;
+	outline-offset: 3px;
+}
+
+@media (min-width: 960px) {
+	.pega-hero__actions .swell-block-button__link { font-size: 16px; padding: 16px 32px; }
+}
+
+@media (min-width: 1280px) {
+	.pega-hero__actions .swell-block-button__link { font-size: 17px; }
 }
 
 /* 信頼指標バー */
-.pega-trust { margin-top: clamp(26px, 5vw, 52px); background: rgba(255,255,255,.72); }
-.pega-trust__inner {
-	max-width: 1160px; margin: 0 auto;
-	padding: clamp(18px, 3vw, 26px) clamp(16px, 4vw, 32px);
-	display: flex; flex-wrap: wrap; gap: clamp(14px, 4vw, 48px); justify-content: center;
+.pega-trust {
+	position: relative;
+	z-index: 3;
+	background: #fff;
+	border-top: 1px solid rgba(16, 103, 214, 0.1);
+	box-shadow: 0 4px 20px rgba(16, 103, 214, 0.06);
 }
-.pega-trust__item { display: flex; align-items: baseline; gap: 10px; flex: 1 1 260px; justify-content: center; }
-.pega-trust__num { color: var(--pega-base); font-weight: 800; font-size: clamp(30px, 6vw, 46px); line-height: 1; }
-.pega-trust__suffix { font-size: .5em; font-weight: 700; margin-left: 2px; }
-.pega-trust__label { color: #3a4657; font-weight: 600; font-size: clamp(13px, 1.8vw, 15px); }
 
-/* モバイル（横スクロール防止・大きなタップ領域・画像を上に） */
-@media (max-width: 782px) {
-	.pega-hero__inner { flex-direction: column; }
-	.pega-hero__media { order: -1; width: 100%; }
-	.pega-hero__img { max-width: 440px; }
-	.pega-hero__copy { width: 100%; }
-	.pega-hero__actions { width: 100%; }
-	.pega-btn { width: 100%; }
-	.pega-br-pc { display: none; }
-	.pega-trust__item { flex: 1 1 100%; }
+.pega-trust > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-trust__inner.wp-block-columns {
+	max-width: 920px;
+	margin: 0 auto;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0;
+}
+
+.pega-trust__inner.wp-block-columns > .wp-block-column {
+	display: flex;
+}
+
+.pega-trust__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	margin: 0;
+	padding: clamp(22px, 3.5vw, 30px) clamp(16px, 4vw, 32px);
+	text-align: center;
+}
+
+.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
+	border-left: 1px solid rgba(16, 103, 214, 0.12);
+}
+
+.pega-trust__num {
+	color: var(--pega-base);
+	font-family: var(--pega-font);
+	font-weight: 800;
+	font-size: 34px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.pega-trust__suffix {
+	font-size: 0.46em;
+	font-weight: 700;
+	margin-left: 2px;
+}
+
+.pega-trust__label {
+	color: var(--pega-text-sub);
+	font-family: var(--pega-font);
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 1.65;
+	max-width: 18em;
+}
+
+@media (min-width: 600px) {
+	.pega-trust__num { font-size: 42px; }
+	.pega-trust__label { font-size: 14px; }
+}
+
+@media (min-width: 960px) {
+	.pega-trust__num { font-size: 48px; }
+	.pega-trust__label { font-size: 15px; }
+}
+
+/* モバイル */
+@media (max-width: 599px) {
+.pega-hero-wrap .swell-block-fullWide,
+.pega-hero-wrap .wp-block-loos-full-wide {
+		min-height: min(86vh, 720px);
+		background-position: center 22%;
+	}
+
+	.pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
+	.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
+		background: linear-gradient(
+			180deg,
+		 rgba(18, 28, 42, 0.74) 0%,
+		 rgba(18, 28, 42, 0.5) 45%,
+		 rgba(18, 28, 42, 0.2) 100%
+		);
+	}
+
+	.pega-hero__actions {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.pega-hero__actions .swell-block-button {
+		width: 100%;
+	}
+
+	.pega-hero__actions .swell-block-button__link {
+		width: 100%;
+		display: flex;
+		box-sizing: border-box;
+		padding: 15px 20px;
+	}
+
+	/* 既に base CSS で display: none を設定済み */
+	.pega-trust__inner.wp-block-columns {
+		grid-template-columns: 1fr;
+	}
+
+	.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
+		border-left: none;
+		border-top: 1px solid rgba(16, 103, 214, 0.12);
+	}
+}
+
+@media (min-width: 600px) {
+	.pega-hero__actions,
+	.pega-hero__actions > .wp-block-group__inner-container,
+	.pega-hero__actions.is-layout-flex {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+/* =========================================================
+   悩み共感セクション
+   ========================================================= */
+.pega-concerns {
+	background: linear-gradient(180deg, #fff 0%, #f3f7fc 100%);
+	padding: clamp(48px, 8vw, 88px) clamp(20px, 4vw, 40px);
+	font-family: var(--pega-font);
+}
+
+.pega-concerns > .wp-block-group__inner-container,
+.pega-concerns.is-layout-constrained > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.pega-concerns__title {
+	margin: 0 0 clamp(16px, 2.5vw, 24px);
+	color: var(--pega-base);
+	font-weight: 800;
+	font-size: clamp(22px, 4.5vw, 32px);
+	line-height: 1.55;
+	letter-spacing: 0.04em;
+}
+
+.pega-concerns__lead {
+	margin: 0 auto clamp(32px, 5vw, 48px);
+	max-width: 36em;
+	color: var(--pega-text-sub);
+	font-size: clamp(15px, 2.2vw, 17px);
+	line-height: 1.85;
+}
+
+.pega-concerns__list > .wp-block-group__inner-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(12px, 2vw, 16px);
+}
+
+.pega-concerns__item {
+	margin: 0;
+	padding: clamp(16px, 2.5vw, 20px) clamp(18px, 3vw, 24px);
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 12px;
+	box-shadow: 0 2px 10px rgba(16, 103, 214, 0.05);
+	transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pega-concerns__item > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-concerns__item p {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	margin: 0;
+	color: var(--pega-text);
+	font-size: clamp(15px, 2.1vw, 16px);
+	font-weight: 500;
+	line-height: 1.75;
+}
+
+.pega-concerns__item p::before {
+	content: "";
+	flex-shrink: 0;
+	width: 8px;
+	height: 8px;
+	margin-top: 0.55em;
+	border-radius: 50%;
+	background: var(--pega-second);
+}
+
+.pega-concerns__item--featured {
+	border-color: rgba(141, 199, 60, 0.45);
+	background: linear-gradient(135deg, #fff 0%, rgba(141, 199, 60, 0.08) 100%);
+	box-shadow: 0 4px 16px rgba(141, 199, 60, 0.12);
+}
+
+.pega-concerns__item--featured p {
+	font-weight: 700;
+	color: #1a3d12;
+}
+
+.pega-concerns__item--featured p::before {
+	background: var(--pega-accent);
+	width: 10px;
+	height: 10px;
+	box-shadow: 0 0 0 3px rgba(141, 199, 60, 0.25);
+}
+
+@media (min-width: 600px) {
+	.pega-concerns__list > .wp-block-group__inner-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-concerns__list > .wp-block-group__inner-container {
+		gap: 18px;
+	}
+
+	.pega-concerns__item:hover {
+		border-color: rgba(16, 103, 214, 0.22);
+		box-shadow: 0 6px 20px rgba(16, 103, 214, 0.08);
+	}
+
+	.pega-concerns__item--featured:hover {
+		border-color: rgba(141, 199, 60, 0.55);
+		box-shadow: 0 8px 24px rgba(141, 199, 60, 0.16);
+	}
+}
+
+/* =========================================================
+   課題→解決ブリッジ
+   ========================================================= */
+.pega-bridge {
+	background: linear-gradient(180deg, #f3f7fc 0%, #e8f0fa 55%, #dce8f8 100%);
+	padding: 0;
+	font-family: var(--pega-font);
+}
+
+.pega-bridge > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-bridge__intro {
+	padding: clamp(48px, 8vw, 72px) clamp(20px, 4vw, 40px) clamp(32px, 5vw, 48px);
+}
+
+.pega-bridge__intro > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-bridge__title {
+	margin: 0 0 clamp(24px, 4vw, 36px);
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: clamp(22px, 4.5vw, 30px);
+	line-height: 1.55;
+	letter-spacing: 0.03em;
+}
+
+.pega-bridge__text {
+	margin: 0 0 clamp(18px, 3vw, 24px);
+	color: var(--pega-text-sub);
+	font-size: clamp(15px, 2.2vw, 17px);
+	line-height: 1.9;
+}
+
+.pega-bridge__text:last-child {
+	margin-bottom: 0;
+}
+
+.pega-bridge__pillars-wrap {
+	padding: 0 clamp(20px, 4vw, 40px) clamp(40px, 6vw, 56px);
+}
+
+.pega-bridge__pillars-wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-bridge__pillars.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(14px, 2.5vw, 20px);
+	margin: 0;
+}
+
+.pega-bridge__pillars > .wp-block-column {
+	display: flex;
+	margin: 0;
+}
+
+.pega-bridge__pillar {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.12);
+	border-radius: 16px;
+	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.07);
+	text-align: center;
+	overflow: hidden;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	height: 100%;
+	min-height: clamp(300px, 52vw, 380px);
+}
+
+.pega-bridge__pillar > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-rows: 7fr 3fr;
+	height: 100%;
+	min-height: inherit;
+}
+
+.pega-bridge__pillar-img {
+	margin: 0 !important;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	min-height: 0;
+	height: 100%;
+}
+
+.pega-bridge__pillar-img::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.pega-bridge__pillar--self .pega-bridge__pillar-img::after {
+	background: linear-gradient(180deg, rgba(16, 103, 214, 0.06) 0%, rgba(16, 103, 214, 0.12) 100%);
+}
+
+.pega-bridge__pillar--skill .pega-bridge__pillar-img::after {
+	background: linear-gradient(180deg, rgba(141, 199, 60, 0.05) 0%, rgba(141, 199, 60, 0.11) 100%);
+}
+
+.pega-bridge__pillar--support .pega-bridge__pillar-img::after {
+	background: linear-gradient(180deg, rgba(253, 117, 124, 0.05) 0%, rgba(253, 117, 124, 0.1) 100%);
+}
+
+.pega-bridge__pillar-img img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+	border-radius: 0;
+}
+
+.pega-bridge__pillar--self .pega-bridge__pillar-img img {
+	border-bottom: 3px solid var(--pega-base);
+}
+
+.pega-bridge__pillar--skill .pega-bridge__pillar-img img {
+	border-bottom: 3px solid var(--pega-accent);
+}
+
+.pega-bridge__pillar--support .pega-bridge__pillar-img img {
+	border-bottom: 3px solid var(--pega-second);
+}
+
+.pega-bridge__pillar-body,
+.pega-bridge__pillar-body > .wp-block-group__inner-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	min-height: 0;
+	padding: 12px clamp(14px, 3vw, 20px) 16px;
+	box-sizing: border-box;
+}
+
+.pega-bridge__pillar-body > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.pega-bridge__pillar-label {
+	margin: 0 0 6px;
+	padding: 0;
+	color: var(--pega-text-sub);
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	line-height: 1.3;
+	text-transform: none;
+}
+
+.pega-bridge__pillar--self .pega-bridge__pillar-label { color: var(--pega-base); }
+.pega-bridge__pillar--skill .pega-bridge__pillar-label { color: #5a8a1e; }
+.pega-bridge__pillar--support .pega-bridge__pillar-label { color: #c94a50; }
+
+.pega-bridge__pillar-title {
+	margin: 0;
+	padding: 0;
+	color: var(--pega-text);
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 1.45;
+}
+
+.pega-bridge__closing {
+	padding: clamp(36px, 6vw, 56px) clamp(20px, 4vw, 40px);
+	background: linear-gradient(
+		135deg,
+		var(--pega-base) 0%,
+		var(--pega-base-ink) 100%
+	);
+}
+
+.pega-bridge__closing > .wp-block-group__inner-container {
+	max-width: 920px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.pega-bridge__closing-photo {
+	margin: 0 auto clamp(20px, 4vw, 32px) !important;
+	max-width: min(560px, 100%);
+	width: 100%;
+	overflow: hidden;
+	border-radius: 14px;
+	box-shadow:
+		0 8px 28px rgba(0, 0, 0, 0.22),
+		0 0 0 3px rgba(255, 255, 255, 0.18);
+}
+
+.pega-bridge__closing-photo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	object-position: center 35%;
+}
+
+.pega-bridge__closing-title {
+	margin: 0 0 clamp(16px, 3vw, 24px);
+	width: 100%;
+	max-width: 720px;
+	color: #fff;
+	font-weight: 800;
+	font-size: clamp(22px, 4.8vw, 34px);
+	line-height: 1.6;
+	letter-spacing: 0.04em;
+	text-align: center !important;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.pega-bridge__closing-lead {
+	margin: 0 0 clamp(14px, 2.5vw, 18px);
+	width: 100%;
+	max-width: 680px;
+	color: rgba(255, 255, 255, 0.94);
+	font-size: clamp(15px, 2.2vw, 17px);
+	line-height: 1.9;
+	text-align: center !important;
+}
+
+.pega-bridge__closing-lead:last-child {
+	margin-bottom: 0;
+}
+
+.pega-bridge__details-wrap {
+	padding: clamp(32px, 6vw, 48px) clamp(20px, 4vw, 40px) clamp(48px, 8vw, 72px);
+}
+
+.pega-bridge__details-wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-bridge__details.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(16px, 3vw, 22px);
+	margin: 0;
+}
+
+.pega-bridge__details > .wp-block-column {
+	margin: 0;
+	display: flex;
+}
+
+.pega-bridge__detail {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: clamp(22px, 4vw, 28px) clamp(20px, 3.5vw, 26px);
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 16px;
+	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.06);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-bridge__detail > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-bridge__detail--rhythm {
+	border-top: 4px solid var(--pega-base);
+}
+
+.pega-bridge__detail--skill {
+	border-top: 4px solid var(--pega-accent);
+}
+
+.pega-bridge__detail--practice {
+	border-top: 4px solid var(--pega-second);
+}
+
+.pega-bridge__detail-title {
+	margin: 0 0 clamp(12px, 2vw, 16px);
+	font-size: clamp(17px, 2.6vw, 20px);
+	font-weight: 800;
+	line-height: 1.5;
+	letter-spacing: 0.02em;
+}
+
+.pega-bridge__detail--rhythm .pega-bridge__detail-title { color: var(--pega-base-ink); }
+.pega-bridge__detail--skill .pega-bridge__detail-title { color: #5a8a1e; }
+.pega-bridge__detail--practice .pega-bridge__detail-title { color: #c94a50; }
+
+.pega-bridge__detail-text {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2.1vw, 16px);
+	line-height: 1.9;
+}
+
+@media (min-width: 600px) {
+	.pega-bridge__pillars.wp-block-columns {
+		grid-template-columns: repeat(3, 1fr);
+		align-items: stretch;
+	}
+
+	.pega-bridge__pillar {
+		min-height: 360px;
+	}
+
+	.pega-bridge__details.wp-block-columns {
+		grid-template-columns: repeat(3, 1fr);
+		align-items: stretch;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-bridge__pillar {
+		min-height: 380px;
+	}
+
+	.pega-bridge__pillar:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 10px 28px rgba(16, 103, 214, 0.12);
+	}
+
+	.pega-bridge__detail:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px rgba(16, 103, 214, 0.1);
+	}
+}
+
+/* =========================================================
+   在宅型就労移行支援サービス紹介（主役セクション）
+   ========================================================= */
+.pega-homeworker {
+	background: #fff;
+	padding: 0;
+	font-family: var(--pega-font);
+	border-top: 1px solid rgba(16, 103, 214, 0.08);
+}
+
+.pega-homeworker > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__intro {
+	padding: clamp(48px, 8vw, 72px) clamp(20px, 4vw, 40px) clamp(32px, 5vw, 48px);
+}
+
+.pega-homeworker__intro > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-homeworker__eyebrow {
+	margin: 0 0 10px;
+	color: var(--pega-accent);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+}
+
+.pega-homeworker__title {
+	margin: 0 0 clamp(18px, 3vw, 24px);
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: clamp(24px, 5vw, 36px);
+	line-height: 1.45;
+	letter-spacing: 0.03em;
+}
+
+.pega-homeworker__lead {
+	margin: 0 auto clamp(24px, 4vw, 32px);
+	max-width: 720px;
+	color: var(--pega-text-sub);
+	font-size: clamp(15px, 2.2vw, 17px);
+	line-height: 1.9;
+}
+
+.pega-homeworker__highlight {
+	margin: 0 auto clamp(32px, 5vw, 44px);
+	max-width: 720px;
+	padding: clamp(14px, 3vw, 18px) clamp(18px, 3.5vw, 24px);
+	background: linear-gradient(135deg, rgba(16, 103, 214, 0.08) 0%, rgba(141, 199, 60, 0.1) 100%);
+	border: 1px solid rgba(16, 103, 214, 0.14);
+	border-radius: 12px;
+}
+
+.pega-homeworker__highlight > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__highlight p {
+	margin: 0;
+	color: var(--pega-base-ink);
+	font-size: clamp(14px, 2.1vw, 16px);
+	font-weight: 700;
+	line-height: 1.75;
+	text-align: center;
+}
+
+.pega-homeworker__hero.wp-block-columns {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(24px, 4vw, 36px);
+	margin: 0;
+}
+
+.pega-homeworker__hero > .wp-block-column {
+	margin: 0;
+}
+
+.pega-homeworker__photo {
+	margin: 0 !important;
+	overflow: hidden;
+	border-radius: 16px;
+	box-shadow: 0 8px 28px rgba(16, 103, 214, 0.12);
+}
+
+.pega-homeworker__photo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.pega-homeworker__strengths > .wp-block-group__inner-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__strength {
+	margin: 0;
+	padding: clamp(14px, 2.5vw, 18px) clamp(16px, 3vw, 20px);
+	background: #f8fafc;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 12px;
+	border-left: 4px solid var(--pega-base);
+}
+
+.pega-homeworker__strength--2 { border-left-color: var(--pega-accent); }
+.pega-homeworker__strength--3 { border-left-color: var(--pega-second); }
+.pega-homeworker__strength--4 { border-left-color: var(--pega-base-ink); }
+
+.pega-homeworker__strength > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__strength p {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2vw, 15px);
+	line-height: 1.75;
+}
+
+.pega-homeworker__strength strong {
+	display: block;
+	margin-bottom: 4px;
+	color: var(--pega-text);
+	font-size: clamp(15px, 2.2vw, 16px);
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.pega-homeworker__videos {
+	padding: clamp(32px, 6vw, 48px) clamp(20px, 4vw, 40px);
+	background: linear-gradient(180deg, #f3f7fc 0%, #eef4fb 100%);
+}
+
+.pega-homeworker__videos > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-homeworker__videos-title {
+	margin: 0 0 clamp(24px, 4vw, 32px);
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: clamp(20px, 3.8vw, 28px);
+	line-height: 1.5;
+}
+
+.pega-homeworker__video-featured {
+	margin: 0 0 clamp(28px, 5vw, 40px);
+	padding: clamp(20px, 3.5vw, 28px);
+	background: #fff;
+	border: 2px solid var(--pega-base);
+	border-radius: 16px;
+	box-shadow: 0 6px 24px rgba(16, 103, 214, 0.1);
+}
+
+.pega-homeworker__video-featured > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__video-label {
+	margin: 0 0 8px;
+	color: var(--pega-base);
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.pega-homeworker__video-heading {
+	margin: 0 0 clamp(12px, 2vw, 16px);
+	color: var(--pega-text);
+	font-weight: 700;
+	font-size: clamp(15px, 2.3vw, 18px);
+	line-height: 1.55;
+}
+
+.pega-homeworker__video-featured .pega-homeworker__video-heading {
+	font-size: clamp(16px, 2.5vw, 20px);
+}
+
+.pega-homeworker__video-featured .wp-block-embed,
+.pega-homeworker__video-card .wp-block-embed {
+	margin: 0;
+}
+
+.pega-homeworker__video-grid.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(16px, 3vw, 22px);
+	margin: 0;
+}
+
+.pega-homeworker__video-grid > .wp-block-column {
+	margin: 0;
+}
+
+.pega-homeworker__video-card {
+	height: 100%;
+	margin: 0;
+	padding: clamp(16px, 3vw, 20px);
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 14px;
+	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.06);
+}
+
+.pega-homeworker__video-card > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-homeworker__video-card .pega-homeworker__video-heading {
+	font-size: clamp(14px, 2.1vw, 16px);
+}
+
+.pega-homeworker__cta-wrap {
+	padding: clamp(36px, 6vw, 56px) clamp(20px, 4vw, 40px) clamp(56px, 9vw, 80px);
+	text-align: center;
+}
+
+.pega-homeworker__cta-wrap > .wp-block-group__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+.pega-homeworker__cta.swell-block-button {
+	margin: 0;
+}
+
+.pega-homeworker__cta .swell-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: min(100%, 320px);
+	padding: clamp(14px, 2.5vw, 18px) clamp(28px, 5vw, 40px);
+	border-radius: 999px;
+	background: var(--pega-base) !important;
+	color: #fff !important;
+	font-size: clamp(15px, 2.2vw, 17px);
+	font-weight: 700;
+	text-decoration: none;
+	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.28);
+	transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-homeworker__cta .swell-block-button__link:hover {
+	filter: brightness(1.06);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 22px rgba(16, 103, 214, 0.34);
+}
+
+@media (min-width: 768px) {
+	.pega-homeworker__hero.wp-block-columns {
+		flex-direction: row;
+		align-items: stretch;
+	}
+
+	.pega-homeworker__hero > .wp-block-column {
+		flex: 1;
+	}
+
+	.pega-homeworker__strengths > .wp-block-group__inner-container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 14px;
+	}
+
+	.pega-homeworker__video-grid.wp-block-columns {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-homeworker__hero > .wp-block-column:first-child {
+		flex: 0 1 46%;
+	}
+
+	.pega-homeworker__hero > .wp-block-column:last-child {
+		flex: 0 1 54%;
+	}
+}
+
+/* =========================================================
+   ペガサスが選ばれている理由
+   ========================================================= */
+.pega-reasons {
+	background: linear-gradient(180deg, #eef4fb 0%, #e4edf8 55%, #dce8f5 100%);
+	padding: 0;
+	font-family: var(--pega-font);
+	border-top: 1px solid rgba(16, 103, 214, 0.08);
+}
+
+.pega-reasons > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-reasons__intro {
+	padding: clamp(48px, 8vw, 72px) clamp(20px, 4vw, 40px) clamp(28px, 5vw, 40px);
+}
+
+.pega-reasons__intro > .wp-block-group__inner-container {
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.pega-reasons__title {
+	margin: 0;
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: clamp(24px, 4.8vw, 34px);
+	line-height: 1.45;
+	letter-spacing: 0.03em;
+}
+
+.pega-reasons__main-wrap {
+	padding: 0 clamp(20px, 4vw, 40px) clamp(28px, 5vw, 40px);
+}
+
+.pega-reasons__main-wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(16px, 3vw, 22px);
+}
+
+.pega-reasons__featured {
+	margin: 0;
+	padding: 0;
+}
+
+.pega-reasons__featured > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-reasons__sub.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(16px, 3vw, 22px);
+	margin: 0;
+}
+
+.pega-reasons__sub > .wp-block-column {
+	margin: 0;
+	display: flex;
+}
+
+.pega-reasons__card {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.12);
+	border-radius: 16px;
+	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.07);
+	overflow: hidden;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-reasons__card--featured {
+	border-color: rgba(16, 103, 214, 0.22);
+	box-shadow: 0 6px 24px rgba(16, 103, 214, 0.1);
+}
+
+.pega-reasons__card > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.pega-reasons__card--featured > .wp-block-group__inner-container {
+	display: block;
+}
+
+.pega-reasons__card-split.wp-block-columns {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin: 0;
+}
+
+.pega-reasons__card-split > .wp-block-column {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.pega-reasons__card-img {
+	margin: 0 !important;
+	overflow: hidden;
+	flex: 0 0 auto;
+}
+
+.pega-reasons__card-img img {
+	display: block;
+	width: 100%;
+	height: clamp(180px, 42vw, 220px);
+	object-fit: cover;
+	object-position: center center;
+}
+
+.pega-reasons__card--featured .pega-reasons__card-img img {
+	height: clamp(200px, 48vw, 240px);
+}
+
+.pega-reasons__card--1 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-base); }
+.pega-reasons__card--2 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-accent); }
+.pega-reasons__card--3 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-second); }
+
+.pega-reasons__card-body,
+.pega-reasons__card-body > .wp-block-group__inner-container {
+	flex: 1 1 auto;
+	padding: clamp(18px, 3vw, 24px) clamp(18px, 3.2vw, 22px) clamp(22px, 3.5vw, 26px);
+}
+
+.pega-reasons__card-body > .wp-block-group__inner-container {
+	max-width: none;
+	padding: inherit;
+	margin: 0;
+}
+
+.pega-reasons__card-label {
+	margin: 0 0 6px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.pega-reasons__card--1 .pega-reasons__card-label { color: var(--pega-base); }
+.pega-reasons__card--2 .pega-reasons__card-label { color: #5a8a1e; }
+.pega-reasons__card--3 .pega-reasons__card-label { color: #c94a50; }
+
+.pega-reasons__card--featured .pega-reasons__card-title {
+	font-size: clamp(17px, 2.6vw, 20px);
+}
+
+.pega-reasons__card-title {
+	margin: 0 0 clamp(10px, 2vw, 14px);
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: clamp(16px, 2.4vw, 18px);
+	line-height: 1.5;
+}
+
+.pega-reasons__card-text {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2.05vw, 15px);
+	line-height: 1.85;
+}
+
+.pega-reasons__extras-wrap {
+	padding: clamp(8px, 2vw, 16px) clamp(20px, 4vw, 40px) clamp(48px, 8vw, 72px);
+}
+
+.pega-reasons__extras-wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-reasons__extras.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(14px, 2.5vw, 20px);
+	margin: 0;
+}
+
+.pega-reasons__extras > .wp-block-column {
+	margin: 0;
+	display: flex;
+}
+
+.pega-reasons__extra {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: clamp(22px, 4vw, 28px) clamp(20px, 3.5vw, 26px);
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 14px;
+	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.06);
+}
+
+.pega-reasons__extra > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-reasons__extra--support {
+	border-left: 4px solid var(--pega-base);
+}
+
+.pega-reasons__extra--aftercare {
+	border-left: 4px solid var(--pega-accent);
+}
+
+.pega-reasons__extra-title {
+	margin: 0 0 clamp(10px, 2vw, 14px);
+	font-weight: 800;
+	font-size: clamp(16px, 2.4vw, 18px);
+	line-height: 1.5;
+}
+
+.pega-reasons__extra--support .pega-reasons__extra-title { color: var(--pega-base-ink); }
+.pega-reasons__extra--aftercare .pega-reasons__extra-title { color: #5a8a1e; }
+
+.pega-reasons__extra-text {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2.05vw, 15px);
+	line-height: 1.85;
+}
+
+@media (min-width: 600px) {
+	.pega-reasons__sub.wp-block-columns {
+		grid-template-columns: repeat(2, 1fr);
+		align-items: stretch;
+	}
+
+	.pega-reasons__extras.wp-block-columns {
+		grid-template-columns: repeat(2, 1fr);
+		align-items: stretch;
+	}
+}
+
+@media (min-width: 768px) {
+	.pega-reasons__card-split.wp-block-columns {
+		flex-direction: row;
+		align-items: stretch;
+	}
+
+	.pega-reasons__card-split > .wp-block-column:first-child {
+		flex: 0 0 46%;
+		max-width: 46%;
+	}
+
+	.pega-reasons__card-split > .wp-block-column:last-child {
+		flex: 1 1 54%;
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-img {
+		height: 100%;
+		min-height: 260px;
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-img img {
+		height: 100%;
+		min-height: 260px;
+		border-bottom: none;
+		border-right: 3px solid var(--pega-base);
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-body,
+	.pega-reasons__card--featured .pega-reasons__card-body > .wp-block-group__inner-container {
+		padding: clamp(24px, 3.5vw, 32px) clamp(24px, 3.5vw, 32px) clamp(24px, 3.5vw, 32px) clamp(20px, 3vw, 28px);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-reasons__card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 10px 28px rgba(16, 103, 214, 0.12);
+	}
+
+	.pega-reasons__card--featured:hover {
+		box-shadow: 0 12px 32px rgba(16, 103, 214, 0.14);
+	}
+
+	.pega-reasons__extra:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 22px rgba(16, 103, 214, 0.1);
+	}
+
+	.pega-reasons__extra {
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+}
+
+/* =========================================================
+   通所案内バナー（控えめサブ動線）
+   ========================================================= */
+/* 装飾（背景・枠・影・色・フォント・hover 等）は Code Snippets「pega-sec-commute」(③装飾レイヤー) へ移行。
+   以下は構造（grid/flex骨格・幅・@media・inner-container余白）のみを子テーマに残す。 */
+
+.pega-commute > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-commute__wrap {
+	padding: clamp(28px, 5vw, 40px) clamp(20px, 4vw, 40px) clamp(40px, 7vw, 56px);
+}
+
+.pega-commute__wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-commute__banner > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-commute__inner.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(16px, 3vw, 20px);
+	margin: 0;
+}
+
+.pega-commute__inner > .wp-block-column {
+	margin: 0;
+	min-width: 0;
+}
+
+.pega-commute__thumb {
+	margin: 0 !important;
+	width: clamp(64px, 12vw, 80px);
+	flex-shrink: 0;
+}
+
+.pega-commute__body,
+.pega-commute__body > .wp-block-group__inner-container {
+	padding: 0;
+	margin: 0;
+}
+
+.pega-commute__body > .wp-block-group__inner-container {
+	max-width: none;
+}
+
+.pega-commute__action,
+.pega-commute__action > .wp-block-group__inner-container {
+	padding: 0;
+	margin: 0;
+}
+
+.pega-commute__action > .wp-block-group__inner-container {
+	max-width: none;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.pega-commute__cta.swell-block-button {
+	margin: 0;
+}
+
+@media (min-width: 640px) {
+	.pega-commute__inner.wp-block-columns {
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		align-items: center;
+		gap: clamp(16px, 2.5vw, 24px);
+	}
+
+	.pega-commute__action > .wp-block-group__inner-container {
+		justify-content: flex-end;
+	}
+}
+
+@media (max-width: 639px) {
+	.pega-commute__inner.wp-block-columns {
+		grid-template-columns: auto minmax(0, 1fr);
+		align-items: start;
+	}
+
+	.pega-commute__inner > .wp-block-column:last-child {
+		grid-column: 1 / -1;
+	}
+}
+
+/* =========================================================
+   利用者・卒業生の声
+   ========================================================= */
+.pega-voices {
+	background: #fff;
+	padding: 0;
+	font-family: var(--pega-font);
+	border-top: 1px solid rgba(16, 103, 214, 0.08);
+}
+
+.pega-voices > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-voices__intro {
+	padding: clamp(48px, 8vw, 72px) clamp(20px, 4vw, 40px) clamp(24px, 4vw, 32px);
+}
+
+.pega-voices__intro > .wp-block-group__inner-container {
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.pega-voices__title {
+	margin: 0 0 clamp(12px, 2vw, 16px);
+	color: var(--pega-base-ink);
+	font-weight: 800;
+	font-size: clamp(22px, 3.6vw, 28px);
+	line-height: 1.45;
+	letter-spacing: 0.03em;
+}
+
+.pega-voices__lead {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2.1vw, 16px);
+	line-height: 1.8;
+}
+
+.pega-voices__policy-img {
+	margin: clamp(20px, 4vw, 28px) auto 0;
+	max-width: 570px;
+	text-align: center;
+}
+
+.pega-voices__policy-img img {
+	display: block;
+	width: 100%;
+	max-width: 570px;
+	height: auto;
+	margin: 0 auto;
+	border-radius: 10px;
+	opacity: 0.94;
+}
+
+.pega-voices__wrap {
+	padding: 0 clamp(20px, 4vw, 40px) clamp(48px, 8vw, 72px);
+}
+
+.pega-voices__wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.pega-voices__group-label {
+	margin: 0 0 clamp(14px, 2.5vw, 18px);
+	color: var(--pega-base);
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: none;
+}
+
+.pega-voices__group-label--grad {
+	margin-top: clamp(28px, 5vw, 36px);
+	color: #5a8a1e;
+}
+
+.pega-voices__cards {
+	margin: 0 0 clamp(8px, 2vw, 12px);
+	padding: 0;
+}
+
+.pega-voices__cards > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(14px, 2.5vw, 18px);
+}
+
+.pega-voices__cards--grad > .wp-block-group__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.pega-voices__card {
+	margin: 0;
+	padding: clamp(20px, 3.5vw, 26px) clamp(20px, 3.5vw, 24px) clamp(22px, 3.5vw, 26px);
+	background: #fafbfd;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 14px;
+	box-shadow: 0 2px 12px rgba(16, 103, 214, 0.05);
+	position: relative;
+}
+
+.pega-voices__card > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-voices__card--user {
+	border-left: 4px solid var(--pega-base);
+}
+
+.pega-voices__card--grad {
+	background: #fafcf7;
+	border-color: rgba(141, 199, 60, 0.18);
+	border-left: 4px solid var(--pega-accent);
+}
+
+.pega-voices__card::before {
+	content: "\201C";
+	position: absolute;
+	top: clamp(12px, 2vw, 16px);
+	right: clamp(16px, 3vw, 20px);
+	color: rgba(16, 103, 214, 0.12);
+	font-size: clamp(36px, 6vw, 48px);
+	font-weight: 800;
+	line-height: 1;
+	pointer-events: none;
+}
+
+.pega-voices__card--grad::before {
+	color: rgba(141, 199, 60, 0.18);
+}
+
+.pega-voices__meta {
+	margin: 0 0 clamp(10px, 2vw, 12px);
+	color: var(--pega-text-sub);
+	font-size: clamp(12px, 1.9vw, 13px);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.pega-voices__quote {
+	margin: 0;
+	padding: 0 !important;
+	border: none;
+	background: transparent !important;
+}
+
+.pega-voices__quote::before,
+.pega-voices__quote::after {
+	content: none !important;
+	display: none !important;
+}
+
+.pega-voices__quote p {
+	margin: 0;
+	color: var(--pega-text);
+	font-size: clamp(14px, 2.05vw, 15px);
+	line-height: 1.85;
+	font-style: normal;
+}
+
+.pega-voices__quote cite {
+	display: none;
+}
+
+.pega-voices__cta-wrap {
+	margin-top: clamp(32px, 5vw, 44px);
+	padding: 0;
+	text-align: center;
+}
+
+.pega-voices__cta-wrap > .wp-block-group__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(12px, 2vw, 16px);
+}
+
+.pega-voices__cta.swell-block-button {
+	margin: 0;
+}
+
+.pega-voices__cta .swell-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 24px;
+	border-radius: 999px;
+	background: var(--pega-base) !important;
+	color: #fff !important;
+	border: none;
+	font-size: clamp(14px, 2vw, 15px);
+	font-weight: 700;
+	text-decoration: none;
+	box-shadow: 0 4px 14px rgba(16, 103, 214, 0.22);
+	transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-voices__cta .swell-block-button__link:hover {
+	filter: brightness(1.06);
+	box-shadow: 0 6px 18px rgba(16, 103, 214, 0.28);
+}
+
+.pega-voices__cta-sub {
+	margin: 0;
+	font-size: clamp(13px, 1.9vw, 14px);
+	line-height: 1.6;
+}
+
+.pega-voices__cta-sub a {
+	color: var(--pega-base-ink);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.pega-voices__cta-sub a:hover {
+	color: var(--pega-base);
+}
+
+@media (min-width: 640px) {
+	.pega-voices__cards--user > .wp-block-group__inner-container {
+		grid-template-columns: repeat(3, 1fr);
+		align-items: stretch;
+	}
+
+	.pega-voices__cards--grad > .wp-block-group__inner-container {
+		grid-template-columns: repeat(2, 1fr);
+		align-items: stretch;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-voices__card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 22px rgba(16, 103, 214, 0.1);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.pega-voices__card--grad:hover {
+		box-shadow: 0 8px 22px rgba(141, 199, 60, 0.12);
+	}
+}
+
+/* =========================================================
+   コラム・ブログ（動的 Query Loop）
+   ========================================================= */
+.pega-posts {
+	background: linear-gradient(180deg, #f4f7fb 0%, #eef3f9 100%);
+	padding: 0;
+	font-family: var(--pega-font);
+	border-top: 1px solid rgba(16, 103, 214, 0.08);
+}
+
+.pega-posts > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-posts__intro {
+	padding: clamp(48px, 8vw, 72px) clamp(20px, 4vw, 40px) clamp(24px, 4vw, 32px);
+}
+
+.pega-posts__intro > .wp-block-group__inner-container {
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.pega-posts__title {
+	margin: 0 0 clamp(12px, 2vw, 16px);
+	color: var(--pega-base-ink);
+	font-weight: 800;
+	font-size: clamp(22px, 3.6vw, 28px);
+	line-height: 1.45;
+	letter-spacing: 0.03em;
+}
+
+.pega-posts__lead {
+	margin: 0;
+	color: var(--pega-text-sub);
+	font-size: clamp(14px, 2.1vw, 16px);
+	line-height: 1.8;
+}
+
+.pega-posts__wrap {
+	padding: 0 clamp(20px, 4vw, 40px) clamp(28px, 4vw, 40px);
+}
+
+.pega-posts__wrap > .wp-block-group__inner-container {
+	max-width: 960px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(36px, 6vw, 48px);
+}
+
+.pega-posts__block {
+	margin: 0;
+	padding: 0;
+}
+
+.pega-posts__block > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-posts__block-title {
+	margin: 0 0 clamp(16px, 3vw, 20px);
+	color: var(--pega-base-ink);
+	font-weight: 800;
+	font-size: clamp(17px, 2.6vw, 20px);
+	line-height: 1.5;
+}
+
+.pega-posts__block--staff .pega-posts__block-title {
+	color: #5a8a1e;
+}
+
+.pega-posts-query {
+	margin: 0;
+}
+
+.pega-posts-query__list.wp-block-post-template {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(14px, 2.5vw, 18px);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pega-posts-query__list > .wp-block-post {
+	margin: 0;
+	min-width: 0;
+}
+
+.pega-posts-card {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: 1px solid rgba(16, 103, 214, 0.1);
+	border-radius: 14px;
+	overflow: hidden;
+	box-shadow: 0 2px 12px rgba(16, 103, 214, 0.05);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-posts-card > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.pega-posts-card__thumb {
+	margin: 0 !important;
+	overflow: hidden;
+}
+
+.pega-posts-card__thumb img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+}
+
+.pega-posts-card__title {
+	margin: 0;
+	padding: clamp(14px, 2.5vw, 16px) clamp(14px, 2.5vw, 16px) clamp(8px, 1.5vw, 10px);
+	font-size: clamp(14px, 2.05vw, 15px);
+	font-weight: 700;
+	line-height: 1.6;
+	flex: 1 1 auto;
+}
+
+.pega-posts-card__title a {
+	color: var(--pega-text);
+	text-decoration: none;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.pega-posts-card__title a:hover {
+	color: var(--pega-base);
+}
+
+.pega-posts-card__date {
+	margin: 0;
+	padding: 0 clamp(14px, 2.5vw, 16px) clamp(14px, 2.5vw, 16px);
+	color: #6b7280;
+	font-size: clamp(12px, 1.8vw, 13px);
+	line-height: 1.5;
+}
+
+.pega-posts__empty {
+	margin: 0;
+	padding: clamp(20px, 3vw, 24px);
+	color: var(--pega-text-sub);
+	font-size: 14px;
+	text-align: center;
+	background: rgba(255, 255, 255, 0.7);
+	border-radius: 12px;
+}
+
+.pega-posts__more {
+	margin: clamp(16px, 3vw, 20px) 0 0;
+	padding: 0;
+	text-align: right;
+}
+
+.pega-posts__more > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-posts__more-link {
+	margin: 0;
+	font-size: clamp(13px, 1.9vw, 14px);
+	font-weight: 600;
+}
+
+.pega-posts__more-link a {
+	color: var(--pega-base-ink);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(16, 103, 214, 0.25);
+	padding-bottom: 2px;
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.pega-posts__more-link a:hover {
+	color: var(--pega-base);
+	border-color: rgba(16, 103, 214, 0.45);
+}
+
+@media (min-width: 640px) {
+	.pega-posts-query__list.wp-block-post-template {
+		grid-template-columns: repeat(3, 1fr);
+		align-items: stretch;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-posts-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 22px rgba(16, 103, 214, 0.1);
+	}
+}
+
+/* =========================================================
+   CTA（まとめ）— ページ最下部
+   ========================================================= */
+.pega-closing {
+	background: linear-gradient(180deg, #eef3f9 0%, #e4edf8 55%, #dce8f5 100%);
+	padding: 0;
+	font-family: var(--pega-font);
+	border-top: 1px solid rgba(16, 103, 214, 0.08);
+}
+
+.pega-closing > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-closing__wrap {
+	padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 40px) clamp(20px, 3vw, 28px);
+}
+
+.pega-closing__wrap > .wp-block-group__inner-container {
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.pega-closing__panel {
+	margin: 0;
+	padding: clamp(36px, 5vw, 48px) clamp(24px, 4vw, 40px);
+	background: rgba(255, 255, 255, 0.88);
+	border: 1px solid rgba(16, 103, 214, 0.12);
+	border-radius: 20px;
+	box-shadow: 0 8px 32px rgba(16, 103, 214, 0.08);
+}
+
+.pega-closing__panel > .wp-block-group__inner-container {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pega-closing__title {
+	margin: 0 0 clamp(16px, 3vw, 22px);
+	color: var(--pega-base-ink);
+	font-weight: 800;
+	font-size: clamp(22px, 3.8vw, 30px);
+	line-height: 1.55;
+	letter-spacing: 0.03em;
+}
+
+.pega-closing__lead {
+	margin: 0 0 clamp(28px, 5vw, 36px);
+	color: var(--pega-text-sub);
+	font-size: clamp(15px, 2.2vw, 17px);
+	line-height: 2;
+}
+
+.pega-closing__actions,
+.pega-closing__actions > .wp-block-group__inner-container {
+	margin: 0;
+	padding: 0;
+}
+
+.pega-closing__actions > .wp-block-group__inner-container {
+	max-width: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(14px, 2.5vw, 18px);
+}
+
+.pega-closing__btn.swell-block-button {
+	margin: 0;
+	width: 100%;
+	max-width: 480px;
+}
+
+.pega-closing__btn .swell-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 56px;
+	padding: clamp(16px, 2.8vw, 20px) clamp(28px, 4.5vw, 36px);
+	border-radius: 999px;
+	font-family: var(--pega-font);
+	font-size: clamp(16px, 2.3vw, 17px);
+	font-weight: 700;
+	line-height: 1.45;
+	text-decoration: none;
+	border: 2px solid transparent;
+	transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.pega-closing__btn--primary .swell-block-button__link {
+	background: var(--pega-accent) !important;
+	color: #fff !important;
+	box-shadow: 0 6px 22px rgba(141, 199, 60, 0.42);
+	border-color: rgba(255, 255, 255, 0.3);
+	font-size: clamp(17px, 2.5vw, 18px);
+	min-height: 60px;
+}
+
+.pega-closing__btn--primary .swell-block-button__link:hover {
+	filter: brightness(1.06);
+	box-shadow: 0 8px 26px rgba(141, 199, 60, 0.5);
+}
+
+.pega-closing__btn--contact .swell-block-button__link {
+	background: var(--pega-second) !important;
+	color: #fff !important;
+	box-shadow: 0 6px 20px rgba(253, 117, 124, 0.36);
+	border-color: rgba(255, 255, 255, 0.25);
+	min-height: 56px;
+}
+
+.pega-closing__btn--contact .swell-block-button__link:hover {
+	filter: brightness(1.05);
+	box-shadow: 0 8px 24px rgba(253, 117, 124, 0.42);
+}
+
+.pega-closing__btn--download .swell-block-button__link {
+	background: rgba(16, 103, 214, 0.1) !important;
+	color: var(--pega-base) !important;
+	border-color: rgba(16, 103, 214, 0.32);
+	box-shadow: 0 4px 14px rgba(16, 103, 214, 0.12);
+	min-height: 56px;
+}
+
+.pega-closing__btn--download .swell-block-button__link:hover {
+	background: rgba(16, 103, 214, 0.16) !important;
+	border-color: rgba(16, 103, 214, 0.42);
+	box-shadow: 0 6px 18px rgba(16, 103, 214, 0.16);
+}
+
+.pega-closing__btn .swell-block-button__link:hover {
+	transform: translateY(-1px);
+}
+
+.pega-closing__btn .swell-block-button__link:focus-visible {
+	outline: 3px solid rgba(16, 103, 214, 0.35);
+	outline-offset: 3px;
+}
+
+.pega-closing__sub.wp-block-columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(12px, 2.5vw, 14px);
+	width: 100%;
+	max-width: 480px;
+	margin: 0;
+}
+
+.pega-closing__sub > .wp-block-column {
+	margin: 0;
+	min-width: 0;
+}
+
+.pega-closing__sub .pega-closing__btn.swell-block-button {
+	max-width: none;
+}
+
+.pega-closing__tel {
+	margin: clamp(22px, 4vw, 28px) 0 0;
+	color: #6b7280;
+	font-size: clamp(13px, 1.9vw, 14px);
+	line-height: 1.7;
+}
+
+.pega-closing__tel a {
+	color: var(--pega-base-ink);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(16, 103, 214, 0.2);
+	padding-bottom: 1px;
+}
+
+.pega-closing__tel a:hover {
+	color: var(--pega-base);
+	border-color: rgba(16, 103, 214, 0.4);
+}
+
+@media (min-width: 640px) {
+	.pega-closing__sub.wp-block-columns {
+		grid-template-columns: repeat(2, 1fr);
+		max-width: 560px;
+	}
+}
+
+/* =========================================================
+   トップ：CTA（まとめ）→ フッター接続
+   ========================================================= */
+.home .pega-closing {
+	margin-bottom: 0 !important;
+}
+
+.home .l-mainContent__inner > .pega-closing,
+.home .post_content > .pega-closing {
+	margin-bottom: 0 !important;
+}
+
+.home .pega-closing__wrap {
+	padding-bottom: clamp(12px, 2vw, 16px);
+}
+
+.home #content,
+.home #main_content,
+.home .l-mainContent {
+	padding-bottom: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.home #breadcrumb,
+.home .c-breadcrumb,
+.home .p-breadcrumb,
+.home .l-breadcrumb,
+.home #before_footer_widget {
+	display: none !important;
+}
+
+.home #footer.l-footer:has(.pega-footer) {
+	margin-top: 0 !important;
+}
+
+/* =========================================================
+   フッター — 通所サブ動線 + サイト情報
+   ========================================================= */
+#footer.l-footer:has(.pega-footer) {
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	border: none;
+	font-family: var(--pega-font);
+}
+
+#footer.l-footer:has(.pega-footer) .l-footer__inner.pega-footer__inner {
+	background: var(--pega-base-dark);
+	padding: clamp(48px, 7vw, 64px) 0 clamp(36px, 5vw, 48px);
+	margin: 0;
+	border: none;
+}
+
+.pega-footer {
+	color: rgba(255, 255, 255, 0.92);
+}
+
+/* 通所サブ動線（じょうご型3つ目）— CTA下の明るい帯で本体と分離 */
+.pega-footer__commute {
+	padding: clamp(28px, 4.5vw, 36px) 0;
+	background: #dce8f5;
+	border-top: none;
+	border-bottom: 3px solid var(--pega-base-dark);
+}
+
+.pega-footer__commute .l-container {
+	max-width: var(--pega-wrap-content);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.pega-footer__commute-inner {
+	display: grid;
+	gap: clamp(14px, 2.5vw, 18px);
+	align-items: center;
+}
+
+.pega-footer__commute-title {
+	margin: 0 0 8px;
+	font-weight: 700;
+	font-size: clamp(15px, 2.4vw, 17px);
+	color: var(--pega-base-ink);
+	letter-spacing: 0.02em;
+}
+
+.pega-footer__commute-text {
+	margin: 0;
+	font-size: clamp(13px, 2.1vw, 14px);
+	line-height: 1.75;
+	color: var(--pega-text-sub);
+}
+
+.pega-footer__commute-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 12px;
+}
+
+.pega-footer__commute-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 11px 22px;
+	font-family: var(--pega-font);
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+	text-decoration: none;
+	border-radius: 999px;
+	border: 2px solid transparent;
+	transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.pega-footer__commute-btn--access {
+	background: var(--pega-base) !important;
+	color: #fff !important;
+	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.3);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pega-footer__commute-btn--access:hover {
+	filter: brightness(1.06);
+	box-shadow: 0 6px 20px rgba(16, 103, 214, 0.38);
+	transform: translateY(-1px);
+	color: #fff !important;
+}
+
+@media (min-width: 768px) {
+	.pega-footer__commute-inner {
+		grid-template-columns: 1fr auto;
+		gap: 24px 32px;
+	}
+
+	.pega-footer__commute-links {
+		justify-self: end;
+		flex-wrap: nowrap;
+	}
+}
+
+.pega-footer__inner > .l-container {
+	padding-left: clamp(20px, 4vw, 40px);
+	padding-right: clamp(20px, 4vw, 40px);
+}
+
+.pega-footer__grid {
+	display: grid;
+	gap: clamp(28px, 4vw, 36px);
+}
+
+.pega-footer__logo-row,
+.pega-footer__brand,
+.pega-footer__nav-group {
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+}
+
+.pega-footer__logo-row {
+	grid-column: 1 / -1;
+}
+
+.pega-footer__brand {
+	max-width: none;
+}
+
+.pega-footer__logo {
+	margin: 0;
+	line-height: 1;
+}
+
+.pega-footer__logo .c-headLogo {
+	margin: 0;
+}
+
+.pega-footer__logo .c-headLogo__link {
+	display: inline-flex;
+	align-items: center;
+	padding: 0;
+	background: transparent;
+}
+
+.pega-footer__logo .c-headLogo__img {
+	display: block;
+	max-height: 52px;
+	width: auto;
+	max-width: min(260px, 100%);
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+	opacity: 0.95;
+}
+
+.pega-footer__office {
+	margin: 0;
+	font-style: normal;
+	font-size: 13px;
+	line-height: 1.85;
+	color: rgba(255, 255, 255, 0.78);
+}
+
+.pega-footer__office-name {
+	margin: 0 0 12px;
+	padding: 0 0 10px;
+	font-weight: 700;
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.55);
+	letter-spacing: 0.06em;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pega-footer__office-line {
+	margin: 0;
+}
+
+.pega-footer__office-line a {
+	color: rgba(255, 255, 255, 0.88);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.pega-footer__office-line a:hover {
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ナビ13件 */
+.pega-footer__nav {
+	display: grid;
+	gap: clamp(24px, 4vw, 32px);
+	grid-template-columns: 1fr;
+	margin: 0;
+	padding: 0;
+}
+
+.pega-footer__nav-heading {
+	margin: 0 0 12px;
+	padding: 0 0 10px;
+	font-weight: 700;
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.55);
+	letter-spacing: 0.06em;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pega-footer__nav-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pega-footer__nav-list li + li {
+	margin-top: 8px;
+}
+
+.pega-footer__nav-list a {
+	display: inline-block;
+	font-size: 13px;
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.82);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.pega-footer__nav-list a:hover {
+	color: #fff;
+}
+
+@media (min-width: 560px) {
+	.pega-footer__nav {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-footer__grid {
+		grid-template-columns: minmax(240px, 280px) repeat(3, minmax(0, 1fr));
+		gap: 28px 32px 24px;
+		align-items: start;
+	}
+
+	.pega-footer__logo-row {
+		margin-bottom: 4px;
+	}
+
+	.pega-footer__nav {
+		display: contents;
+	}
+
+	.pega-footer__nav-group {
+		align-self: start;
+	}
+}
+
+/* SNS・コピーライト */
+.pega-footer__meta {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	margin-top: clamp(32px, 5vw, 44px);
+	padding-top: clamp(24px, 4vw, 28px);
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pega-footer__sns {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: rgba(255, 255, 255, 0.82);
+	text-decoration: none;
+	font-size: 13px;
+	transition: color 0.2s ease;
+}
+
+.pega-footer__sns:hover {
+	color: #fff;
+}
+
+.pega-footer__sns-icon {
+	flex-shrink: 0;
+}
+
+.pega-footer__copyright {
+	margin: 0;
+	font-size: 12px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+	.pega-footer__meta {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+/* =========================================================
+   スクロール追従CTA（トップ・ヒーロー後〜フッター前）
+   ========================================================= */
+.pega-sticky-cta {
+	position: fixed;
+	z-index: 90;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+	pointer-events: none;
+	font-family: var(--pega-font);
+}
+
+.pega-sticky-cta.is-visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	pointer-events: auto;
+}
+
+.pega-sticky-cta__close {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: rgba(16, 103, 214, 0.08);
+	color: #6b7280;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pega-sticky-cta__close:hover {
+	background: rgba(16, 103, 214, 0.14);
+	color: var(--pega-base-ink);
+}
+
+.pega-sticky-cta__inner {
+	display: flex;
+	gap: 8px;
+}
+
+.pega-sticky-cta__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 10px 14px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.35;
+	text-decoration: none;
+	text-align: center;
+	border: 2px solid transparent;
+	transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pega-sticky-cta__btn--primary {
+	flex: 1.15;
+	background: var(--pega-accent) !important;
+	color: #fff !important;
+	box-shadow: 0 3px 12px rgba(141, 199, 60, 0.32);
+}
+
+.pega-sticky-cta__btn--primary:hover {
+	filter: brightness(1.05);
+	color: #fff !important;
+}
+
+.pega-sticky-cta__btn--contact {
+	flex: 1;
+	background: var(--pega-second) !important;
+	color: #fff !important;
+	box-shadow: 0 3px 12px rgba(253, 117, 124, 0.28);
+}
+
+.pega-sticky-cta__btn--contact:hover {
+	filter: brightness(1.04);
+	color: #fff !important;
+}
+
+/* モバイル: 下部固定バー */
+@media (max-width: 959px) {
+	.pega-sticky-cta {
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+		background: rgba(255, 255, 255, 0.97);
+		border-top: 1px solid rgba(16, 103, 214, 0.1);
+		box-shadow: 0 -4px 18px rgba(16, 103, 214, 0.08);
+	}
+
+	.pega-sticky-cta__close {
+		top: 4px;
+		right: 4px;
+	}
+
+	.pega-sticky-cta__inner {
+		max-width: 520px;
+		margin: 0 auto;
+		padding-right: 24px;
+	}
+
+	.pega-has-sticky-cta {
+		padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+	}
+}
+
+/* PC: 右下フローティング（スクロールバー幅を考慮して内側に配置） */
+@media (min-width: 960px) {
+	.pega-sticky-cta {
+		right: calc(28px + (100vw - 100%));
+		bottom: clamp(28px, 3.5vw, 40px);
+		left: auto;
+		width: auto;
+		min-width: 240px;
+		max-width: 280px;
+		padding: 28px 16px 14px;
+		background: rgba(255, 255, 255, 0.96);
+		border: 1px solid rgba(16, 103, 214, 0.12);
+		border-radius: 14px;
+		box-shadow: 0 6px 24px rgba(16, 103, 214, 0.1);
+	}
+
+	.pega-sticky-cta__inner {
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.pega-sticky-cta__btn {
+		width: 100%;
+		font-size: 14px;
+		min-height: 42px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pega-sticky-cta {
+		transition: opacity 0.15s ease, visibility 0.15s ease;
+		transform: none;
+	}
+
+	.pega-sticky-cta.is-visible {
+		transform: none;
+	}
+}
+
+/* =========================================================
+   TOP PAGE UNIFIED REFINEMENT — 余白・幅・装飾・階層の統一
+   ========================================================= */
+
+/* 調整1: ページトップボタンを追従CTAの上へ（追従CTA位置は維持）
+   ※ pega-has-sticky-cta は body、home は #body_wrap に付与 */
+body.pega-has-sticky-cta .home .p-fixBtnWrap {
+	transition: bottom 0.3s ease, opacity 0.25s, visibility 0.25s;
+}
+
+@media (max-width: 959px) {
+	body.pega-has-sticky-cta .home .p-fixBtnWrap {
+		bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+	}
+}
+
+@media (min-width: 960px) {
+	body.pega-has-sticky-cta .home .p-fixBtnWrap {
+		bottom: calc(220px + 0.5em);
+		right: calc(2.5em + (100vw - 100%));
+	}
+}
+
+/* 調整2・3: セクション余白・コンテンツ幅の統一 */
+.home .pega-concerns {
+	padding: var(--pega-section-py) var(--pega-section-px);
+	background: var(--pega-soft-bg);
+}
+
+.home .pega-concerns > .wp-block-group__inner-container {
+	max-width: var(--pega-wrap-wide);
+}
+
+.home .pega-bridge {
+	background: var(--pega-soft-bg);
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-bridge > .wp-block-group__inner-container,
+.home .pega-reasons > .wp-block-group__inner-container,
+.home .pega-voices > .wp-block-group__inner-container,
+.home .pega-posts > .wp-block-group__inner-container,
+.home .pega-homeworker > .wp-block-group__inner-container,
+.home .pega-closing > .wp-block-group__inner-container {
+	max-width: var(--pega-wrap-content) !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	width: 100% !important;
+}
+
+.home .pega-bridge__intro,
+.home .pega-homeworker__intro,
+.home .pega-reasons__intro,
+.home .pega-voices__intro,
+.home .pega-posts__intro {
+	padding: var(--pega-section-py) 0 var(--pega-section-py-sm);
+}
+
+.home .pega-bridge__pillars-wrap,
+.home .pega-bridge__details-wrap,
+.home .pega-reasons__main-wrap,
+.home .pega-reasons__extras-wrap,
+.home .pega-voices__wrap,
+.home .pega-posts__wrap,
+.home .pega-homeworker__hero,
+.home .pega-homeworker__videos,
+.home .pega-homeworker__cta-wrap {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.home .pega-bridge__pillars-wrap,
+.home .pega-bridge__details-wrap,
+.home .pega-reasons__main-wrap,
+.home .pega-reasons__extras-wrap,
+.home .pega-voices__wrap,
+.home .pega-posts__wrap {
+	padding-bottom: var(--pega-section-py);
+}
+
+.home .pega-bridge__pillars-wrap {
+	padding-top: 0;
+}
+
+.home .pega-homeworker {
+	background: #fff;
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-homeworker__videos {
+	padding-bottom: var(--pega-section-py-sm);
+}
+
+.home .pega-reasons {
+	background: var(--pega-soft-blue);
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-posts {
+	background: var(--pega-soft-bg);
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-voices {
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-commute__wrap {
+	max-width: var(--pega-wrap-content);
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.home .pega-closing {
+	background: var(--pega-soft-blue);
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-closing__wrap {
+	padding: var(--pega-section-py-sm) 0;
+}
+
+/* 調整6: セクションタイトル階層 */
+.home .pega-concerns__title,
+.home .pega-bridge__title,
+.home .pega-homeworker__title,
+.home .pega-reasons__title,
+.home .pega-voices__title,
+.home .pega-posts__title,
+.home .pega-closing__title {
+	margin: 0 0 clamp(16px, 2.5vw, 24px);
+	color: var(--pega-text);
+	font-weight: 800;
+	font-size: var(--pega-h2);
+	line-height: 1.45;
+	letter-spacing: 0.02em;
+}
+
+.home .pega-concerns__lead,
+.home .pega-bridge__text,
+.home .pega-homeworker__lead,
+.home .pega-voices__lead,
+.home .pega-posts__lead,
+.home .pega-closing__lead {
+	font-size: var(--pega-lead);
+	line-height: 1.85;
+	color: var(--pega-text-sub);
+}
+
+.home .pega-bridge__pillar-title,
+.home .pega-bridge__detail-title,
+.home .pega-reasons__card-title,
+.home .pega-posts__block-title,
+.home .pega-homeworker__strength strong {
+	font-size: var(--pega-h3);
+	font-weight: 700;
+	line-height: 1.5;
+	color: var(--pega-text);
+}
+
+/* 調整4・5: 装飾削減・色の柔らかさ */
+.home .pega-concerns__item,
+.home .pega-bridge__pillar,
+.home .pega-bridge__detail,
+.home .pega-reasons__card,
+.home .pega-voices__card,
+.home .pega-posts-card,
+.home .pega-homeworker__strength {
+	background: #fff;
+	border: 1px solid var(--pega-border);
+	border-radius: var(--pega-card-radius);
+	box-shadow: var(--pega-card-shadow);
+}
+
+.home .pega-concerns__item p::before {
+	width: 6px;
+	height: 6px;
+	background: var(--pega-base);
+	opacity: 0.35;
+	box-shadow: none;
+}
+
+.home .pega-concerns__item--featured,
+.home .pega-concerns__item--featured p {
+	background: #fff;
+	border-color: var(--pega-border-strong);
+	box-shadow: var(--pega-card-shadow);
+	color: var(--pega-text);
+	font-weight: 600;
+}
+
+.home .pega-bridge__pillar--self .pega-bridge__pillar-img::after,
+.home .pega-bridge__pillar--skill .pega-bridge__pillar-img::after,
+.home .pega-bridge__pillar--support .pega-bridge__pillar-img::after {
+	display: none;
+}
+
+.home .pega-bridge__pillar--self .pega-bridge__pillar-img img,
+.home .pega-bridge__pillar--skill .pega-bridge__pillar-img img,
+.home .pega-bridge__pillar--support .pega-bridge__pillar-img img,
+.home .pega-reasons__card--1 .pega-reasons__card-img img,
+.home .pega-reasons__card--2 .pega-reasons__card-img img,
+.home .pega-reasons__card--3 .pega-reasons__card-img img {
+	border-bottom: none;
+}
+
+.home .pega-bridge__pillar--self .pega-bridge__pillar-label,
+.home .pega-bridge__pillar--skill .pega-bridge__pillar-label,
+.home .pega-bridge__pillar--support .pega-bridge__pillar-label,
+.home .pega-bridge__detail--rhythm .pega-bridge__detail-title,
+.home .pega-bridge__detail--skill .pega-bridge__detail-title,
+.home .pega-bridge__detail--practice .pega-bridge__detail-title,
+.home .pega-reasons__card--1 .pega-reasons__card-label,
+.home .pega-reasons__card--2 .pega-reasons__card-label,
+.home .pega-reasons__card--3 .pega-reasons__card-label {
+	color: var(--pega-text-sub);
+}
+
+.home .pega-bridge__detail--rhythm,
+.home .pega-bridge__detail--skill,
+.home .pega-bridge__detail--practice {
+	border-top: none;
+	border-left: 3px solid var(--pega-base);
+}
+
+.home .pega-bridge__detail--skill {
+	border-left-color: var(--pega-accent);
+}
+
+.home .pega-bridge__detail--practice {
+	border-left-color: var(--pega-second);
+}
+
+.home .pega-homeworker__strength {
+	border-left: 3px solid var(--pega-base);
+}
+
+.home .pega-homeworker__strength--2 {
+	border-left-color: var(--pega-accent);
+}
+
+.home .pega-homeworker__strength--3 {
+	border-left-color: var(--pega-second);
+}
+
+.home .pega-homeworker__strength--4 {
+	border-left-color: var(--pega-base-ink);
+}
+
+.home .pega-homeworker__highlight {
+	background: var(--pega-soft-blue);
+	border: 1px solid var(--pega-border);
+}
+
+.home .pega-homeworker__eyebrow,
+.home .pega-voices__group-label {
+	color: var(--pega-text-sub);
+	letter-spacing: 0.08em;
+}
+
+.home .pega-voices__group-label--grad {
+	color: var(--pega-text-sub);
+}
+
+.home .pega-voices__card--user,
+.home .pega-voices__card--grad {
+	border-left: none;
+	background: #fff;
+}
+
+.home .pega-voices__card::before,
+.home .pega-voices__card--grad::before {
+	display: none;
+}
+
+.home .pega-bridge__closing {
+	background: var(--pega-soft-blue);
+	border-top: 1px solid var(--pega-border);
+	border-bottom: 1px solid var(--pega-border);
+}
+
+.home .pega-bridge__closing-title {
+	color: var(--pega-text);
+	text-shadow: none;
+}
+
+.home .pega-bridge__closing-lead {
+	color: var(--pega-text-sub);
+}
+
+.home .pega-bridge__closing-photo {
+	box-shadow: var(--pega-card-shadow);
+	border: 1px solid var(--pega-border);
+}
+
+.home .pega-bridge__closing-photo img {
+	box-shadow: none;
+}
+
+.home .pega-reasons__card--featured {
+	border-color: var(--pega-border-strong);
+	box-shadow: var(--pega-card-shadow);
+}
+
+.home .pega-closing__panel {
+	background: #fff;
+	border: 1px solid var(--pega-border);
+	box-shadow: var(--pega-card-shadow);
+}
+
+/* SWELL post_content 既定 h2（青帯）を解除 */
+.home .post_content :is(
+	.pega-concerns__title,
+	.pega-bridge__title,
+	.pega-homeworker__title,
+	.pega-reasons__title,
+	.pega-voices__title,
+	.pega-posts__title,
+	.pega-closing__title
+) {
+	background: transparent !important;
+	padding: 0 !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: var(--pega-text) !important;
+}
+
+.home .post_content :is(
+	.pega-concerns__title,
+	.pega-bridge__title,
+	.pega-homeworker__title,
+	.pega-reasons__title,
+	.pega-voices__title,
+	.pega-posts__title,
+	.pega-closing__title
+)::before {
+	display: none !important;
+	content: none !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+/* SWELL post_content 既定 h3/h4 装飾（下線・左線）を解除 — padding は維持 */
+.home .post_content :is(
+	.pega-bridge__pillar-title,
+	.pega-bridge__detail-title,
+	.pega-bridge__closing-title,
+	.pega-reasons__card-title,
+	.pega-reasons__extra-title,
+	.pega-homeworker__videos-title,
+	.pega-homeworker__video-heading,
+	.pega-voices__card-title,
+	.pega-posts__block-title,
+	.pega-posts-card__title,
+	.pega-commute__title
+) {
+	border: none !important;
+	background: transparent !important;
+}
+
+.home .post_content :is(
+	.pega-bridge__pillar-title,
+	.pega-bridge__detail-title,
+	.pega-bridge__closing-title,
+	.pega-reasons__card-title,
+	.pega-reasons__extra-title,
+	.pega-homeworker__videos-title,
+	.pega-homeworker__video-heading,
+	.pega-voices__card-title,
+	.pega-posts__block-title,
+	.pega-posts-card__title,
+	.pega-commute__title
+)::before {
+	display: none !important;
+	content: none !important;
+	border: none !important;
+	background: none !important;
+}
+
+/* 調整7: カード縦長の改善 */
+.home .pega-bridge__pillar {
+	min-height: 0;
+}
+
+.home .pega-bridge__pillar > .wp-block-group__inner-container {
+	grid-template-rows: auto auto;
+	min-height: 0;
+}
+
+.home .pega-bridge__pillar-img {
+	height: auto;
+	max-height: 200px;
+	aspect-ratio: 4 / 3;
+}
+
+.home .pega-bridge__pillar-body,
+.home .pega-bridge__pillar-body > .wp-block-group__inner-container {
+	padding: var(--pega-card-padding);
+}
+
+.home .pega-bridge__detail,
+.home .pega-reasons__card-body,
+.home .pega-reasons__card-body > .wp-block-group__inner-container,
+.home .pega-homeworker__strength,
+.home .pega-concerns__item {
+	padding: var(--pega-card-padding);
+}
+
+.home .pega-voices__card {
+	padding: var(--pega-card-padding);
+}
+
+.home .pega-posts-card__title {
+	padding: var(--pega-card-padding) var(--pega-card-padding) clamp(8px, 1.5vw, 10px);
+	text-align: center;
+}
+
+.home .pega-posts-card__date {
+	padding: 0 var(--pega-card-padding) var(--pega-card-padding);
+}
+
+.home .pega-bridge__detail-text,
+.home .pega-reasons__card-text,
+.home .pega-voices__quote p {
+	line-height: 1.75;
+}
+
+.home .pega-reasons__card-img img {
+	height: clamp(160px, 36vw, 200px);
+}
+
+.home .pega-reasons__card--featured .pega-reasons__card-img img {
+	height: clamp(180px, 40vw, 220px);
+}
+
+@media (min-width: 960px) {
+	.home .pega-bridge__pillar {
+		min-height: 0;
+	}
+
+	.home .pega-bridge__pillar:hover,
+	.home .pega-bridge__detail:hover,
+	.home .pega-concerns__item:hover,
+	.home .pega-reasons__card:hover,
+	.home .pega-posts-card:hover {
+		transform: none;
+		box-shadow: var(--pega-card-shadow);
+	}
+}
+
+/* =========================================================
+   LAYOUT FIXES — 幅統一・位置・カード内余白・ボーダー
+   ========================================================= */
+
+/* WordPress constrained の contentSize を上書きし、全セクション同一幅に */
+.home .wp-block-group[class*="pega-"] > .wp-block-group__inner-container {
+	max-width: var(--pega-wrap-content) !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	width: 100%;
+}
+
+/* ヒーローはフル幅のまま（キャッチコピー右配置を維持） */
+.home .pega-hero-wrap .wp-block-group__inner-container,
+.home .pega-hero-wrap .wp-block-group[class*="pega-"] > .wp-block-group__inner-container {
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	width: 100% !important;
+}
+
+/* constrained ブロック自体の幅制限を解除（padding 二重化を防ぐ） */
+.home :is(
+	.pega-bridge__intro,
+	.pega-bridge__pillars-wrap,
+	.pega-bridge__details-wrap,
+	.pega-reasons__intro,
+	.pega-reasons__main-wrap,
+	.pega-reasons__extras-wrap,
+	.pega-voices__intro,
+	.pega-voices__wrap,
+	.pega-posts__intro,
+	.pega-posts__wrap,
+	.pega-homeworker__intro,
+	.pega-homeworker__hero,
+	.pega-homeworker__videos,
+	.pega-homeworker__cta-wrap,
+	.pega-closing__wrap,
+	.pega-commute__wrap
+) {
+	max-width: none !important;
+	width: 100% !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.home .pega-concerns > .wp-block-group__inner-container,
+.home .pega-commute__wrap,
+.home .pega-closing__wrap {
+	max-width: var(--pega-wrap-content);
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+.home .pega-commute {
+	padding: var(--pega-section-py-sm) 0;
+}
+
+.home .pega-commute__wrap {
+	padding-left: var(--pega-section-px);
+	padding-right: var(--pega-section-px);
+}
+
+.home .pega-commute__banner {
+	padding: var(--pega-card-padding);
+}
+
+/* カードタイトル中央揃え */
+.home :is(
+	.pega-bridge__pillar-title,
+	.pega-bridge__detail-title,
+	.pega-reasons__card-title,
+	.pega-homeworker__strength strong,
+	.pega-posts-card__title,
+	.pega-posts-card__title a
+) {
+	text-align: center;
+}
+
+/* カード枠線 — 左アクセント + やや濃い全体枠（border 一括指定の後に left を指定） */
+.home :is(
+	.pega-concerns__item,
+	.pega-bridge__pillar,
+	.pega-bridge__detail,
+	.pega-reasons__card,
+	.pega-reasons__extra,
+	.pega-voices__card,
+	.pega-posts-card,
+	.pega-homeworker__strength,
+	.pega-commute__banner
+) {
+	border: 1px solid var(--pega-border-strong);
+	box-shadow: var(--pega-card-shadow);
+}
+
+.home .pega-concerns__item,
+.home .pega-bridge__pillar,
+.home .pega-bridge__detail,
+.home .pega-reasons__card,
+.home .pega-voices__card--user,
+.home .pega-posts-card,
+.home .pega-homeworker__strength {
+	border-left-width: 3px;
+	border-left-style: solid;
+	border-left-color: var(--pega-base);
+}
+
+.home .pega-bridge__detail--skill,
+.home .pega-homeworker__strength--2 {
+	border-left-color: var(--pega-accent);
+}
+
+.home .pega-bridge__detail--practice,
+.home .pega-homeworker__strength--3 {
+	border-left-color: var(--pega-second);
+}
+
+.home .pega-homeworker__strength--4 {
+	border-left-color: var(--pega-base-ink);
+}
+
+.home .pega-concerns__item--featured {
+	border-left-color: var(--pega-accent);
+}
+
+/* フッター下端の余白を除去（画面下端との隙間のみ） */
+.home #footer.l-footer:has(.pega-footer) {
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
 }
