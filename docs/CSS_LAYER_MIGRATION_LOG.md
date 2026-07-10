@@ -100,3 +100,55 @@ commute の装飾は**本体ブロックだけで完結していない**。以�
 ### 次ステップの推奨 → **pega-global-\* を先に**
 commute パイロットで、**セクション装飾が横断層（UNIFIED/LAYOUT）と絡む**ことが判明。card枠/影・title リセット・幅/余白の"最終調整"は横断の `:is()` グループにあり、各セクション snippet だけでは③に集約しきれない。
 → **次は pega-global-\*（UNIFIED REFINEMENT + LAYOUT FIXES を snippet 化、優先度は section より後＝最終上書き）を先に処理**し、その後に残りのセクションを進めるのが、二度手間なく綺麗な3層になる。
+
+---
+
+## Step 3（2026-07-10）: 横断CSS（UNIFIED REFINEMENT + LAYOUT FIXES）を pega-global-\* へ
+
+**目的:** commute パイロットで判明した横断層を先に③へ集約。**見た目は一切変えない。** これで commute を含む全セクションの横断装飾が③に載り、以降のセクション個別移行が綺麗に進む。
+
+### layout / deco の分類（プロパティ集合が排他的なのを利用）
+子テーマの UNIFIED REFINEMENT（約457行）＋ LAYOUT FIXES（約129行）＝計**79ルール**を、プログラムで分類（「装飾プロパティが1つでも混ざるセレクタは丸ごとdeco側」）:
+
+| スニペット | 優先度 | 内容（構造寄り / 装飾寄り） | ルール数 |
+|---|---|---|---|
+| **pega-global-layout** | 30 | 幅統一（constrained `[class*=pega-]` 上書き）・`--pega-wrap-content` 適用・余白トークン（section-px/py, card-padding）・intro/wrap の padding・カード内 padding・img 高さ・追従CTA位置（p-fixBtnWrap）・footer下端 | 34 |
+| **pega-global-deco** | 31 | セクション背景（soft-bg/blue）・カード枠/影（border-strong）・左アクセント線（base/accent/second/base-ink）・タイトル/リード色・font-size(h2/h3)・SWELL既定 h2/h3/h4 装飾リセット（`post_content :is(){border:none…}` + `::before`）・hover抑制（transform:none） | 49 |
+
+- **優先度設計:** `pega-tokens(1) < section(10) < global-layout(30) < global-deco(31)`。横断＝最終上書きの役割のため section より後。deco を layout の後にして装飾を最終確定。
+- **トークン化不要:** 両セクションは元々 var(--pega-\*) で書かれており（layout: 生色0／deco: 生色は白カード `#fff` の5箇所のみ＝対応トークン無しのため維持）、**バイト一致で再配置**。
+- 原本（版管理）: `scripts/code-snippets/pega-global-layout.css`（DB id=14）・`scripts/code-snippets/pega-global-deco.css`（DB id=15）。
+
+### 順序保持（重要）
+横断内には**順序依存**がある:
+- **カード枠:** UNIFIED の `border:1px solid var(--pega-border)`（薄）を LAYOUT の `border:…border-strong`（濃）が**後勝ち**→実際の枠は濃い方。
+- **左線:** LAYOUT で `border`一括指定の**後に** `border-left-color` を指定（一括で消えないように）。
+
+→ 各スニペット内で**ソース順を厳密保持**（UNIFIED由来→LAYOUT由来の順）。layout/deco 間はプロパティ集合が排他的（幅/余白/位置 vs 枠/影/色）なので**跨ぎの並びは結果に影響しない**ことを確認。
+
+### 完全性検証（取りこぼし防止）
+- 元の横断79ルールと、layout+deco の79ルールを**正規化して集合比較→完全一致（True）**。ルールの欠落・改変ゼロを機械的に保証。
+
+### 子テーマ側の扱い
+- 横断領域（UNIFIED header〜EOF、**583行**）を子テーマから削除、移行メモのコメントに置換。ブレース均衡564維持。
+- **残置した `.home .pega-*`（4件）は別セクションのbase**（ヘッダー contact / hero-wrap / CTA closing）で横断ではない＝正しく保持。同一セレクタ（`.home .pega-closing` 等）は、移行分がスニペット(p31)で子テーマbase(p11)より**後に読込**＝元の「base→UNIFIED」上書き順を保持。
+
+### 検証（見た目不変）
+| 確認 | 結果 |
+|---|---|
+| 横断スニペット出力 | ✅ reasons背景/border-strong/post_content :is リセット/constrained上書き/footer :has、追従CTA、全て出力。 |
+| 出力順 | ✅ layout(p30) → deco(p31)。deco内は border一括→左線 の順序保持。 |
+| 子テーマから横断が消えたか | ✅ 配信CSSに border-strongカード枠=0・`post_content :is(`=0・constrained=0（token定義/コメント/closing-baseの正当な残置のみ）。 |
+| 完全性 | ✅ 79→79ルール一致。 |
+| 全ページ | ✅ 200（10ページ）。 |
+| 既存機能 | ✅ id8 sitemap=301。追従CTA位置ルールもスニペット供給。 |
+| 視覚（PC/SP・影響大セクション） | ✅ concerns/bridge/reasons/voices/commute のカード枠・影・左線・タイトル・背景に変化なし。 |
+
+### commute の横断装飾も③へ集約されたか
+✅ **集約完了。** commute の card枠/影（LAYOUT `:is(…commute__banner)`）と title リセット（UNIFIED `post_content :is(…commute__title)`）は pega-global-deco に、幅/余白（`.home .pega-commute*`）は pega-global-layout に移行。Step2で②に残置していた commute 横断装飾が、これで全て③に載った。
+
+### ロールバック
+スニペット id=14/15 停止で横断装飾が消える（子テーマから削除済）。完全復元は git revert（このコミット）。バックアップ `scratchpad/style.css.bak_global`。
+
+### 次ステップ → 残りセクションの個別移行
+横断が③に載ったので、**各セクションの base 装飾（concerns/bridge/reasons/homeworker/voices/posts/closing 等）を、commute と同じ手順（Step2の横展開テンプレ）で pega-sec-\* へ順次移行**できる。優先度は section=10（tokens<section<global の関係を維持）。横断（global=30/31）が最終上書きなので、section 移行時も見た目は保たれる。
