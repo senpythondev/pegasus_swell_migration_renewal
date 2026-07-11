@@ -1100,12 +1100,7 @@
 /* =========================================================
    課題→解決ブリッジ
    ========================================================= */
-.pega-bridge {
-	background: linear-gradient(180deg, #f3f7fc 0%, #e8f0fa 55%, #dce8f8 100%);
-	padding: 0;
-	font-family: var(--pega-font);
-}
-
+/* 装飾は Code Snippets「pega-sec-bridge」(③/優先度10) へ移行。以下は構造（幅・grid/flex・@media骨格・inner余白）のみ。 */
 .pega-bridge > .wp-block-group__inner-container {
 	max-width: none;
 	padding: 0;
@@ -1119,22 +1114,6 @@
 .pega-bridge__intro > .wp-block-group__inner-container {
 	max-width: 960px;
 	margin: 0 auto;
-}
-
-.pega-bridge__title {
-	margin: 0 0 clamp(24px, 4vw, 36px);
-	color: var(--pega-text);
-	font-weight: 800;
-	font-size: clamp(22px, 4.5vw, 30px);
-	line-height: 1.55;
-	letter-spacing: 0.03em;
-}
-
-.pega-bridge__text {
-	margin: 0 0 clamp(18px, 3vw, 24px);
-	color: var(--pega-text-sub);
-	font-size: clamp(15px, 2.2vw, 17px);
-	line-height: 1.9;
 }
 
 .pega-bridge__text:last-child {
@@ -1160,21 +1139,6 @@
 .pega-bridge__pillars > .wp-block-column {
 	display: flex;
 	margin: 0;
-}
-
-.pega-bridge__pillar {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	background: #fff;
-	border: 1px solid rgba(16, 103, 214, 0.12);
-	border-radius: 16px;
-	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.07);
-	text-align: center;
-	overflow: hidden;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-	height: 100%;
-	min-height: clamp(300px, 52vw, 380px);
 }
 
 .pega-bridge__pillar > .wp-block-group__inner-container {
@@ -1203,39 +1167,6 @@
 	pointer-events: none;
 }
 
-.pega-bridge__pillar--self .pega-bridge__pillar-img::after {
-	background: linear-gradient(180deg, rgba(16, 103, 214, 0.06) 0%, rgba(16, 103, 214, 0.12) 100%);
-}
-
-.pega-bridge__pillar--skill .pega-bridge__pillar-img::after {
-	background: linear-gradient(180deg, rgba(141, 199, 60, 0.05) 0%, rgba(141, 199, 60, 0.11) 100%);
-}
-
-.pega-bridge__pillar--support .pega-bridge__pillar-img::after {
-	background: linear-gradient(180deg, rgba(253, 117, 124, 0.05) 0%, rgba(253, 117, 124, 0.1) 100%);
-}
-
-.pega-bridge__pillar-img img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center center;
-	border-radius: 0;
-}
-
-.pega-bridge__pillar--self .pega-bridge__pillar-img img {
-	border-bottom: 3px solid var(--pega-base);
-}
-
-.pega-bridge__pillar--skill .pega-bridge__pillar-img img {
-	border-bottom: 3px solid var(--pega-accent);
-}
-
-.pega-bridge__pillar--support .pega-bridge__pillar-img img {
-	border-bottom: 3px solid var(--pega-second);
-}
-
 .pega-bridge__pillar-body,
 .pega-bridge__pillar-body > .wp-block-group__inner-container {
 	display: flex;
@@ -1255,39 +1186,6 @@
 	width: 100%;
 }
 
-.pega-bridge__pillar-label {
-	margin: 0 0 6px;
-	padding: 0;
-	color: var(--pega-text-sub);
-	font-size: 14px;
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	line-height: 1.3;
-	text-transform: none;
-}
-
-.pega-bridge__pillar--self .pega-bridge__pillar-label { color: var(--pega-base); }
-.pega-bridge__pillar--skill .pega-bridge__pillar-label { color: #5a8a1e; }
-.pega-bridge__pillar--support .pega-bridge__pillar-label { color: #c94a50; }
-
-.pega-bridge__pillar-title {
-	margin: 0;
-	padding: 0;
-	color: var(--pega-text);
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 1.45;
-}
-
-.pega-bridge__closing {
-	padding: clamp(36px, 6vw, 56px) clamp(20px, 4vw, 40px);
-	background: linear-gradient(
-		135deg,
-		var(--pega-base) 0%,
-		var(--pega-base-ink) 100%
-	);
-}
-
 .pega-bridge__closing > .wp-block-group__inner-container {
 	max-width: 920px;
 	margin: 0 auto;
@@ -1297,17 +1195,6 @@
 	text-align: center;
 }
 
-.pega-bridge__closing-photo {
-	margin: 0 auto clamp(20px, 4vw, 32px) !important;
-	max-width: min(560px, 100%);
-	width: 100%;
-	overflow: hidden;
-	border-radius: 14px;
-	box-shadow:
-		0 8px 28px rgba(0, 0, 0, 0.22),
-		0 0 0 3px rgba(255, 255, 255, 0.18);
-}
-
 .pega-bridge__closing-photo img {
 	display: block;
 	width: 100%;
@@ -1315,29 +1202,6 @@
 	aspect-ratio: 3 / 2;
 	object-fit: cover;
 	object-position: center 35%;
-}
-
-.pega-bridge__closing-title {
-	margin: 0 0 clamp(16px, 3vw, 24px);
-	width: 100%;
-	max-width: 720px;
-	color: #fff;
-	font-weight: 800;
-	font-size: clamp(22px, 4.8vw, 34px);
-	line-height: 1.6;
-	letter-spacing: 0.04em;
-	text-align: center !important;
-	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
-}
-
-.pega-bridge__closing-lead {
-	margin: 0 0 clamp(14px, 2.5vw, 18px);
-	width: 100%;
-	max-width: 680px;
-	color: rgba(255, 255, 255, 0.94);
-	font-size: clamp(15px, 2.2vw, 17px);
-	line-height: 1.9;
-	text-align: center !important;
 }
 
 .pega-bridge__closing-lead:last-child {
@@ -1365,53 +1229,10 @@
 	display: flex;
 }
 
-.pega-bridge__detail {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: clamp(22px, 4vw, 28px) clamp(20px, 3.5vw, 26px);
-	background: #fff;
-	border: 1px solid rgba(16, 103, 214, 0.1);
-	border-radius: 16px;
-	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.06);
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
 .pega-bridge__detail > .wp-block-group__inner-container {
 	max-width: none;
 	padding: 0;
 	margin: 0;
-}
-
-.pega-bridge__detail--rhythm {
-	border-top: 4px solid var(--pega-base);
-}
-
-.pega-bridge__detail--skill {
-	border-top: 4px solid var(--pega-accent);
-}
-
-.pega-bridge__detail--practice {
-	border-top: 4px solid var(--pega-second);
-}
-
-.pega-bridge__detail-title {
-	margin: 0 0 clamp(12px, 2vw, 16px);
-	font-size: clamp(17px, 2.6vw, 20px);
-	font-weight: 800;
-	line-height: 1.5;
-	letter-spacing: 0.02em;
-}
-
-.pega-bridge__detail--rhythm .pega-bridge__detail-title { color: var(--pega-base-ink); }
-.pega-bridge__detail--skill .pega-bridge__detail-title { color: #5a8a1e; }
-.pega-bridge__detail--practice .pega-bridge__detail-title { color: #c94a50; }
-
-.pega-bridge__detail-text {
-	margin: 0;
-	color: var(--pega-text-sub);
-	font-size: clamp(14px, 2.1vw, 16px);
-	line-height: 1.9;
 }
 
 @media (min-width: 600px) {
@@ -1433,16 +1254,6 @@
 @media (min-width: 960px) {
 	.pega-bridge__pillar {
 		min-height: 380px;
-	}
-
-	.pega-bridge__pillar:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 10px 28px rgba(16, 103, 214, 0.12);
-	}
-
-	.pega-bridge__detail:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 24px rgba(16, 103, 214, 0.1);
 	}
 }
 
