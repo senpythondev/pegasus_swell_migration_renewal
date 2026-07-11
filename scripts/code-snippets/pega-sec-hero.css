@@ -1,0 +1,222 @@
+/* =========================================================
+   pega-sec-hero — ヒーロー(FV)+信頼指標バーの装飾（③ / site-css / priority 10）
+   -----------------------------------------------------------
+   セレクタ単位でレイヤーを固定（base と全@media上書きを同一レイヤーに）し、
+   font-size/min-height/padding/背景位置 等の上書き連鎖を保全（見た目不変）。
+   ここには「見た目」＝背景画像・右寄せ暗幕グラデ・見出し色/影・2段CTAボタン配色・
+   信頼指標の色/枠 を集約。full-wide の高さ(min-height)は背景画像と一体のため deco 側。
+   構造（コピー右配置・flex/grid骨格・inner余白・SWELL :before無効化・幅）は子テーマ残置。
+   ========================================================= */
+
+.pega-hero-wrap .swell-block-fullWide,
+.pega-hero-wrap .wp-block-loos-full-wide,
+.pega-hero-wrap .pega-hero-fv-bg {
+	position: relative;
+	min-height: min(88vh, 820px);
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	margin: 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	background-color: #e8eef5;
+	background-image: url("/wp-content/uploads/2026/07/pega-hero-fv.jpg") !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: 28% 32%;
+}
+.pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
+.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: linear-gradient(
+		270deg,
+	 rgba(18, 28, 42, 0.78) 0%,
+	 rgba(18, 28, 42, 0.55) 26%,
+	 rgba(18, 28, 42, 0.14) 46%,
+	 transparent 62%
+	);
+}
+.pega-hero__title {
+	margin: 0 0 14px;
+	color: #fff;
+	font-weight: 800;
+	font-size: 33px;
+	line-height: 1.42;
+	letter-spacing: 0.03em;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+}
+.pega-hero__eyebrow {
+	margin: 0 0 12px;
+	color: rgba(255, 255, 255, 0.96);
+	font-weight: 700;
+	font-size: 22px;
+	line-height: 1.65;
+	letter-spacing: 0.05em;
+}
+.pega-hero__desc {
+	margin: 0 0 36px;
+	color: rgba(255, 255, 255, 0.92);
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.8;
+	max-width: 32em;
+}
+@media (min-width: 600px) {
+	.pega-hero__title { font-size: 39px; }
+	.pega-hero__eyebrow { font-size: 24px; }
+	.pega-hero__desc { font-size: 21px; margin-bottom: 32px; }
+}
+@media (min-width: 768px) and (max-width: 959px) {
+	.pega-hero__title { font-size: 41px; }
+	.pega-hero__eyebrow { font-size: 25px; }
+	.pega-hero__desc { font-size: 20px; }
+}
+@media (min-width: 960px) {
+	.pega-hero-wrap .swell-block-fullWide,
+	.pega-hero-wrap .wp-block-loos-full-wide,
+	.pega-hero-wrap .pega-hero-fv-bg {
+		min-height: min(90vh, 860px);
+	}
+	.pega-hero__title { font-size: 51px; margin-bottom: 18px; }
+	.pega-hero__eyebrow { font-size: 28px; margin-bottom: 14px; }
+	.pega-hero__desc { font-size: 22px; margin-bottom: 0; }
+}
+@media (min-width: 1200px) {
+	.pega-hero__title { font-size: 57px; }
+	.pega-hero__eyebrow { font-size: 30px; }
+	.pega-hero__desc { font-size: 23px; }
+}
+@media (min-width: 1440px) {
+	.pega-hero__title { font-size: 63px; }
+	.pega-hero__eyebrow { font-size: 33px; }
+	.pega-hero__desc { font-size: 25px; max-width: none; }
+}
+@media (min-width: 1600px) {
+	.pega-hero__title { font-size: 67px; }
+	.pega-hero__eyebrow { font-size: 34px; }
+	.pega-hero__desc { font-size: 26px; }
+}
+@media (min-width: 1920px) {
+	.pega-hero__title { font-size: 71px; }
+	.pega-hero__eyebrow { font-size: 35px; }
+	.pega-hero__desc { font-size: 27px; }
+}
+.pega-hero__actions .swell-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35em;
+	min-height: 52px;
+	min-width: 44px;
+	padding: 16px 28px;
+	border-radius: 999px;
+	font-family: var(--pega-font);
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 1.4;
+	text-decoration: none;
+	border: 2px solid transparent;
+	white-space: nowrap;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link {
+	background: var(--pega-base);
+	color: #fff;
+	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.35);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link:hover {
+	box-shadow: 0 8px 24px rgba(16, 103, 214, 0.45);
+}
+.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link {
+	background: var(--pega-accent);
+	color: #fff;
+	box-shadow: 0 4px 18px rgba(141, 199, 60, 0.42);
+	border-color: rgba(255, 255, 255, 0.25);
+}
+.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link:hover {
+	box-shadow: 0 8px 24px rgba(141, 199, 60, 0.52);
+}
+.pega-hero__actions .swell-block-button__link:hover {
+	transform: translateY(-2px);
+	filter: brightness(1.04);
+}
+.pega-hero__actions .swell-block-button__link:focus-visible {
+	outline: 3px solid #fff;
+	outline-offset: 3px;
+}
+@media (min-width: 960px) {
+	.pega-hero__actions .swell-block-button__link { font-size: 16px; padding: 16px 32px; }
+}
+@media (min-width: 1280px) {
+	.pega-hero__actions .swell-block-button__link { font-size: 17px; }
+}
+.pega-trust {
+	position: relative;
+	z-index: 3;
+	background: #fff;
+	border-top: 1px solid rgba(16, 103, 214, 0.1);
+	box-shadow: 0 4px 20px rgba(16, 103, 214, 0.06);
+}
+.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
+	border-left: 1px solid rgba(16, 103, 214, 0.12);
+}
+.pega-trust__num {
+	color: var(--pega-base);
+	font-family: var(--pega-font);
+	font-weight: 800;
+	font-size: 34px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+.pega-trust__suffix {
+	font-size: 0.46em;
+	font-weight: 700;
+	margin-left: 2px;
+}
+.pega-trust__label {
+	color: var(--pega-text-sub);
+	font-family: var(--pega-font);
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 1.65;
+	max-width: 18em;
+}
+@media (min-width: 600px) {
+	.pega-trust__num { font-size: 42px; }
+	.pega-trust__label { font-size: 14px; }
+}
+@media (min-width: 960px) {
+	.pega-trust__num { font-size: 48px; }
+	.pega-trust__label { font-size: 15px; }
+}
+@media (max-width: 599px) {
+.pega-hero-wrap .swell-block-fullWide,
+.pega-hero-wrap .wp-block-loos-full-wide {
+		min-height: min(86vh, 720px);
+		background-position: center 22%;
+	}
+	.pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
+	.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
+		background: linear-gradient(
+			180deg,
+		 rgba(18, 28, 42, 0.74) 0%,
+		 rgba(18, 28, 42, 0.5) 45%,
+		 rgba(18, 28, 42, 0.2) 100%
+		);
+	}
+	.pega-hero__actions .swell-block-button__link {
+		width: 100%;
+		display: flex;
+		box-sizing: border-box;
+		padding: 15px 20px;
+	}
+	.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
+		border-left: none;
+		border-top: 1px solid rgba(16, 103, 214, 0.12);
+	}
+}
