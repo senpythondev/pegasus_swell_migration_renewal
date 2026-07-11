@@ -227,4 +227,35 @@ commute パイロットで、**セクション装飾が横断層（UNIFIED/LAYOU
 
 ### 残タスク
 - `.pega-top` スコープの**さらなる展開**（現状はヘッダーのみ適用。他のトップ限定 `.home .pega-*` セクション装飾はスニペット化で他ページ非適用が既に担保されているため優先度低）。
-- **フォント最適化**（`--pega-font` の読込・pega-tokens集約・Webフォント）。
+
+---
+
+## Step 6（2026-07-10）: フォント最適化 ／ コミット `ba65de6`
+
+**現状把握:**
+- `--pega-font`（`"Noto Sans JP", "Hiragino Sans", …, sans-serif`）は **Step1で pega-tokens に集約済**（子テーマ :root はfallback）＝運用の主入口。
+- Web フォントは `functions.php` で Google Fonts を1回 enqueue：`Noto+Sans+JP:wght@400;500;700;800&display=swap`（**swap適用済**）。**SWELL customizer にフォント設定なし＝競合・重複なし**。preconnect/preload は無し（dns-prefetchのみ）。
+
+**最適化（見た目不変）:**
+- **preconnect 追加**（`wp_resource_hints` フィルタ）：`fonts.googleapis.com`＋`fonts.gstatic.com`(crossorigin)。接続確立(~50ms/host)を前倒しし、フォント本体取得の待ちをクリティカルパスから除去。
+- **ウェイト**：使用実績 700(31)/800(17)/600(5)/500(4)＋本文400。**読込4種すべて使用中＝削減不可**（既に最小）。`font-display:swap` 維持。
+- **`@import`化しない**：`<link>` enqueue の方が速いため維持（SWELL標準はフォント未設定のため独自enqueue継続）。
+
+**監査所見（要記録）:** `font-weight:600`（5箇所）は**未読込**のため CSS フォント照合で **700 描画**（現状の見た目）。600を読み込むと本来の600（やや細く）に変わるため、**見た目維持を優先し据え置き**。将来「600を正しく出したい」場合はウェイトに600追加＝見た目変更として別途判断。
+
+**検証:** computed で `--pega-font`=Noto Sans JP・hero800/本文500/gnav600 が移行前と同一。全ページ200・既存機能無影響。preconnect が HTML に出力（googleapis＋gstatic crossorigin）、Noto Sans JP 読込は1回のみ。
+
+---
+
+## ✅ CSS 3層移行 完了（Step 1〜6）
+
+| Step | 内容 | スニペット/変更 |
+|---|---|---|
+| 1 | 設計トークン | `pega-tokens`(1) |
+| 2 | commuteパイロット | `pega-sec-commute`(10) |
+| 3 | 横断集約 | `pega-global-layout`(30)・`pega-global-deco`(31) |
+| 4 | カード系7セクション | `pega-sec-concerns/bridge/homeworker/reasons/voices/posts/closing`(10) |
+| 5 | hero・header | `pega-sec-hero`(10)・`pega-header-deco`(10)＋`.pega-top`スコープ＋SWELL上書き文書化 |
+| 6 | フォント最適化 | Google Fonts preconnect |
+
+**到達点:** 装飾は Code Snippets（site-css）に集約＝**ペガサス様が管理画面で色・余白・フォント・各セクション装飾を調整可能**。子テーマ style.css は**構造のみ**（4044→1857行）。横断＝最終上書き、セクション、トークンの読込順を優先度で担保。橋本様ご指摘（保守性・命名規則・SWELL競合回避）に対応。本番移行は `docs/PRODUCTION_CUTOVER_CHECKLIST.md` フェーズ11参照。
