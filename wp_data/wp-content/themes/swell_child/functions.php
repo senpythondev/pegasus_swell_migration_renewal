@@ -11,6 +11,24 @@
 
 
 /**
+ * Webフォント（Noto Sans JP / Google Fonts）の接続を前倒しし表示速度を最適化。
+ * fonts.googleapis.com（CSS）と fonts.gstatic.com（フォント本体・crossorigin）へ preconnect。
+ * ※font-family の定義（--pega-font）は pega-tokens スニペットが運用の主入口。
+ *   読込ウェイトは 400/500/700/800（すべて使用中・font-display:swap 適用済）。600は未読込＝
+ *   CSSフォント照合で700描画（現状維持。追加すると見た目が変わるため据え置き）。
+ */
+add_filter( 'wp_resource_hints', function( $urls, $relation_type ) {
+	if ( 'preconnect' === $relation_type ) {
+		$urls[] = 'https://fonts.googleapis.com';
+		$urls[] = array(
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		);
+	}
+	return $urls;
+}, 10, 2 );
+
+/**
  * 子テーマでのファイルの読み込み
  */
 add_action('wp_enqueue_scripts', function() {
