@@ -84,11 +84,11 @@
 /* 装飾(色・背景・グラデ・影・枠・角丸・drop-shadow・フォント)は Code Snippets「pega-header-deco」(③/優先度10) へ移行。
    以下は構造(display/flex/grid/order/position/幅/余白・SPメニュー機能上書き)のみ。
    スコープ改名(.home→.pega-top)と SWELL上書き一覧は別コミット・docs/PRODUCTION_CUTOVER_CHECKLIST.md 参照。 */
-.home #fix_header {
+.pega-top #fix_header {
 	display: none !important;
 }
 
-.home #header .l-header__inner.l-container {
+.pega-top #header .l-header__inner.l-container {
 	padding-left: clamp(16px, 3vw, 52px);
 	padding-right: clamp(16px, 3vw, 52px);
 }
@@ -97,7 +97,7 @@
 
 /* ドロップダウン：白文字×白背景を避け、ヘッダーと調和する配色 */
 
-.home #header .l-header__bar {
+.pega-top #header .l-header__bar {
 	display: none;
 }
 
@@ -156,7 +156,7 @@
 }
 
 @media (min-width: 960px) and (max-width: 1349px) {
-	.home .pega-header-contact {
+	.pega-top .pega-header-contact {
 		display: flex;
 	}
 }
@@ -186,16 +186,16 @@
    Grid の自動配置はカーソルが戻れないため、flex + order で並べ直す */
 @media (min-width: 960px) and (max-width: 1349px) {
 	/* SWELL PC CSS が .p-spMenu { display:none } のため、タブレット幅で開閉不能になる */
-	.home #sp_menu.p-spMenu {
+	.pega-top #sp_menu.p-spMenu {
 		display: block !important;
 	}
 
-	.home #header .l-header__gnav.c-gnavWrap {
+	.pega-top #header .l-header__gnav.c-gnavWrap {
 		display: none !important;
 	}
 
 	/* ハンバーガー: DOM 最後だが order: -1 で最左に */
-	.home #header .l-header__menuBtn.sp_ {
+	.pega-top #header .l-header__menuBtn.sp_ {
 		display: flex !important;
 		order: -1;
 		flex-shrink: 0;
@@ -204,7 +204,7 @@
 		touch-action: manipulation;
 	}
 
-	.home #header .l-header__menuBtn .c-iconBtn {
+	.pega-top #header .l-header__menuBtn .c-iconBtn {
 		min-width: 44px;
 		min-height: 44px;
 	}
@@ -212,7 +212,7 @@
 	/* ロゴ左・連絡先右（1行） */
 	
 	/* カスタムボタン（検索等）: 最右 */
-	.home #header .l-header__customBtn.sp_ {
+	.pega-top #header .l-header__customBtn.sp_ {
 		order: 1;
 		flex-shrink: 0;
 	}
@@ -221,20 +221,20 @@
 /* 1350px以上：フルナビ表示 */
 @media (min-width: 1350px) {
 	/* nav の <br> を非表示にして1行化 */
-	.home #header .c-gnav .ttl br {
+	.pega-top #header .c-gnav .ttl br {
 		display: none;
 	}
 }
 
 @media (min-width: 1440px) {
-	.home #header .l-header__inner.l-container {
+	.pega-top #header .l-header__inner.l-container {
 		max-width: 1560px;
 		margin: 0 auto;
 	}
 }
 
 @media (min-width: 1920px) {
-	.home #header .l-header__inner.l-container {
+	.pega-top #header .l-header__inner.l-container {
 		max-width: 1760px;
 	}
 }

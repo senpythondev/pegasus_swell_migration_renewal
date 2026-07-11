@@ -244,4 +244,39 @@
 | リダイレクト | `docs/REDIRECT_IMPLEMENTATION_REPORT.md` |
 | プラグイン整理 | `docs/PLUGIN_CLEANUP_EXECUTION_20260625.md` / `docs/PLUGIN_CLEANUP_PHASE2_20260625.md` |
 | 総合検証 | `docs/INTEGRATION_TEST_20260625.md` |
+| CSS3層移行 | `docs/CSS_LAYER_MIGRATION_LOG.md`（Step1〜5） |
+
+---
+
+## フェーズ11：CSS3層構造 と SWELL内部クラス上書き（SWELL更新時の再点検）★橋本様ご指摘対応
+
+CSS を3層化（`docs/CSS_LAYER_MIGRATION_LOG.md`）。装飾は **Code Snippets（site-css）** に集約、子テーマ style.css は**構造のみ**。本番移行時・SWELL更新時に以下を点検する。
+
+### 11-1. スコープ方針（競合回避）
+- トップ限定の上書きは **`.pega-top`** でスコープ（`functions.php` の `pega_body_class_top()`／`body_class`フィルタ・`is_front_page()`限定で **#body_wrap** に付与）。WPコア `.home` と同一要素のため付け替えは挙動不変。
+- 全ページ共有の上書き（SPメニュー `.p-spMenu*`・連絡先 `.pega-header-contact` base・ハンバーガーアイコン色）は **bare で据え置き**（テンプレートoverrideで全ページ出力される共有要素のため。`.pega-top`に閉じるとサブページの見た目が変わる）。
+- 物理層：`pega-tokens(1)` → `pega-sec-*/pega-header-deco(10)` → `pega-global-*(30/31)`。
+
+### 11-2. 上書きしている SWELL 内部クラス（**SWELL更新でクラス名/DOM/既定が変わると競合・失効**）
+- **ヘッダー（`.pega-top #header …` トップ限定）**：`#header`/`#fix_header`/`.l-header__inner`/`.l-header__logo`/`.l-header__bar`/`.l-header__gnav`/`.l-header__menuBtn`/`.l-header__customBtn`/`.c-headLogo__link`/`.c-headLogo__img`/`.c-gnav`/`.c-gnavWrap`/`.sub-menu`/`.ttl`/`.c-iconBtn`(`__icon`)/`.current-menu-item`/`.l-container`
+- **SPメニュー（`.p-spMenu …` bare・全ページ）**：`.p-spMenu`(`#sp_menu.p-spMenu`)/`.p-spMenu__inner`(`::before`)/`__body`/`__nav`/`__overlay`/`__closeBtn`/`.c-listMenu`/`.c-spnav`/`.c-widget__title.-spmenu`/`.c-submenuToggleBtn`(`.is-opened`)
+  - ⚠️ **機能上書き**：`.p-spMenu .c-listMenu.c-spnav { min-height:0; overflow:visible }`（SWELL既定 `min-height:8em;overflow-y:auto` で項目が隠れる問題への対処）と、`@media 960–1349 .pega-top #sp_menu.p-spMenu { display:block }`（タブレット幅で開閉可能化）。SWELL更新で既定が変わったら**必ず開閉と全項目表示を確認**。
+- **追従CTA**：`.p-fixBtnWrap`（位置調整・`pega-global-layout`）
+
+### 11-3. テンプレート override（SWELLコア差分・要diff）
+SWELLにフックが無いため子テーマでコアテンプレを**最小上書き**（git追跡下）。**SWELL更新時はコア原本とdiffし、注入行を保ったまま取り込む。**
+- `parts/header/header_contents.php`：SWELLコア複製＋**1行注入** `pega_render_header_contact()`（連絡先ブロック）。
+- `parts/footer/footer_contents.php`：SWELLコア複製＋フッター独自コンテンツ注入（`pega_render_footer_*`）。
+
+### 11-4. SWELL更新後の表示・動作チェック
+- [ ] トップ：ヘッダー青背景・白ロゴ（drop-shadow）・ナビ白文字＋accent下線
+- [ ] トップ：960–1349px でハンバーガー（`order:-1`最左）・gnav非表示
+- [ ] **SPメニュー開閉**（白パネル＋青「メニュー」バー＋HOME緑＋Xボタン＋overlayぼかし）※`pega-sp-menu.js`
+- [ ] SPメニュー内で**全項目表示**（`overflow:visible` 機能上書きが有効か）
+- [ ] 連絡先：601–959px 全ページ／960–1349px トップで表示
+- [ ] 全ページ200・サブページのヘッダー（SWELL既定）が壊れていない
+- [ ] `#body_wrap` に `.pega-top`（トップのみ）
+
+### 11-5. 本番のCode Snippets
+- 本番でも **Code Snippets Pro のライセンス認証**（サイト単位上限あり／ステージング解除→本番認証）が必要。site-css スニペット（pega-tokens/pega-sec-*/pega-global-*/pega-header-deco）を**同名・同優先度で移送**し、`code_snippets_assets_rev` が加算される保存操作を行う。
 </content>

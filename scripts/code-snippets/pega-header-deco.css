@@ -6,12 +6,12 @@
    構造(display/flex/grid/order/position/z-index/幅/余白・SPメニュー機能上書き
    [display:block/overflow:visible/min-height:0]・ハンバーガーの order 並べ替え)は
    子テーマ style.css に残置。
-   ※base(.home #header…高詳細度)と@media(bare #header…低詳細度)は詳細度差で勝敗が
+   ※base(.pega-top #header…高詳細度)と@media(bare #header…低詳細度)は詳細度差で勝敗が
      決まり読込順に非依存＝レイヤー分離でも反転しない。
    ※スコープ改名(.home→.pega-top)と SWELL上書き一覧は別コミット/別ドキュメントで管理。
    ========================================================= */
 
-.home #header {
+.pega-top #header {
 	position: relative;
 	top: auto;
 	left: auto;
@@ -25,20 +25,20 @@
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
-.home #header .l-header__inner {
+.pega-top #header .l-header__inner {
 	background: transparent;
 	max-width: none;
 	padding-top: 12px;
 	padding-bottom: 12px;
 	border-bottom: none;
 }
-.home #header .l-header__logo {
+.pega-top #header .l-header__logo {
 	background: transparent;
 	padding: 0;
 	margin-right: clamp(16px, 2.5vw, 36px);
 	flex-shrink: 0;
 }
-.home #header .c-headLogo__link {
+.pega-top #header .c-headLogo__link {
 	display: inline-flex;
 	align-items: center;
 	background: transparent;
@@ -48,7 +48,7 @@
 	font-weight: 700;
 	color: #fff;
 }
-.home #header .c-headLogo__img {
+.pega-top #header .c-headLogo__img {
 	display: block;
 	max-height: 46px;
 	width: auto;
@@ -59,23 +59,23 @@
 		drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35))
 		drop-shadow(0 0 1px rgba(255, 255, 255, 0.85));
 }
-.home #header .c-gnav > li > a .ttl {
+.pega-top #header .c-gnav > li > a .ttl {
 	font-family: var(--pega-font);
 	font-weight: 600;
 	color: #fff;
 }
-.home #header .c-gnav > li > a::after {
+.pega-top #header .c-gnav > li > a::after {
 	background: var(--pega-accent);
 }
-.home #header .c-iconBtn,
-.home #header .c-iconBtn__icon {
+.pega-top #header .c-iconBtn,
+.pega-top #header .c-iconBtn__icon {
 	color: #fff !important;
 }
-.home #header .c-gnav > li.menu-item-1206 > a .ttl {
+.pega-top #header .c-gnav > li.menu-item-1206 > a .ttl {
 	color: var(--pega-accent) !important;
 	font-weight: 700;
 }
-.home #header .c-gnav .sub-menu {
+.pega-top #header .c-gnav .sub-menu {
 	background: rgba(255, 255, 255, 0.97);
 	border: 1px solid rgba(16, 103, 214, 0.14);
 	border-radius: 8px;
@@ -83,13 +83,13 @@
 	overflow: hidden;
 	padding: 6px 0;
 }
-.home #header .c-gnav .sub-menu a,
-.home #header .c-gnav .sub-menu a .ttl {
+.pega-top #header .c-gnav .sub-menu a,
+.pega-top #header .c-gnav .sub-menu a .ttl {
 	color: var(--pega-text) !important;
 	font-weight: 500;
 }
-.home #header .c-gnav .sub-menu a:hover,
-.home #header .c-gnav .sub-menu a:hover .ttl {
+.pega-top #header .c-gnav .sub-menu a:hover,
+.pega-top #header .c-gnav .sub-menu a:hover .ttl {
 	background: rgba(16, 103, 214, 0.08) !important;
 	color: var(--pega-base) !important;
 }
@@ -163,7 +163,7 @@
 	}
 }
 @media (min-width: 960px) and (max-width: 1349px) {
-	.home #header .l-header__logo {
+	.pega-top #header .l-header__logo {
 		flex: 1;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -172,7 +172,7 @@
 		margin-right: 0;
 		min-width: 0;
 	}
-	.home #header .c-headLogo__link {
+	.pega-top #header .c-headLogo__link {
 		flex-shrink: 0;
 		max-width: min(200px, 28vw);
 	}
@@ -282,11 +282,11 @@
 	color: #fff !important;
 }
 @media (min-width: 960px) and (max-width: 1349px) {
-	.home #header .l-header__inner {
+	.pega-top #header .l-header__inner {
 		display: flex !important;
 		align-items: center;
 	}
-.home #header .l-header__logo {
+.pega-top #header .l-header__logo {
 		flex: 1;
 		display: flex;
 		flex-direction: row;
@@ -295,43 +295,43 @@
 		margin-right: 0;
 		min-width: 0;
 	}
-	.home #header .c-headLogo__link {
+	.pega-top #header .c-headLogo__link {
 		max-width: min(300px, 54vw);
 	}
 }
 @media (min-width: 1350px) {
-	.home #header .c-gnav > li > a {
+	.pega-top #header .c-gnav > li > a {
 		font-size: 12.5px;
 		padding-left: 0.6em;
 		padding-right: 0.6em;
 		white-space: nowrap;
 	}
-	.home #header .c-headLogo__link {
+	.pega-top #header .c-headLogo__link {
 		font-size: 14px;
 	}
 }
 @media (min-width: 1440px) {
-	.home #header .c-gnav > li > a {
+	.pega-top #header .c-gnav > li > a {
 		font-size: 13.5px;
 		padding-left: 0.8em;
 		padding-right: 0.8em;
 	}
 }
 @media (min-width: 1600px) {
-	.home #header .c-gnav > li > a {
+	.pega-top #header .c-gnav > li > a {
 		font-size: 14px;
 		padding-left: 1em;
 		padding-right: 1em;
 	}
 }
 @media (min-width: 1440px) {
-	.home #header .c-headLogo__img {
+	.pega-top #header .c-headLogo__img {
 		max-height: 50px;
 		max-width: 260px;
 	}
 }
 @media (min-width: 1920px) {
-	.home #header .c-gnav > li > a {
+	.pega-top #header .c-gnav > li > a {
 		font-size: 15px;
 		padding-left: 1.2em;
 		padding-right: 1.2em;

@@ -198,3 +198,33 @@ commute パイロットで、**セクション装飾が横断層（UNIFIED/LAYOU
 - **hero・header の移行**（最後・慎重に）：SWELL内部セレクタ上書き（`.l-header` 等）・`.home .pega-hero-wrap`・`.home .pega-header-contact` を含み、SWELLコアの読込順と干渉しやすい。テンプレート override（`parts/header/header_contents.php`）との整合も要確認。
 - **`.pega-top` スコープ統一**：トップ限定 CSS を `.pega-top`（body/wrapper クラス）配下に閉じ込め、他ページへの影響を構造的に遮断。
 - **フォント**：`--pega-font`（Noto Sans JP）読込の pega-tokens 集約 or Webフォント最適化。
+
+---
+
+## Step 5（2026-07-10）: hero・header（SWELL内部依存の繊細セクション）
+
+**方針:** 機械分割でなく**セレクタ単位ルーティング**（base と全@mediaを同一レイヤーに固定＝上書き連鎖を保全）で手検証。
+
+### Step5-1: hero（FV）+ trust — `pega-sec-hero`（DB id23・優先度10）／コミット `d6fb0c4`
+- 装飾（full-wide背景画像・右寄せ暗幕グラデ`::after`・見出し色/text-shadow・2段CTA配色・trust色/枠）→ スニペット。構造（コピー右配置・flex/grid・inner余白・SWELL`:before`無効化・full-wideラッパー）→ 子テーマ。
+- **専用 `split_hero.py`**：`font-size/min-height/padding/背景位置` の base+@media を同一レイヤーへ（別レイヤーだと読込順が変わり反転する問題を回避）。
+- 検証：PC・モバイルで背景画像・右配置コピー・2段CTA・trust が移行前と同一。全200。
+
+### Step5-2: header 装飾 → `pega-header-deco`（DB id24・優先度10）／コミット `f6dee0f`
+- SWELL内部クラス上書きの「見た目」（`#header`青背景・ロゴ白drop-shadow・`.c-gnav`白文字/accent下線・`.sub-menu`・`.p-spMenu`白パネル/青バー/overlay 等）→ スニペット。構造＋**SPメニュー機能上書き**（`display:block`/`overflow:visible`/`min-height:0`・ハンバーガー`order`）→ 子テーマ。
+- **専用 `split_header.py`**（2パス・セレクタ単位）：base(`.pega-top #header…`高詳細度)と@media(bare `#header…`低詳細度)は詳細度差で勝敗が決まり読込順非依存＝レイヤー分離でも反転しない。
+- **【不具合と修正】** スニペット先頭コメント内の文字列 `.l-header__*/` に `*/` が含まれ**CSSコメントを途中終了** → 直後の `.pega-top #header{背景青}` が丢弃されヘッダー白化。コメント修正で復旧（computed bg=`rgb(16,103,214)`）。他12スニペットは `/* */` 均衡・健全を確認。→ **教訓：スニペットのコメントに `*/` を生む文字列（`__*/` 等）を書かない。**
+- 検証：**SPメニュー開閉を puppeteer で実クリック検証**（open時 visible/active・白パネル＋青バー＋HOME緑＋Xボタン青＋overlayぼかしが正常）。PC/モバイルで青ヘッダー・白ロゴ・ナビ・追従が同一。全200。
+
+### Step5-3: 命名規則スコープ化（`.pega-top`）＋ SWELL上書き文書化／コミット `<this>`
+- `functions.php` に `pega_body_class_top()`（`body_class`フィルタ・`is_front_page()`）を追加し **#body_wrap に `.pega-top`** 付与（`.home` と同一要素＝挙動不変）。
+- トップ限定 `.home #header/#fix_header/#sp_menu/.home .pega-header-contact` を **`.pega-top …`** に付け替え（子テーマ12件＋スニペット27件・残存0）。**bare な全ページ共有ルール（`.p-spMenu*`・`.pega-header-contact` base・`#header .l-header__menuBtn`）は据え置き**（`.pega-top`に閉じるとサブページの見た目が変わるため）。
+- **SWELL内部クラス上書き一覧＋テンプレートoverride（`parts/header|footer/*_contents.php`）＋SWELL更新時再点検チェック**を `docs/PRODUCTION_CUTOVER_CHECKLIST.md` フェーズ11に整備。テンプレートoverride 2ファイルを**git追跡下に追加**。
+- 検証：rescope後も header 青・SPメニュー開閉・全200・サブページ不変。
+
+### 3層の最終到達点
+`pega-tokens(1)` → `pega-sec-*(10)`×8（commute+カード7）＋`pega-sec-hero(10)`＋`pega-header-deco(10)` → `pega-global-layout(30)` → `pega-global-deco(31)`。**子テーマ style.css は構造のみ**（＋トークンfallback）。トップ全セクションの装飾が③に集約。
+
+### 残タスク
+- `.pega-top` スコープの**さらなる展開**（現状はヘッダーのみ適用。他のトップ限定 `.home .pega-*` セクション装飾はスニペット化で他ページ非適用が既に担保されているため優先度低）。
+- **フォント最適化**（`--pega-font` の読込・pega-tokens集約・Webフォント）。
