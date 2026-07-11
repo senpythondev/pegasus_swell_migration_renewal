@@ -81,31 +81,11 @@
    SWELL は #header + #fix_header の2要素構成。
    トップでは fix_header を非表示。header は relative（先頭のみ表示）。
    ========================================================= */
+/* 装飾(色・背景・グラデ・影・枠・角丸・drop-shadow・フォント)は Code Snippets「pega-header-deco」(③/優先度10) へ移行。
+   以下は構造(display/flex/grid/order/position/幅/余白・SPメニュー機能上書き)のみ。
+   スコープ改名(.home→.pega-top)と SWELL上書き一覧は別コミット・docs/PRODUCTION_CUTOVER_CHECKLIST.md 参照。 */
 .home #fix_header {
 	display: none !important;
-}
-
-.home #header {
-	position: relative;
-	top: auto;
-	left: auto;
-	right: auto;
-	z-index: 20;
-	background: var(--pega-base);
-	backdrop-filter: none;
-	-webkit-backdrop-filter: none;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-	box-shadow: 0 2px 12px rgba(8, 40, 100, 0.14);
-	margin-bottom: 0;
-	padding-bottom: 0;
-}
-
-.home #header .l-header__inner {
-	background: transparent;
-	max-width: none;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	border-bottom: none;
 }
 
 .home #header .l-header__inner.l-container {
@@ -114,77 +94,8 @@
 }
 
 /* ロゴ：白背景を外し、ドロップシャドウでグラデーション上でも視認性を確保 */
-.home #header .l-header__logo {
-	background: transparent;
-	padding: 0;
-	margin-right: clamp(16px, 2.5vw, 36px);
-	flex-shrink: 0;
-}
-
-.home #header .c-headLogo__link {
-	display: inline-flex;
-	align-items: center;
-	background: transparent;
-	padding: 0;
-	border-radius: 0;
-	font-family: var(--pega-font);
-	font-weight: 700;
-	color: #fff;
-}
-
-.home #header .c-headLogo__img {
-	display: block;
-	max-height: 46px;
-	width: auto;
-	max-width: min(240px, 32vw);
-	object-fit: contain;
-	filter:
-		drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55))
-		drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35))
-		drop-shadow(0 0 1px rgba(255, 255, 255, 0.85));
-}
-
-.home #header .c-gnav > li > a .ttl {
-	font-family: var(--pega-font);
-	font-weight: 600;
-	color: #fff;
-}
-
-.home #header .c-gnav > li > a::after {
-	background: var(--pega-accent);
-}
-
-.home #header .c-iconBtn,
-.home #header .c-iconBtn__icon {
-	color: #fff !important;
-}
-
-.home #header .c-gnav > li.menu-item-1206 > a .ttl {
-	color: var(--pega-accent) !important;
-	font-weight: 700;
-}
 
 /* ドロップダウン：白文字×白背景を避け、ヘッダーと調和する配色 */
-.home #header .c-gnav .sub-menu {
-	background: rgba(255, 255, 255, 0.97);
-	border: 1px solid rgba(16, 103, 214, 0.14);
-	border-radius: 8px;
-	box-shadow: 0 10px 28px rgba(8, 40, 100, 0.14);
-	overflow: hidden;
-	padding: 6px 0;
-}
-
-.home #header .c-gnav .sub-menu a,
-.home #header .c-gnav .sub-menu a .ttl {
-	color: var(--pega-text) !important;
-	font-weight: 500;
-}
-
-.home #header .c-gnav .sub-menu a:hover,
-.home #header .c-gnav .sub-menu a:hover .ttl {
-	background: rgba(16, 103, 214, 0.08) !important;
-	color: var(--pega-base) !important;
-}
 
 .home #header .l-header__bar {
 	display: none;
@@ -192,17 +103,6 @@
 
 /* ハンバーガー表示時の連絡先（全ページ: ~959px / トップ: 960–1349px）
    ロゴ左・連絡先右（1行）。連絡先内はテキスト左・ボタン右。 */
-.pega-header-contact {
-	display: none;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-end;
-	gap: clamp(8px, 2vw, 14px);
-	margin: 0 0 0 auto;
-	font-family: var(--pega-font);
-	flex-shrink: 1;
-	min-width: 0;
-}
 
 .pega-header-contact__info {
 	display: flex;
@@ -213,65 +113,7 @@
 	text-align: right;
 }
 
-.pega-header-contact__hours,
-.pega-header-contact__tel {
-	margin: 0;
-	font-size: 10px;
-	line-height: 1.45;
-	color: rgba(255, 255, 255, 0.92);
-	white-space: nowrap;
-}
-
-.pega-header-contact__label {
-	display: inline-block;
-	margin-right: 4px;
-	padding: 1px 5px;
-	border-radius: 4px;
-	background: rgba(255, 255, 255, 0.16);
-	font-size: 9px;
-	font-weight: 700;
-	letter-spacing: 0.06em;
-}
-
-.pega-header-contact__tel a {
-	color: #fff;
-	font-weight: 700;
-	font-size: clamp(12px, 3.2vw, 14px);
-	text-decoration: none;
-	letter-spacing: 0.03em;
-}
-
-.pega-header-contact__tel a:hover {
-	text-decoration: underline;
-}
-
-.pega-header-contact__link {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-	margin: 0;
-	padding: 8px 12px;
-	border-radius: 999px;
-	background: var(--pega-accent);
-	color: #fff;
-	font-size: 11px;
-	font-weight: 700;
-	text-decoration: none;
-	line-height: 1.3;
-	white-space: nowrap;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.pega-header-contact__link:hover {
-	filter: brightness(1.06);
-}
-
 @media (max-width: 600px) {
-	.pega-header-contact {
-		display: none !important;
-	}
-
 	#header .l-header__logo {
 		flex: 1;
 		display: flex;
@@ -311,73 +153,17 @@
 		max-height: 38px;
 		max-width: 100%;
 	}
-
-	.pega-header-contact {
-		display: flex;
-	}
 }
 
 @media (min-width: 960px) and (max-width: 1349px) {
-	.home #header .l-header__logo {
-		flex: 1;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-		justify-content: space-between;
-		margin-right: 0;
-		min-width: 0;
-	}
-
-	.home #header .c-headLogo__link {
-		flex-shrink: 0;
-		max-width: min(200px, 28vw);
-	}
-
 	.home .pega-header-contact {
 		display: flex;
 	}
 }
 
-@media (max-width: 380px) {
-	.pega-header-contact__hours {
-		font-size: 9px;
-	}
-
-	.pega-header-contact__link {
-		padding: 7px 10px;
-		font-size: 10px;
-	}
-}
-
 /* ハンバーガーメニュー — 白系パネル＋ブランド色テキスト（SWELL 標準に近い見慣れた構成） */
-#sp_menu.p-spMenu {
-	color: var(--pega-text) !important;
-}
-
-.p-spMenu__inner {
-	background-color: #f8f9fb !important;
-	color: var(--pega-text) !important;
-	box-shadow: 0 0 24px rgba(8, 40, 100, 0.16) !important;
-}
 
 /* SWELL 既定の ::before をパネル用オーバーレイとして活用（白〜薄グレーの面） */
-.p-spMenu__inner::before {
-	display: block !important;
-	content: "" !important;
-	background: linear-gradient(
-		180deg,
-		rgba(255, 255, 255, 0.98) 0%,
-		rgba(248, 249, 251, 0.96) 100%
-	) !important;
-	opacity: 1 !important;
-}
-
-.p-spMenu__body,
-.p-spMenu__nav,
-.p-spMenu .c-listMenu.c-spnav {
-	background: transparent !important;
-	color: var(--pega-text) !important;
-}
 
 .p-spMenu__body {
 	position: relative;
@@ -393,89 +179,7 @@
 	overflow: visible !important;
 }
 
-.p-spMenu .c-widget__title.-spmenu {
-	margin: 0 -4vw 1.25em;
-	padding: 14px 4vw;
-	background: var(--pega-base) !important;
-	color: #fff !important;
-	font-family: var(--pega-font);
-	font-weight: 700;
-	font-size: 15px;
-	letter-spacing: 0.14em;
-	text-align: center;
-	border-bottom: none;
-}
-
-.p-spMenu .c-spnav a,
-.p-spMenu .c-listMenu a,
-.p-spMenu a {
-	color: var(--pega-text) !important;
-	background: transparent !important;
-	border-bottom-color: rgba(26, 26, 26, 0.08) !important;
-	font-family: var(--pega-font);
-	font-weight: 500;
-}
-
-.p-spMenu .c-spnav a:hover,
-.p-spMenu .c-listMenu a:hover {
-	background: rgba(16, 103, 214, 0.08) !important;
-	color: var(--pega-base) !important;
-}
-
-.p-spMenu .c-spnav .current-menu-item > a,
-.p-spMenu .c-listMenu .current-menu-item > a {
-	color: var(--pega-base-ink) !important;
-	background: rgba(141, 199, 60, 0.12) !important;
-	box-shadow: inset 3px 0 0 var(--pega-accent);
-}
-
-.p-spMenu .c-submenuToggleBtn {
-	color: var(--pega-base) !important;
-}
-
-.p-spMenu .c-submenuToggleBtn.is-opened {
-	color: var(--pega-base-ink) !important;
-}
-
-.p-spMenu .sub-menu {
-	position: relative;
-	transform: none;
-	width: auto;
-	box-shadow: none;
-	padding-left: 0;
-	background: #f0f2f5 !important;
-}
-
-.p-spMenu .sub-menu a {
-	font-size: 0.92em;
-	color: var(--pega-text-sub) !important;
-	border-bottom-color: rgba(26, 26, 26, 0.06) !important;
-}
-
-.p-spMenu .sub-menu a:hover {
-	color: var(--pega-base) !important;
-	background: rgba(16, 103, 214, 0.06) !important;
-}
-
-.p-spMenu__closeBtn .c-iconBtn,
-.p-spMenu__closeBtn .c-iconBtn__icon {
-	color: var(--pega-base) !important;
-}
-
 /* 背面: 画面全体を白くせず、元画像を残したままぼかし＋薄いトーン */
-.p-spMenu__overlay {
-	background: rgba(8, 30, 70, 0.22) !important;
-	opacity: 1 !important;
-	backdrop-filter: blur(8px) saturate(1.05);
-	-webkit-backdrop-filter: blur(8px) saturate(1.05);
-}
-
-#header .l-header__menuBtn .c-iconBtn,
-#header .l-header__menuBtn .c-iconBtn__icon,
-#header .l-header__customBtn .c-iconBtn,
-#header .l-header__customBtn .c-iconBtn__icon {
-	color: #fff !important;
-}
 
 /* 960〜1349px：ナビ項目数が多いためハンバーガー表示。
    SWELL の DOM 順: logo → gnav → customBtn → menuBtn
@@ -484,11 +188,6 @@
 	/* SWELL PC CSS が .p-spMenu { display:none } のため、タブレット幅で開閉不能になる */
 	.home #sp_menu.p-spMenu {
 		display: block !important;
-	}
-
-	.home #header .l-header__inner {
-		display: flex !important;
-		align-items: center;
 	}
 
 	.home #header .l-header__gnav.c-gnavWrap {
@@ -511,24 +210,11 @@
 	}
 
 	/* ロゴ左・連絡先右（1行） */
-	.home #header .l-header__logo {
-		flex: 1;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		margin-right: 0;
-		min-width: 0;
-	}
-
+	
 	/* カスタムボタン（検索等）: 最右 */
 	.home #header .l-header__customBtn.sp_ {
 		order: 1;
 		flex-shrink: 0;
-	}
-
-	.home #header .c-headLogo__link {
-		max-width: min(300px, 54vw);
 	}
 }
 
@@ -538,33 +224,6 @@
 	.home #header .c-gnav .ttl br {
 		display: none;
 	}
-
-	.home #header .c-gnav > li > a {
-		font-size: 12.5px;
-		padding-left: 0.6em;
-		padding-right: 0.6em;
-		white-space: nowrap;
-	}
-
-	.home #header .c-headLogo__link {
-		font-size: 14px;
-	}
-}
-
-@media (min-width: 1440px) {
-	.home #header .c-gnav > li > a {
-		font-size: 13.5px;
-		padding-left: 0.8em;
-		padding-right: 0.8em;
-	}
-}
-
-@media (min-width: 1600px) {
-	.home #header .c-gnav > li > a {
-		font-size: 14px;
-		padding-left: 1em;
-		padding-right: 1em;
-	}
 }
 
 @media (min-width: 1440px) {
@@ -572,22 +231,11 @@
 		max-width: 1560px;
 		margin: 0 auto;
 	}
-
-	.home #header .c-headLogo__img {
-		max-height: 50px;
-		max-width: 260px;
-	}
 }
 
 @media (min-width: 1920px) {
 	.home #header .l-header__inner.l-container {
 		max-width: 1760px;
-	}
-
-	.home #header .c-gnav > li > a {
-		font-size: 15px;
-		padding-left: 1.2em;
-		padding-right: 1.2em;
 	}
 }
 
