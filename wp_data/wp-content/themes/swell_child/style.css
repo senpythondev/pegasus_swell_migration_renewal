@@ -1398,13 +1398,7 @@
 /* =========================================================
    ペガサスが選ばれている理由
    ========================================================= */
-.pega-reasons {
-	background: linear-gradient(180deg, #eef4fb 0%, #e4edf8 55%, #dce8f5 100%);
-	padding: 0;
-	font-family: var(--pega-font);
-	border-top: 1px solid rgba(16, 103, 214, 0.08);
-}
-
+/* 装飾は Code Snippets「pega-sec-reasons」(③/優先度10) へ移行。以下は構造（幅・grid/flex・@media骨格・inner余白）のみ。 */
 .pega-reasons > .wp-block-group__inner-container {
 	max-width: none;
 	padding: 0;
@@ -1418,15 +1412,6 @@
 .pega-reasons__intro > .wp-block-group__inner-container {
 	max-width: 760px;
 	margin: 0 auto;
-}
-
-.pega-reasons__title {
-	margin: 0;
-	color: var(--pega-text);
-	font-weight: 800;
-	font-size: clamp(24px, 4.8vw, 34px);
-	line-height: 1.45;
-	letter-spacing: 0.03em;
 }
 
 .pega-reasons__main-wrap {
@@ -1462,24 +1447,6 @@
 .pega-reasons__sub > .wp-block-column {
 	margin: 0;
 	display: flex;
-}
-
-.pega-reasons__card {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	background: #fff;
-	border: 1px solid rgba(16, 103, 214, 0.12);
-	border-radius: 16px;
-	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.07);
-	overflow: hidden;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pega-reasons__card--featured {
-	border-color: rgba(16, 103, 214, 0.22);
-	box-shadow: 0 6px 24px rgba(16, 103, 214, 0.1);
 }
 
 .pega-reasons__card > .wp-block-group__inner-container {
@@ -1526,10 +1493,6 @@
 	height: clamp(200px, 48vw, 240px);
 }
 
-.pega-reasons__card--1 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-base); }
-.pega-reasons__card--2 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-accent); }
-.pega-reasons__card--3 .pega-reasons__card-img img { border-bottom: 3px solid var(--pega-second); }
-
 .pega-reasons__card-body,
 .pega-reasons__card-body > .wp-block-group__inner-container {
 	flex: 1 1 auto;
@@ -1540,36 +1503,6 @@
 	max-width: none;
 	padding: inherit;
 	margin: 0;
-}
-
-.pega-reasons__card-label {
-	margin: 0 0 6px;
-	font-size: 12px;
-	font-weight: 700;
-	letter-spacing: 0.12em;
-}
-
-.pega-reasons__card--1 .pega-reasons__card-label { color: var(--pega-base); }
-.pega-reasons__card--2 .pega-reasons__card-label { color: #5a8a1e; }
-.pega-reasons__card--3 .pega-reasons__card-label { color: #c94a50; }
-
-.pega-reasons__card--featured .pega-reasons__card-title {
-	font-size: clamp(17px, 2.6vw, 20px);
-}
-
-.pega-reasons__card-title {
-	margin: 0 0 clamp(10px, 2vw, 14px);
-	color: var(--pega-text);
-	font-weight: 800;
-	font-size: clamp(16px, 2.4vw, 18px);
-	line-height: 1.5;
-}
-
-.pega-reasons__card-text {
-	margin: 0;
-	color: var(--pega-text-sub);
-	font-size: clamp(14px, 2.05vw, 15px);
-	line-height: 1.85;
 }
 
 .pega-reasons__extras-wrap {
@@ -1593,46 +1526,10 @@
 	display: flex;
 }
 
-.pega-reasons__extra {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: clamp(22px, 4vw, 28px) clamp(20px, 3.5vw, 26px);
-	background: #fff;
-	border: 1px solid rgba(16, 103, 214, 0.1);
-	border-radius: 14px;
-	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.06);
-}
-
 .pega-reasons__extra > .wp-block-group__inner-container {
 	max-width: none;
 	padding: 0;
 	margin: 0;
-}
-
-.pega-reasons__extra--support {
-	border-left: 4px solid var(--pega-base);
-}
-
-.pega-reasons__extra--aftercare {
-	border-left: 4px solid var(--pega-accent);
-}
-
-.pega-reasons__extra-title {
-	margin: 0 0 clamp(10px, 2vw, 14px);
-	font-weight: 800;
-	font-size: clamp(16px, 2.4vw, 18px);
-	line-height: 1.5;
-}
-
-.pega-reasons__extra--support .pega-reasons__extra-title { color: var(--pega-base-ink); }
-.pega-reasons__extra--aftercare .pega-reasons__extra-title { color: #5a8a1e; }
-
-.pega-reasons__extra-text {
-	margin: 0;
-	color: var(--pega-text-sub);
-	font-size: clamp(14px, 2.05vw, 15px);
-	line-height: 1.85;
 }
 
 @media (min-width: 600px) {
@@ -1667,13 +1564,6 @@
 		min-height: 260px;
 	}
 
-	.pega-reasons__card--featured .pega-reasons__card-img img {
-		height: 100%;
-		min-height: 260px;
-		border-bottom: none;
-		border-right: 3px solid var(--pega-base);
-	}
-
 	.pega-reasons__card--featured .pega-reasons__card-body,
 	.pega-reasons__card--featured .pega-reasons__card-body > .wp-block-group__inner-container {
 		padding: clamp(24px, 3.5vw, 32px) clamp(24px, 3.5vw, 32px) clamp(24px, 3.5vw, 32px) clamp(20px, 3vw, 28px);
@@ -1682,27 +1572,6 @@
 		justify-content: center;
 	}
 }
-
-@media (min-width: 960px) {
-	.pega-reasons__card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 10px 28px rgba(16, 103, 214, 0.12);
-	}
-
-	.pega-reasons__card--featured:hover {
-		box-shadow: 0 12px 32px rgba(16, 103, 214, 0.14);
-	}
-
-	.pega-reasons__extra:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 22px rgba(16, 103, 214, 0.1);
-	}
-
-	.pega-reasons__extra {
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-}
-
 /* =========================================================
    通所案内バナー（控えめサブ動線）
    ========================================================= */
