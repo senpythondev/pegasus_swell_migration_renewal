@@ -152,3 +152,49 @@ commute パイロットで、**セクション装飾が横断層（UNIFIED/LAYOU
 
 ### 次ステップ → 残りセクションの個別移行
 横断が③に載ったので、**各セクションの base 装飾（concerns/bridge/reasons/homeworker/voices/posts/closing 等）を、commute と同じ手順（Step2の横展開テンプレ）で pega-sec-\* へ順次移行**できる。優先度は section=10（tokens<section<global の関係を維持）。横断（global=30/31）が最終上書きなので、section 移行時も見た目は保たれる。
+
+---
+
+## Step 4（2026-07-10）: カード系7セクションの装飾を pega-sec-\* へ（連続個別移行）
+
+**目的:** 横断集約（Step3）後、独立性の高い7セクションの base 装飾を確立手順で pega-sec-\*（優先度10）へ横展開。1セクション=1コミット=1検証。**見た目不変。**
+
+### 対象・コミット・スニペット
+| # | セクション | スニペット(DB id) | コミット | 装飾ブロック |
+|---|---|---|---|---|
+| 4-1 | concerns（悩み共感） | pega-sec-concerns (16) | `4377005` | 背景グラデ/カード枠・影/dot/featured/title・lead色/hover |
+| 4-2 | bridge（課題→解決） | pega-sec-bridge (17) | `d95d157` | 背景/pillar・detail枠・影/画像下線色/overlayグラデ/label・title色/closing濃青グラデ/hover |
+| 4-3 | homeworker（在宅紹介） | pega-sec-homeworker (18) | `1101ee6` | eyebrow・title・lead色/highlight/photo枠・影/strength枠・左線色/video-card・heading/CTAボタン |
+| 4-4 | reasons（選ばれる理由） | pega-sec-reasons (19) | `394713f` | title色/card・featured枠・影/画像下線色/label・title・text色/extra枠・hover |
+| 4-5 | voices（利用者の声） | pega-sec-voices (20) | `80c92c1` | title・lead色/policy画像枠/group-label/card枠・影/::beforeアクセント/meta・quote色/CTA・サブリンク |
+| 4-6 | posts（コラム・ブログ） | pega-sec-posts (21) | `1023475` | title・lead・block-title色/card枠・影/card-title・date色/more-linkボタン/empty |
+| 4-7 | closing（CTAまとめ） | pega-sec-closing (22) | `f5ec1d2` | panel枠・影/title・lead色/CTAボタン3種・hover・focus-visible/tel色 |
+
+- 原本（版管理）: `scripts/code-snippets/pega-sec-<section>.css`。
+- **hero・header は今回対象外**（SWELL内部上書きが多く繊細なため、最後に別途）。
+
+### 分類手順（機械化・commute手順を踏襲）
+- **分類器** `scratchpad/split_section.py`：各ルールを「装飾プロパティ（色/背景/影/枠/角丸/フォント/opacity/filter/transition）or `:hover/:focus/:active`」の有無でセレクタ単位に判定。混在は丸ごと deco 側。@media は内部ルールごとに deco/struct へ分割（hover→deco、grid/min-height→struct 等）。**プロパティ単位分割はしない。**
+- **構造は子テーマ残置**：幅・grid/flex 骨格・inner-container 余白・画像/embed サイズ・position/z-index・@media 骨格・疑似要素の位置指定基底（`::after{position;inset}`）・display:none 無効化。
+- **トークン化**：値が完全一致する `border-radius:12px` のみ `var(--pega-card-radius)` 化。section 固有の中間色・角丸(14px/16px)・左線色・グラデは**ハードコード維持**（値一致しない＝トークン化すると見た目が変わるため）。
+
+### 発見・修正した問題（重要）
+- **分類器の複数ハイフンborderバグ**：初版の正規表現 `border(?:-[a-z]+)?` は `border-left-color` 等（ハイフン2個）を検出できず、homeworker の `.pega-homeworker__strength--2/3/4 {border-left-color}` を誤って構造判定。→ `border(?:-[a-z]+)*` に修正し deco へ。**concerns/bridge は該当なし**（border-color/border-top の単一ハイフンで正しく deco 判定・grep で漏れ0件確認済）。homeworker 以降は修正版で分類。
+- それ以外の想定外問題（横断干渉の残り・見た目変化）は**なし**。横断（global）が既に③集約済のため、各セクションは横断を気にせず移行できた。
+
+### 検証（各セクション・見た目不変）
+- **手順**：スニペット挿入 → エンドポイント `?code-snippets-css` に section-local セレクタ（`.home`無し）が出力されるのを確認 → **その後**子テーマから装飾削除 → ブレース均衡・残存装飾0・全ページ200・視覚確認。
+- **各セクション全ページ200・sitemap301**：✅（7セクションすべて）。ブレース均衡：concerns 553 / bridge 522 / homeworker 499 / reasons 472 / voices 450 / posts 434 / closing 418（各段階で `{`=`}`）。
+- **視覚**：PC 全画面キャプチャで concerns/bridge/homeworker/reasons/voices/posts/closing のカード枠・影・左アクセント線・グラデ・タイトル・ボタン・hover 抑制が**移行前と同一**を確認。
+- **既存機能**：CF7（/contact/ form id7 到達）・sitemap 301・PHPスニペット無影響。
+
+### 3層の最終状態（優先度）
+`pega-tokens(1)` → `pega-sec-*(10)`×8（commute+7） → `pega-global-layout(30)` → `pega-global-deco(31)`。子テーマは**構造のみ**（+ hero/header の未移行分・トークンfallback）。
+
+### ロールバック
+各セクションは1コミット。`git revert <hash>` で該当セクションのみ復元（子テーマに装飾が戻り、スニペットは残るが同値なので安全）。バックアップ `scratchpad/style.bak_<section>`。
+
+### 次ステップ
+- **hero・header の移行**（最後・慎重に）：SWELL内部セレクタ上書き（`.l-header` 等）・`.home .pega-hero-wrap`・`.home .pega-header-contact` を含み、SWELLコアの読込順と干渉しやすい。テンプレート override（`parts/header/header_contents.php`）との整合も要確認。
+- **`.pega-top` スコープ統一**：トップ限定 CSS を `.pega-top`（body/wrapper クラス）配下に閉じ込め、他ページへの影響を構造的に遮断。
+- **フォント**：`--pega-font`（Noto Sans JP）読込の pega-tokens 集約 or Webフォント最適化。
