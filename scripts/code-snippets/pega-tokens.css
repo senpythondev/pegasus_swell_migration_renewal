@@ -8,6 +8,9 @@
 	--pega-base:        #1067D6;
 	--pega-second:      #FD757C;
 	--pega-accent:      #8DC73C;
+	--pega-orange:      #FF8C42;   /* 温かみのあるアクセント（友本様ご要望・実績数字/資料請求ボタン等） */
+	--pega-orange-ink:  #E8722A;   /* 濃いオレンジ（文字/hover用） */
+	--pega-orange-soft: rgba(255, 140, 66, 0.1);  /* 淡いオレンジ（背景の面） */
 	--pega-base-ink:    #0a4aa8;
 	--pega-base-dark:   #0b3d8a;
 	--pega-text:        #1A1A1A;

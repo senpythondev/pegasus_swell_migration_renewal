@@ -166,12 +166,28 @@
 	border-left: 1px solid rgba(16, 103, 214, 0.12);
 }
 .pega-trust__num {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 12px;
 	color: var(--pega-base);
 	font-family: var(--pega-font);
 	font-weight: 800;
 	font-size: 34px;
 	line-height: 1;
 	letter-spacing: -0.02em;
+}
+
+/* 実績数字の下線アクセント（オレンジ / 友本様ご要望） */
+.pega-trust__num::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%);
+	width: 40px;
+	height: 3px;
+	border-radius: 999px;
+	background: var(--pega-orange);
 }
 .pega-trust__suffix {
 	font-size: 0.46em;

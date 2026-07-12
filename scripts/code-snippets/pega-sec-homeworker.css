@@ -18,6 +18,18 @@
 	font-weight: 700;
 	letter-spacing: 0.14em;
 }
+
+/* 主役セクションのラベルに、オレンジ縁取りドットのアクセント（友本様ご要望：アイコンの縁取り） */
+.pega-homeworker__eyebrow::before {
+	content: "";
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin-right: 8px;
+	vertical-align: middle;
+	border-radius: 50%;
+	border: 2px solid var(--pega-orange);
+}
 .pega-homeworker__title {
 	margin: 0 0 clamp(18px, 3vw, 24px);
 	color: var(--pega-text);
