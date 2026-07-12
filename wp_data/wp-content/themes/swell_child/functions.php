@@ -262,3 +262,37 @@ function pega_body_class_top( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'pega_body_class_top' );
+
+/**
+ * 【不具合対処】GTM4WP（Google Tag Manager）の YouTube 連携が、
+ * YouTube イベント計測OFF（event-youtube=false）にもかかわらず、
+ * player スクリプト（gtm4wp-youtube.js）で YouTube IFrame API（www-widgetapi.js）を
+ * 親ページに読み込み、各埋め込みに enablejsapi=1&origin=（ポート抜き）を付与する。
+ * ステージング(:8080)では www-widgetapi.js の postMessage オリジン不一致エラーが無限発生。
+ * 計測は不要なので YouTube 連携を無効化し、埋め込みを素の iframe に戻す。
+ * ※動画の表示・再生は正常。本番でも無害（YouTube計測を使う場合はGTM4WPのバグ修正が別途必要）。
+ */
+// (1) IFrame API を起動する player スクリプトを読み込ませない
+add_action( 'wp_enqueue_scripts', function () {
+	wp_dequeue_script( 'gtm4wp-youtube' );
+	wp_deregister_script( 'gtm4wp-youtube' );
+}, 100 );
+// (2) oembed 生成時に enablejsapi/origin を付与するフィルタを解除
+add_action( 'wp_loaded', function () {
+	remove_filter( 'oembed_result', 'gtm4wp_youtube', 10 );
+} );
+// (3) 既にキャッシュ済み／描画される埋め込みからも enablejsapi・origin を除去（素のiframeに）
+add_filter( 'embed_oembed_html', function ( $html, $url = '', $attr = array(), $post_id = 0 ) {
+	if ( is_string( $html ) && false !== strpos( $html, 'youtube' ) ) {
+		// 区切り文字は ~（パターン内の &#038; と衝突しないよう）。null（パターンエラー）時は元HTMLを保持。
+		$stripped = preg_replace( '~&(?:amp;|#038;)?enablejsapi=1~', '', $html );
+		if ( null !== $stripped ) {
+			$html = $stripped;
+		}
+		$stripped = preg_replace( '~&(?:amp;|#038;)?origin=https?://[^"&\'<>\s]+~', '', $html );
+		if ( null !== $stripped ) {
+			$html = $stripped;
+		}
+	}
+	return $html;
+}, 20, 4 );
