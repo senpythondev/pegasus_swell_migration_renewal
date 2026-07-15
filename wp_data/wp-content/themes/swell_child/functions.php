@@ -61,6 +61,14 @@ add_action('wp_enqueue_scripts', function() {
 			filemtime( get_stylesheet_directory() . '/pega-sticky-cta.js' ),
 			true
 		);
+
+		wp_enqueue_script(
+			'pega-inview',
+			get_stylesheet_directory_uri() . '/pega-inview.js',
+			[],
+			filemtime( get_stylesheet_directory() . '/pega-inview.js' ),
+			true
+		);
 	}
 
 	/* その他の読み込みファイルはこの下に記述 */
