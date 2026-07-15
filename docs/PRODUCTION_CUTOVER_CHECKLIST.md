@@ -281,7 +281,10 @@ SWELLにフックが無いため子テーマでコアテンプレを**最小上�
 **Pro版は不要になった**（無料版へ移行済・`docs/CODE_SNIPPETS_PRO_TO_FREE_20260715.md`）。本番でも以下でライセンス無しに同一の見た目を再現できる。
 
 - [ ] 本番に **無料版「Code Snippets」** を導入・有効化（Pro版は入れない）。
-- [ ] **PHPスニペット14本を投入**：`scripts/code-snippets/php/pega-css-*.php`（00-tokens／01-commute〜10-header／20-global-layout・21-global-deco・22-global-motion）。Code Snippets の「インポート」またはスニペット新規作成で、各ファイルの内容（`<?php` 直後の本体）を貼り付け、**scope=「サイト全体で実行(global)」・有効化**。
+- [ ] **PHPスニペット14本を投入**：`scripts/code-snippets/php/pega-css-*.php`（00-tokens／01-commute〜10-header／20-global-layout・21-global-deco・22-global-motion）。
+  - **推奨（自動）:** リポジトリで **`bash scripts/import-snippets.sh`**（`--dry-run` で確認 → 本実行）。name で upsert・scope=global・有効化まで自動。対象は `pega-css-*` のみ（機能スニペット id5-8 には触れない）。※接続先は環境変数 `PEGA_WP_CONTAINER` 等でDockerコンテナを指定できるよう調整（本番構成に合わせる）。
+  - **手動:** Code Snippets の「インポート」またはスニペット新規作成で、各 `php/*.php` の**内容（`<?php` 直後の本体）**を貼り付け、**scope=「サイト全体で実行(global)」・有効化**。
+  - 逆に、ステージング/本番の管理画面で編集した内容を Git に取り込むには **`bash scripts/export-snippets.sh` → commit**（`scripts/code-snippets/README.md` の運用ルール参照）。
   - 各スニペットは `wp_register_style( '<name>', false, array('child_style'), null )`＋`wp_add_inline_style()` で CSS を inline 出力。読込順は**コード内にハードコードした hook優先度**（`}, 12);` 等）で決まり、**インポートでIDが変わっても順序は保たれる**（ライセンス／`code_snippets_assets_rev` 不要）。
 - [ ] 前提：子テーマ `functions.php` が `child_style` を優先度11で enqueue していること（14本はこれに依存して直後に読み込まれる）。
 - [ ] 投入後の確認：レンダHTMLで `child_style` → `pega-css-00-tokens` → … → `pega-css-22-global-motion` の順に `<style>` が出ること／全ページ200／トップの見た目がステージングと一致すること。
