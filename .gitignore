@@ -91,5 +91,14 @@ wp_data/wp-content/mu-plugins/
 last_docs/
 design_reference/
 
+# Cursor/Playwright 検証スクショ（ローカル作業用・本番移行不要）
+docs/resp-*.png
+docs/pega-*.png
+docs/pega-*.jpg
+docs/aftercare-*.png
+
+# 不採用 JS（ヘッダー scroll-hide 試作・functions.php 未 enqueue。コンテナ上の実体は手動削除可）
+wp_data/wp-content/themes/swell_child/pega-header-scroll.js
+
 # Code Snippets Pro ZIP・ライセンス等の作業用一時ファイル(コミット禁止)
 tmp/
