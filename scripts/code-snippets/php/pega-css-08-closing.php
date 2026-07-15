@@ -1,25 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-08-closing / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-08-closing — CSS3層 ② セクション: CTAまとめ(closing)
-// 読込順: pega-css-07-posts の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「CTA（まとめ）」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-closing — CTA(まとめ)の装飾（③ / site-css / priority 10）
-   構造（幅・panel/actions/sub箱組み・grid/flex・@media骨格）は子テーマに残置。
-   横断の最終調整は pega-global-*（優先度30/31）が担当。section固有の中間色・角丸は維持。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-closing {
 	background: linear-gradient(180deg, #eef3f9 0%, #e4edf8 55%, #dce8f5 100%);
 	padding: 0;
@@ -124,8 +114,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	color: var(--pega-base);
 	border-color: rgba(16, 103, 214, 0.4);
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-08-closing', false, array( 'pega-css-07-posts' ), null );
+CSS;
+	wp_register_style( 'pega-css-08-closing', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-08-closing' );
-	wp_add_inline_style( 'pega-css-08-closing', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-08-closing', $css );
+}, 20 );

@@ -1,29 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-01-commute / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-01-commute — CSS3層 ② セクション: 通所バナー(commute)
-// 読込順: pega-css-00-tokens の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「通所案内バナー」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-commute — 通所案内バナー（③装飾レイヤー / site-css / priority 10）
-   -----------------------------------------------------------
-   CSS3層移行 Step2（commuteパイロット）で子テーマから外出しした「装飾」CSS。
-   構造（grid/flex骨格・幅・@media・inner-container余白）は子テーマ style.css に残す。
-   commute は「控えめサブ動線」として意図的に中間色（グレー系）を使うため、
-   青系カードトークン（--pega-card-shadow 等）ではなく元のハードコード値を維持
-   （＝見た目を一切変えない）。値が完全一致する border-radius のみ var() 化。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-commute {
 	background: #f8f7f4;
 	padding: 0;
@@ -98,9 +84,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	filter: none;
 	box-shadow: none;
 }
-
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-01-commute', false, array( 'pega-css-00-tokens' ), null );
+CSS;
+	wp_register_style( 'pega-css-01-commute', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-01-commute' );
-	wp_add_inline_style( 'pega-css-01-commute', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-01-commute', $css );
+}, 13 );

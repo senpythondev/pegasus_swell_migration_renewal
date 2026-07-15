@@ -1,25 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-07-posts / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-07-posts — CSS3層 ② セクション: コラム(posts)
-// 読込順: pega-css-06-voices の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「コラム・ブログ」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-posts — コラム・ブログ(動的Query Loop)の装飾（③ / site-css / priority 10）
-   構造（幅・grid・card箱組み・thumb画像比率・Query Loopの骨格・@media）は子テーマに残置。
-   横断の最終調整は pega-global-*（優先度30/31）が担当。card固有角丸14px・中間色は維持。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-posts {
 	background: linear-gradient(180deg, #f4f7fb 0%, #eef3f9 100%);
 	padding: 0;
@@ -118,9 +108,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		box-shadow: 0 8px 22px rgba(16, 103, 214, 0.1);
 	}
 }
-
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-07-posts', false, array( 'pega-css-06-voices' ), null );
+CSS;
+	wp_register_style( 'pega-css-07-posts', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-07-posts' );
-	wp_add_inline_style( 'pega-css-07-posts', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-07-posts', $css );
+}, 19 );

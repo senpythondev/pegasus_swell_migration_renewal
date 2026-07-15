@@ -1,27 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-03-bridge / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-03-bridge — CSS3層 ② セクション: 課題→解決(bridge)
-// 読込順: pega-css-02-concerns の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「課題→解決ブリッジ」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-bridge — 課題→解決ブリッジの装飾（③ / site-css / priority 10）
-   構造（幅・grid/flex骨格・pillar/detailの箱組み・画像サイズ・@media骨格・
-   ::after位置指定基底）は子テーマ style.css に残置。
-   横断の最終調整は pega-global-*（優先度30/31）が担当。
-   bridge固有の角丸(16px/14px)・中間色は維持（値一致なし）。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-bridge {
 	background: linear-gradient(180deg, #f3f7fc 0%, #e8f0fa 55%, #dce8f8 100%);
 	padding: 0;
@@ -205,8 +193,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		box-shadow: 0 8px 24px rgba(16, 103, 214, 0.1);
 	}
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-03-bridge', false, array( 'pega-css-02-concerns' ), null );
+CSS;
+	wp_register_style( 'pega-css-03-bridge', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-03-bridge' );
-	wp_add_inline_style( 'pega-css-03-bridge', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-03-bridge', $css );
+}, 15 );

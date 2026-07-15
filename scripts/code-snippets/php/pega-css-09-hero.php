@@ -1,29 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-09-hero / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-09-hero — CSS3層 ② セクション: ヒーロー+信頼指標(hero)
-// 読込順: pega-css-08-closing の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「ヒーロー（FV）＋信頼指標バー」の装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-hero — ヒーロー(FV)+信頼指標バーの装飾（③ / site-css / priority 10）
-   -----------------------------------------------------------
-   セレクタ単位でレイヤーを固定（base と全@media上書きを同一レイヤーに）し、
-   font-size/min-height/padding/背景位置 等の上書き連鎖を保全（見た目不変）。
-   ここには「見た目」＝背景画像・右寄せ暗幕グラデ・見出し色/影・2段CTAボタン配色・
-   信頼指標の色/枠 を集約。full-wide の高さ(min-height)は背景画像と一体のため deco 側。
-   構造（コピー右配置・flex/grid骨格・inner余白・SWELL :before無効化・幅）は子テーマ残置。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-hero-wrap .swell-block-fullWide,
 .pega-hero-wrap .wp-block-loos-full-wide,
 .pega-hero-wrap .pega-hero-fv-bg {
@@ -385,8 +371,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		min-height: 48px;
 	}
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-09-hero', false, array( 'pega-css-08-closing' ), null );
+CSS;
+	wp_register_style( 'pega-css-09-hero', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-09-hero' );
-	wp_add_inline_style( 'pega-css-09-hero', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-09-hero', $css );
+}, 21 );

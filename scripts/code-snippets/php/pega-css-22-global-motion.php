@@ -1,24 +1,16 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-22-global-motion / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-22-global-motion — CSS3層 ③ 横断: アニメーション(motion)
-// 読込順: pega-css-21-global-deco の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ スクロール出現アニメーション（控えめ）
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （この設定の見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ *   これはスクロール時のふわっと表示の設定です。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-global-motion — 控えめなスクロール出現（③ / site-css / priority 32）
-   構造は子テーマに書かない。JS は pega-inview.js（フロントのみ）。
-   ========================================================= */
-
+	$css = <<<'CSS'
 /* transition は両状態で維持（is-visible 付与時に 0s へ落ちるのを防ぐ） */
 html.pega-motion-js .pega-animate {
 	transition:
@@ -70,8 +62,8 @@ html.pega-motion-js .pega-animate.pega-animate--fade.is-visible {
 		transform: none !important;
 	}
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-22-global-motion', false, array( 'pega-css-21-global-deco' ), null );
+CSS;
+	wp_register_style( 'pega-css-22-global-motion', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-22-global-motion' );
-	wp_add_inline_style( 'pega-css-22-global-motion', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-22-global-motion', $css );
+}, 32 );

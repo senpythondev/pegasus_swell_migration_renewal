@@ -1,32 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-10-header / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-10-header — CSS3層 ② セクション: ヘッダー(header)
-// 読込順: pega-css-09-hero の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「ヘッダー」の装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-header-deco — ヘッダー(トップ)の装飾（③ / site-css / priority 10）
-   -----------------------------------------------------------
-   SWELL内部クラス(#header・.l-header__inner・.c-gnav・.c-headLogo・.p-spMenu 等)への
-   「見た目」上書き＝色・背景・グラデ・影・枠・角丸・drop-shadow・フォント を集約。
-   構造(display/flex/grid/order/position/z-index/幅/余白・SPメニュー機能上書き
-   [display:block/overflow:visible/min-height:0]・ハンバーガーの order 並べ替え)は
-   子テーマ style.css に残置。
-   ※base(.pega-top #header…高詳細度)と@media(bare #header…低詳細度)は詳細度差で勝敗が
-     決まり読込順に非依存＝レイヤー分離でも反転しない。
-   ※スコープ改名(.home→.pega-top)と SWELL上書き一覧は別コミット/別ドキュメントで管理。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-top #header {
 	position: relative;
 	top: auto;
@@ -351,8 +334,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		padding-right: 1.2em;
 	}
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-10-header', false, array( 'pega-css-09-hero' ), null );
+CSS;
+	wp_register_style( 'pega-css-10-header', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-10-header' );
-	wp_add_inline_style( 'pega-css-10-header', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-10-header', $css );
+}, 22 );

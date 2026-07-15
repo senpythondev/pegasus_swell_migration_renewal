@@ -1,25 +1,16 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-00-tokens / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-00-tokens — CSS3層 ① 設計トークン（色/余白/フォント等・運用の主入口）
-// 読込順: child_style の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 設計トークン（サイト全体の色・余白・フォントの共通設定）
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （この設定の見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ *   ★色を変えたい時は、まずここ。ここが色・余白・フォントの「唯一の定義元」です（子テーマには置いていません）。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-tokens — ペガサス 設計トークン（運用調整の主入口）
-   Code Snippets Pro (site-css / priority 1) に集約。
-   色・余白・角丸・影・フォント等はここで調整する。
-   ※子テーマ swell_child/style.css にも同一の :root をフォールバックとして一時保持。
-   ========================================================= */
+	$css = <<<'CSS'
 :root {
 	--pega-base:        #1067D6;
 	--pega-second:      #FD757C;
@@ -71,8 +62,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		--pega-header-h: 84px;
 	}
 }
-PEGA_LAYER_EOF;
+CSS;
 	wp_register_style( 'pega-css-00-tokens', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-00-tokens' );
-	wp_add_inline_style( 'pega-css-00-tokens', pega_css_min( $css ) );
+	wp_add_inline_style( 'pega-css-00-tokens', $css );
 }, 12 );

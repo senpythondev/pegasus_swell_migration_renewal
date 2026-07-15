@@ -1,30 +1,16 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-21-global-deco / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-21-global-deco — CSS3層 ③ 横断: 装飾(deco)
-// 読込順: pega-css-20-global-layout の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 横断装飾調整（カード枠・影・見出し等の共通調整）
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （この設定の見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ *   これは複数セクションに共通で効く「横断」設定です（各セクションより後に適用＝最終上書き）。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-global-deco — 横断装飾調整（③ / site-css / priority 31）
-   -----------------------------------------------------------
-   CSS3層移行 Step3。子テーマの「UNIFIED REFINEMENT + LAYOUT FIXES」から、
-   装飾寄り(カード枠・影・左アクセント線・色の柔らかさ・タイトル装飾リセット・
-   ホバー抑制)を集約。layout(30)の後(31)＝装飾が最終確定。
-   ※値は元と完全一致(唯一の生色 #fff=白カード背景はトークン無しのため維持)。ソース順厳密保持。
-   ========================================================= */
-
-
-
+	$css = <<<'CSS'
 /* 調整2・3: セクション余白・コンテンツ幅の統一 */
 .home .pega-concerns {
 	padding: var(--pega-section-py) var(--pega-section-px);
@@ -399,8 +385,8 @@ add_action( 'wp_enqueue_scripts', function () {
 .home .pega-concerns__item--featured {
 	border-left-color: var(--pega-accent);
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-21-global-deco', false, array( 'pega-css-20-global-layout' ), null );
+CSS;
+	wp_register_style( 'pega-css-21-global-deco', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-21-global-deco' );
-	wp_add_inline_style( 'pega-css-21-global-deco', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-21-global-deco', $css );
+}, 31 );

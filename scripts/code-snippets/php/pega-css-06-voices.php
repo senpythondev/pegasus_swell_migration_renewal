@@ -1,25 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-06-voices / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-06-voices — CSS3層 ② セクション: 利用者の声(voices)
-// 読込順: pega-css-05-reasons の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「利用者・卒業生の声」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-voices — 利用者・卒業生の声の装飾（③ / site-css / priority 10）
-   構造（幅・grid/flex・card箱組み・引用符無効化・cite非表示・@media骨格）は子テーマに残置。
-   横断の最終調整は pega-global-*（優先度30/31）が担当。section固有の中間色・角丸は維持。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-voices {
 	background: #fff;
 	padding: 0;
@@ -154,9 +144,8 @@ add_action( 'wp_enqueue_scripts', function () {
 		box-shadow: 0 8px 22px rgba(141, 199, 60, 0.12);
 	}
 }
-
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-06-voices', false, array( 'pega-css-05-reasons' ), null );
+CSS;
+	wp_register_style( 'pega-css-06-voices', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-06-voices' );
-	wp_add_inline_style( 'pega-css-06-voices', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-06-voices', $css );
+}, 18 );

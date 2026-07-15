@@ -1,26 +1,15 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-02-concerns / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-02-concerns — CSS3層 ② セクション: 悩み共感(concerns)
-// 読込順: pega-css-01-commute の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 「悩み共感」セクションの装飾
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （このセクションの見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-sec-concerns — 悩み共感セクションの装飾（③ / site-css / priority 10）
-   構造（幅・grid・inner余白・@media骨格）は子テーマ style.css に残置。
-   横断の最終調整は pega-global-*（優先度30/31）が担当。
-   border-radius:12px のみ --pega-card-radius 参照（値一致）。他はsection固有値を維持。
-   ========================================================= */
-
+	$css = <<<'CSS'
 .pega-concerns {
 	background: linear-gradient(180deg, #fff 0%, var(--pega-soft-blue) 100%);
 	padding: clamp(48px, 8vw, 88px) clamp(20px, 4vw, 40px);
@@ -135,8 +124,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	background: var(--pega-soft-green);
 	color: var(--pega-accent);
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-02-concerns', false, array( 'pega-css-01-commute' ), null );
+CSS;
+	wp_register_style( 'pega-css-02-concerns', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-02-concerns' );
-	wp_add_inline_style( 'pega-css-02-concerns', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-02-concerns', $css );
+}, 14 );

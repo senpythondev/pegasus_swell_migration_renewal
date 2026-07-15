@@ -1,28 +1,16 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-20-global-layout / scope=global / active
-// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-20-global-layout — CSS3層 ③ 横断: レイアウト(layout)
-// 読込順: pega-css-10-header の後（依存チェーンで順序保証）。
-if ( ! function_exists( 'pega_css_min' ) ) {
-	function pega_css_min( $css ) {
-		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
-		$css = preg_replace( '~^[ \t]+~m', '', $css );
-		$css = preg_replace( '~\n\s*\n~', "\n", $css );
-		$css = preg_replace( '~;\s*}~', '}', $css );
-		return trim( $css );
-	}
-}
+/*
+ * ▼ペガサス様 編集ガイド ─ 横断レイアウト調整（全セクション共通の幅・余白）
+ *
+ *   下の  $css = <<<'CSS'  から  CSS;  までの間が CSS（見た目）です。
+ *   色や余白を変えたい時は、その中を書き換えて「変更を保存」を押してください。
+ *   ・このスニペット単体をオフにしても、他の部分には影響しません。
+ *     （この設定の見た目だけが外れます）
+ *   ・色などの共通設定は「pega-css-00-tokens」にまとまっています。
+ *   これは複数セクションに共通で効く「横断」設定です。
+ */
 add_action( 'wp_enqueue_scripts', function () {
-	$css = <<<'PEGA_LAYER_EOF'
-/* =========================================================
-   pega-global-layout — 横断レイアウト調整（③ / site-css / priority 30）
-   -----------------------------------------------------------
-   CSS3層移行 Step3。子テーマの「UNIFIED REFINEMENT + LAYOUT FIXES」から、
-   構造寄り(幅統一・余白トークン適用・constrained上書き・位置・カード内余白)を集約。
-   横断=最終上書きの役割のため、section スニペット(優先度10)より後(30)に読み込む。
-   ※値は元の子テーマと完全一致(既に var(--pega-*) 化済)。ソース順を厳密保持。
-   ========================================================= */
-
+	$css = <<<'CSS'
 /* =========================================================
    TOP PAGE UNIFIED REFINEMENT — 余白・幅・装飾・階層の統一
    ========================================================= */
@@ -254,8 +242,8 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	margin-bottom: 0 !important;
 	padding-bottom: 0 !important;
 }
-PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-20-global-layout', false, array( 'pega-css-10-header' ), null );
+CSS;
+	wp_register_style( 'pega-css-20-global-layout', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-20-global-layout' );
-	wp_add_inline_style( 'pega-css-20-global-layout', pega_css_min( $css ) );
-}, 12 );
+	wp_add_inline_style( 'pega-css-20-global-layout', $css );
+}, 30 );
