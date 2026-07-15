@@ -1,11 +1,10 @@
 <?php
-// Code Snippets(無料版) PHPスニペット原本: pega-css-1-tokens / scope=global / active
-// ※実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
-// pega-css-1-tokens — CSS3層① 設計トークン（色/余白/角丸/影/フォント等の主入口）
-// 子テーマ style.css の後に読み込み（child_style 依存）。ペガサス様はここで色味等を調整。
+// Code Snippets(無料版) PHPスニペット原本: pega-css-00-tokens / scope=global / active
+// 実体はDB(wp04447asnippets)。この原本はバージョン管理・再投入用。
+// pega-css-00-tokens — CSS3層 ① 設計トークン（色/余白/フォント等・運用の主入口）
+// 読込順: child_style の後（依存チェーンで順序保証）。
 if ( ! function_exists( 'pega_css_min' ) ) {
 	function pega_css_min( $css ) {
-		// 安全なミニファイ（見た目に無影響）: コメント除去→行頭インデント除去→空行圧縮→末尾;除去
 		$css = preg_replace( '~/\*.*?\*/~s', '', $css );
 		$css = preg_replace( '~^[ \t]+~m', '', $css );
 		$css = preg_replace( '~\n\s*\n~', "\n", $css );
@@ -73,7 +72,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 }
 PEGA_LAYER_EOF;
-	wp_register_style( 'pega-css-tokens', false, array( 'child_style' ), null );
-	wp_enqueue_style( 'pega-css-tokens' );
-	wp_add_inline_style( 'pega-css-tokens', pega_css_min( $css ) );
+	wp_register_style( 'pega-css-00-tokens', false, array( 'child_style' ), null );
+	wp_enqueue_style( 'pega-css-00-tokens' );
+	wp_add_inline_style( 'pega-css-00-tokens', pega_css_min( $css ) );
 }, 12 );

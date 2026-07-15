@@ -6,7 +6,8 @@
 ---
 
 ## 0. 結論
-- **無料版「Code Snippets」＋ PHP スニペット3本方式へ移行完了。** Pro依存（ライセンス）を解消。
+- **無料版「Code Snippets」＋ PHP スニペット方式へ移行完了。** Pro依存（ライセンス）を解消。※当初3本で構築後、微調整しやすさのため**最終的にセクション別14本へ再分割**（§7-1）。以下 §1〜6 は初期の3本時点の記録、最終形は §7。
+- **Proプラグイン本体も削除済**（§7-3）。管理画面からの実編集（編集→保存→反映→復元）も実証済（§7-2）。
 - **見た目は移行前後でピクセル完全一致**（差分 0 / 1,620万px・最大画素差 0。PC/モバイル）。
 - 既存PHPスニペット **id5-8（CF7確認欄・SMTP・メールリンク・サイトマップ）は完全保持・動作**（id5 は実送信で「メールアドレスが一致しません」を確認）。
 - **Pro解除済**（`active_plugins` を無料版へ差替）→ **返金申請可能な状態**。
@@ -67,5 +68,31 @@ Pro の CSSスニペット（site-css / 優先度で連結・外部配信）を�
 - CSS原本: `backup/pro_to_free_20260715/css/*.css`（14本）／`scripts/code-snippets/php/*.php`（PHP版）。
 
 ## 6. 残タスク（本番移行時）
-- 本番でも同3本のPHPスニペットを投入すれば、**ライセンス不要**でCSSが出力される（`docs/PRODUCTION_CUTOVER_CHECKLIST.md` の Code Snippets 項を「無料版＋PHPスニペット3本」に更新）。
-- ペガサス様への周知: 装飾編集は「スニペット → pega-css-1-tokens/2-sections/3-global」で行う。
+- 本番でも同**14本**のPHPスニペット（`scripts/code-snippets/php/pega-css-*.php`）を投入すれば、**ライセンス不要**でCSSが出力される（`docs/PRODUCTION_CUTOVER_CHECKLIST.md` の Code Snippets 項を「無料版＋PHPスニペット14本」に更新）。
+- ペガサス様への周知: 装飾編集は「スニペット → pega-css-00-tokens（色味）/ 01〜10（各セクション）/ 20〜22（横断）」で行う。個別ON/OFFも可能。
+
+---
+
+## 7. 【追記 2026-07-15】報告前の3点対処
+
+橋本様への報告前に、以下3点を確認・対処。
+
+### 7-1. 粒度をセクション別（14本）へ再分割 ← 橋本様「微調整しやすさ」に合わせて
+当初 sections を1本(pega-css-2-sections)に集約したが、**運用者が微調整しやすいよう、元Proと同じ粒度（1セクション=1スニペット）へ再分割**。
+- **14本構成（scope=global・線形依存チェーンで読込順保証）:**
+  `pega-css-00-tokens`(dep child_style) → `01-commute` → `02-concerns` → `03-bridge` → `04-homeworker` → `05-reasons` → `06-voices` → `07-posts` → `08-closing` → `09-hero` → `10-header` → `20-global-layout` → `21-global-deco` → `22-global-motion`（各々1つ前に依存）。
+- **利点:** 個別ON/OFF可・目的箇所を探しやすい・編集範囲が小さく事故が少ない（＝橋本様の「微調整しやすさ」に合致）。名前を連番プレフィックスにし管理画面で順に並ぶ。
+- 読込順は実測で child_style→00→…→22 の順を確認。**baselineとピクセル完全一致（差分0）**。原本: `scripts/code-snippets/php/pega-css-*.php`。
+
+### 7-2. 管理画面からの実編集テスト（実施・成功）← 橋本様要求の核心
+**実際に wp-admin にログインし、Code Snippets の編集画面で編集→保存→反映→復元を実施**（puppeteerでUI操作）。
+- `pega-css-00-tokens` を開き、CodeMirror上で `--pega-base` を `#1067D6`→`#E4007F`（マゼンタ）に変更 → 「保存」ボタン押下。
+- **結果:** スニペットは **active のまま（無効化されず・PHP保存エラー無し）**、DBに反映、**フロントのヘッダー等が即マゼンタ化**（--pega-base=#E4007F / header=rgb(228,0,127)）。
+- **復元:** 同じ管理画面で `#E4007F`→`#1067D6` に戻して保存 → **baselineとピクセル完全一致（差分0）で青に復元**。
+- → **運用者が管理画面から安全に微調整でき、保存時にPHPエラーや無効化が起きないことを実証。** CSSはnowdoc内のためPHP構造は保存で変わらず、値編集は安全。
+
+### 7-3. Proプラグイン本体を削除（実施）
+- 無料版で全機能・見た目・管理画面編集が安定していることを確認の上、**`wp-content/plugins/code-snippets-pro/` を削除**。
+- バックアップ2重（`tmp/code-snippets-pro.3.9.6.zip` 原本ZIP ＋ `backup/pro_to_free_20260715/code-snippets-pro_backup.tar.gz`）。
+- **削除後の再確認:** 全ページ200・sitemap301・**baselineとピクセル完全一致（差分0）**・id5-8動作・**Code Snippets管理画面が正常に開き14本を一覧表示（fatal無し）**・Pro定数=未定義。
+- → 「Pro版は解除しました」と報告可能な実態（プラグイン本体も除去）。**返金申請を進められます。**
