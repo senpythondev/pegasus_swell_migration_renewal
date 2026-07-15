@@ -1547,31 +1547,21 @@
 /* =========================================================
    フッター — 通所サブ動線 + サイト情報
    ========================================================= */
+/* 装飾（背景・色・枠・角丸・影・フォント・hover 等）は Code Snippets「pega-css-11-footer」(③/優先度23) へ移行。
+   以下は構造（レイアウト骨格・グリッド/フレックス・幅・余白・position・@media）のみ。 */
 #footer.l-footer:has(.pega-footer) {
-	background: transparent;
 	padding: 0;
 	margin: 0;
-	border: none;
-	font-family: var(--pega-font);
 }
 
 #footer.l-footer:has(.pega-footer) .l-footer__inner.pega-footer__inner {
-	background: var(--pega-base-dark);
 	padding: clamp(48px, 7vw, 64px) 0 clamp(36px, 5vw, 48px);
 	margin: 0;
-	border: none;
 }
 
-.pega-footer {
-	color: rgba(255, 255, 255, 0.92);
-}
-
-/* 通所サブ動線（じょうご型3つ目）— CTA下の明るい帯で本体と分離 */
+/* 通所サブ動線（じょうご型3つ目）— CTA下の帯（構造） */
 .pega-footer__commute {
 	padding: clamp(28px, 4.5vw, 36px) 0;
-	background: #dce8f5;
-	border-top: none;
-	border-bottom: 3px solid var(--pega-base-dark);
 }
 
 .pega-footer__commute .l-container {
@@ -1590,17 +1580,10 @@
 
 .pega-footer__commute-title {
 	margin: 0 0 8px;
-	font-weight: 700;
-	font-size: clamp(15px, 2.4vw, 17px);
-	color: var(--pega-base-ink);
-	letter-spacing: 0.02em;
 }
 
 .pega-footer__commute-text {
 	margin: 0;
-	font-size: clamp(13px, 2.1vw, 14px);
-	line-height: 1.75;
-	color: var(--pega-text-sub);
 }
 
 .pega-footer__commute-links {
@@ -1616,28 +1599,6 @@
 	justify-content: center;
 	min-height: 44px;
 	padding: 11px 22px;
-	font-family: var(--pega-font);
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 1.4;
-	text-decoration: none;
-	border-radius: 999px;
-	border: 2px solid transparent;
-	transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
-}
-
-.pega-footer__commute-btn--access {
-	background: var(--pega-base) !important;
-	color: #fff !important;
-	box-shadow: 0 4px 16px rgba(16, 103, 214, 0.3);
-	border-color: rgba(255, 255, 255, 0.2);
-}
-
-.pega-footer__commute-btn--access:hover {
-	filter: brightness(1.06);
-	box-shadow: 0 6px 20px rgba(16, 103, 214, 0.38);
-	transform: translateY(-1px);
-	color: #fff !important;
 }
 
 @media (min-width: 768px) {
@@ -1691,7 +1652,6 @@
 	display: inline-flex;
 	align-items: center;
 	padding: 0;
-	background: transparent;
 }
 
 .pega-footer__logo .c-headLogo__img {
@@ -1700,42 +1660,19 @@
 	width: auto;
 	max-width: min(260px, 100%);
 	object-fit: contain;
-	filter: brightness(0) invert(1);
-	opacity: 0.95;
 }
 
 .pega-footer__office {
 	margin: 0;
-	font-style: normal;
-	font-size: 13px;
-	line-height: 1.85;
-	color: rgba(255, 255, 255, 0.78);
 }
 
 .pega-footer__office-name {
 	margin: 0 0 12px;
 	padding: 0 0 10px;
-	font-weight: 700;
-	font-size: 13px;
-	color: rgba(255, 255, 255, 0.55);
-	letter-spacing: 0.06em;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .pega-footer__office-line {
 	margin: 0;
-}
-
-.pega-footer__office-line a {
-	color: rgba(255, 255, 255, 0.88);
-	text-decoration: none;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-	transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.pega-footer__office-line a:hover {
-	color: #fff;
-	border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ナビ13件 */
@@ -1750,11 +1687,6 @@
 .pega-footer__nav-heading {
 	margin: 0 0 12px;
 	padding: 0 0 10px;
-	font-weight: 700;
-	font-size: 13px;
-	color: rgba(255, 255, 255, 0.55);
-	letter-spacing: 0.06em;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .pega-footer__nav-list {
@@ -1769,15 +1701,6 @@
 
 .pega-footer__nav-list a {
 	display: inline-block;
-	font-size: 13px;
-	line-height: 1.55;
-	color: rgba(255, 255, 255, 0.82);
-	text-decoration: none;
-	transition: color 0.2s ease;
-}
-
-.pega-footer__nav-list a:hover {
-	color: #fff;
 }
 
 @media (min-width: 560px) {
@@ -1806,7 +1729,7 @@
 	}
 }
 
-/* SNS・コピーライト */
+/* SNS・コピーライト（構造） */
 .pega-footer__meta {
 	display: flex;
 	flex-direction: column;
@@ -1814,21 +1737,12 @@
 	gap: 16px;
 	margin-top: clamp(32px, 5vw, 44px);
 	padding-top: clamp(24px, 4vw, 28px);
-	border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .pega-footer__sns {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	color: rgba(255, 255, 255, 0.82);
-	text-decoration: none;
-	font-size: 13px;
-	transition: color 0.2s ease;
-}
-
-.pega-footer__sns:hover {
-	color: #fff;
 }
 
 .pega-footer__sns-icon {
@@ -1837,9 +1751,6 @@
 
 .pega-footer__copyright {
 	margin: 0;
-	font-size: 12px;
-	line-height: 1.6;
-	color: rgba(255, 255, 255, 0.5);
 }
 
 @media (min-width: 768px) {
@@ -1853,6 +1764,10 @@
 /* =========================================================
    スクロール追従CTA（トップ・ヒーロー後〜フッター前）
    ========================================================= */
+/* 装飾（背景・枠・角丸・影・色・フォント・hover 等）は Code Snippets「pega-css-12-sticky-cta」(③/優先度24) へ移行。
+   以下は構造のみ＝position/z-index・表示制御(opacity/visibility/transform/transition/pointer-events)・
+   .is-visible・レイアウト・@media・prefers-reduced-motion。
+   ※表示/非表示の動作に関わるため、装飾スニペットをオフにしても表示制御は保持される。 */
 .pega-sticky-cta {
 	position: fixed;
 	z-index: 90;
@@ -1861,7 +1776,6 @@
 	transform: translateY(10px);
 	transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
 	pointer-events: none;
-	font-family: var(--pega-font);
 }
 
 .pega-sticky-cta.is-visible {
@@ -1878,19 +1792,7 @@
 	width: 28px;
 	height: 28px;
 	padding: 0;
-	border: none;
-	border-radius: 50%;
-	background: rgba(16, 103, 214, 0.08);
-	color: #6b7280;
-	font-size: 18px;
-	line-height: 1;
 	cursor: pointer;
-	transition: background 0.2s ease, color 0.2s ease;
-}
-
-.pega-sticky-cta__close:hover {
-	background: rgba(16, 103, 214, 0.14);
-	color: var(--pega-base-ink);
 }
 
 .pega-sticky-cta__inner {
@@ -1904,50 +1806,23 @@
 	justify-content: center;
 	min-height: 44px;
 	padding: 10px 14px;
-	border-radius: 999px;
-	font-size: 13px;
-	font-weight: 700;
-	line-height: 1.35;
-	text-decoration: none;
-	text-align: center;
-	border: 2px solid transparent;
-	transition: filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 .pega-sticky-cta__btn--primary {
 	flex: 1.15;
-	background: var(--pega-accent) !important;
-	color: #fff !important;
-	box-shadow: 0 3px 12px rgba(141, 199, 60, 0.32);
-}
-
-.pega-sticky-cta__btn--primary:hover {
-	filter: brightness(1.05);
-	color: #fff !important;
 }
 
 .pega-sticky-cta__btn--contact {
 	flex: 1;
-	background: var(--pega-second) !important;
-	color: #fff !important;
-	box-shadow: 0 3px 12px rgba(253, 117, 124, 0.28);
 }
 
-.pega-sticky-cta__btn--contact:hover {
-	filter: brightness(1.04);
-	color: #fff !important;
-}
-
-/* モバイル: 下部固定バー */
+/* モバイル: 下部固定バー（構造） */
 @media (max-width: 959px) {
 	.pega-sticky-cta {
 		left: 0;
 		right: 0;
 		bottom: 0;
 		padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-		background: rgba(255, 255, 255, 0.97);
-		border-top: 1px solid rgba(16, 103, 214, 0.1);
-		box-shadow: 0 -4px 18px rgba(16, 103, 214, 0.08);
 	}
 
 	.pega-sticky-cta__close {
@@ -1966,7 +1841,7 @@
 	}
 }
 
-/* PC: 右下フローティング（スクロールバー幅を考慮して内側に配置） */
+/* PC: 右下フローティング（スクロールバー幅を考慮して内側に配置）（構造） */
 @media (min-width: 960px) {
 	.pega-sticky-cta {
 		right: calc(28px + (100vw - 100%));
@@ -1976,10 +1851,6 @@
 		min-width: 240px;
 		max-width: 280px;
 		padding: 28px 16px 14px;
-		background: rgba(255, 255, 255, 0.96);
-		border: 1px solid rgba(16, 103, 214, 0.12);
-		border-radius: 14px;
-		box-shadow: 0 6px 24px rgba(16, 103, 214, 0.1);
 	}
 
 	.pega-sticky-cta__inner {
@@ -1989,7 +1860,6 @@
 
 	.pega-sticky-cta__btn {
 		width: 100%;
-		font-size: 14px;
 		min-height: 44px;
 	}
 }
