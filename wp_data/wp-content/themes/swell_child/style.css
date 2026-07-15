@@ -208,6 +208,17 @@
 	display: none;
 }
 
+/* pega-br-sp: モバイル・タブレットのみ改行（説明文の意図した区切り） */
+.pega-br-sp {
+	display: inline;
+}
+
+@media (min-width: 960px) {
+	.pega-br-sp {
+		display: none;
+	}
+}
+
 /* =========================================================
    ヒーロー（FV）— SWELL フルワイドブロック + 子テーマCSS
    ========================================================= */
@@ -262,11 +273,12 @@
 	z-index: 2;
 	width: 100%;
 	box-sizing: border-box;
-	padding: clamp(24px, 5vh, 56px) clamp(20px, 4vw, 40px) clamp(36px, 6vh, 72px);
+	padding: clamp(24px, 5vh, 56px) clamp(16px, 3vw, 40px) clamp(36px, 6vh, 72px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: clamp(24px, 4vh, 36px);
+	justify-content: center;
+	gap: 0;
 }
 
 .pega-hero__copy {
@@ -276,6 +288,7 @@
 	width: 100%;
 	max-width: 640px;
 	text-align: center;
+	margin-bottom: 0;
 }
 
 .pega-hero__copy > .wp-block-group__inner-container {
@@ -292,96 +305,163 @@
 	width: 100%;
 }
 
+/* ヒーロー内の改行は常に有効（pega-br-pc の display:none を上書き） */
+.pega-hero__title br,
+.pega-hero__title br.pega-br-pc,
+.pega-hero__desc br,
+.pega-hero__desc br.pega-br-pc,
+.pega-hero__desc br.pega-br-sp {
+	display: block !important;
+}
+
 /* タイポ：ブレークポイント別（clamp だけに頼らない） */
 
-/* 600px〜：タブレット以上は右側にコピー配置 */
-@media (min-width: 600px) {
+/* 600px〜767px */
+@media (min-width: 600px) and (max-width: 767px) {
 	.pega-hero__content {
-		align-items: stretch;
-	}
-
-	.pega-hero__copy {
-		width: min(420px, 54%);
-		margin-left: auto;
-		margin-right: 0;
-		align-items: flex-end;
-		text-align: right;
+		padding-left: 52%;
 	}
 }
 
-/* 768px〜959px：タブレット */
-
-@media (min-width: 960px) {
-	/* コピーブロックを右半分に固定幅で配置（margin-left: auto で右寄せ） */
+/* 600px〜：右側カラム（人物と非重複・コピー＋CTAを右エリア中央に） */
+@media (min-width: 600px) {
 	.pega-hero__content {
-		align-items: stretch;
-		padding-right: clamp(24px, 4vw, 64px);
+		align-items: center;
+		justify-content: center;
+		padding-left: 48%;
+		padding-right: clamp(16px, 3vw, 36px);
 	}
 
 	.pega-hero__copy {
-		/* 固定幅 + margin-left: auto で右側に確実に収める */
-		width: 420px;
-		max-width: 42%;
+		width: min(400px, 92%);
+		max-width: 400px;
 		margin-left: auto;
-		margin-right: 0;
-		align-items: flex-start;
-		text-align: left;
-		/* コピーとCTAの間の余白 */
-		margin-bottom: clamp(56px, 8vh, 84px);
+		margin-right: auto;
+		align-items: center;
+		text-align: center;
+	}
+}
+
+/* 768px〜959px：タブレット縦（コピー幅をわずかに拡張） */
+@media (min-width: 768px) and (max-width: 959px) {
+	.pega-hero__content {
+		padding-left: 52%;
+	}
+
+	.pega-hero__copy {
+		width: 100%;
+		max-width: none;
+	}
+}
+
+/* 768px〜1023px：タブレット（人物を隠さないよう右エリアを広く） */
+@media (min-width: 768px) {
+	.pega-hero__content {
+		padding-left: 54%;
+		padding-right: clamp(20px, 3.5vw, 40px);
+	}
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+	.pega-hero__content {
+		padding-left: 52%;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-hero__content {
+		padding-right: clamp(24px, 4vw, 56px);
+	}
+
+	.pega-hero__copy {
+		width: min(440px, 92%);
+		max-width: 440px;
 	}
 }
 
 @media (min-width: 1200px) {
-	.pega-hero__copy { width: 480px; max-width: 40%; margin-bottom: clamp(64px, 9vh, 92px); }
-}
-
-@media (min-width: 1440px) {
-	.pega-br-pc {
-		display: none;
+	.pega-hero__content {
+		padding-left: 48%;
 	}
 
 	.pega-hero__copy {
-		width: max-content;
-		max-width: none;
-		margin-bottom: clamp(72px, 10vh, 100px);
+		width: min(480px, 90%);
+		max-width: 480px;
 	}
+}
+
+@media (min-width: 1600px) {
+	.pega-br-pc {
+		display: none;
+	}
+}
+
+@media (min-width: 1440px) {
+	.pega-hero__content {
+		padding-left: 50%;
+	}
+
+	.pega-hero__copy {
+		width: min(520px, 38vw);
+		max-width: 520px;
+	}
+
 	.pega-hero__copy > .wp-block-group__inner-container {
-		width: max-content;
+		width: 100%;
 	}
+
 	.pega-hero__title,
 	.pega-hero__eyebrow,
 	.pega-hero__desc {
-		width: max-content;
+		width: 100%;
 		max-width: none;
-		white-space: nowrap;
+		white-space: normal;
+	}
+}
+
+@media (min-width: 1900px) {
+	.pega-hero__copy {
+		width: min(580px, 36vw);
+		max-width: 580px;
 	}
 }
 
 .pega-hero__actions {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	gap: 14px;
-	justify-content: center;
+	flex-direction: column !important;
+	flex-wrap: nowrap !important;
+	gap: 12px;
+	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
-	margin: clamp(12px, 2.5vh, 24px) 0 0;
+	max-width: 640px;
+	margin: clamp(28px, 4vh, 44px) auto 0;
 }
 
+.pega-hero__actions.is-row,
 .pega-hero__actions > .wp-block-group__inner-container,
-.pega-hero__actions.is-layout-flex {
+.pega-hero__actions.is-layout-flex,
+.pega-hero__actions.is-layout-flex.is-row {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	gap: 14px;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column !important;
+	flex-wrap: nowrap !important;
+	gap: 12px;
+	justify-content: flex-start;
+	align-items: stretch;
 	width: 100%;
 }
 
 .pega-hero__actions .swell-block-button {
 	margin: 0;
-	width: auto;
+	width: 100%;
+}
+
+/* 長いCTAを基準に等幅（構造） */
+.pega-hero__actions .swell-block-button > .swell-block-button__link {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	justify-content: center;
 }
 
 /* 信頼指標バー */
@@ -419,9 +499,23 @@
 
 /* モバイル */
 @media (max-width: 599px) {
+	.pega-hero__content {
+		justify-content: flex-end;
+		align-items: center;
+		padding-bottom: clamp(32px, 6vh, 56px);
+		padding-left: clamp(16px, 5vw, 24px);
+		padding-right: clamp(16px, 5vw, 24px);
+	}
+
+	.pega-hero__copy {
+		width: 100%;
+		max-width: 100%;
+	}
+
 	.pega-hero__actions {
 		flex-direction: column;
 		width: 100%;
+		max-width: 100%;
 	}
 
 	.pega-hero__actions .swell-block-button {
@@ -436,12 +530,50 @@
 
 @media (min-width: 600px) {
 	.pega-hero__actions,
+	.pega-hero__actions.is-row,
 	.pega-hero__actions > .wp-block-group__inner-container,
-	.pega-hero__actions.is-layout-flex {
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
+	.pega-hero__actions.is-layout-flex,
+	.pega-hero__actions.is-layout-flex.is-row {
+		flex-direction: column !important;
+		flex-wrap: nowrap !important;
+		width: min(400px, 92%);
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		align-items: stretch;
+	}
+}
+
+@media (min-width: 960px) {
+	.pega-hero__actions,
+	.pega-hero__actions.is-row,
+	.pega-hero__actions > .wp-block-group__inner-container,
+	.pega-hero__actions.is-layout-flex,
+	.pega-hero__actions.is-layout-flex.is-row {
+		width: min(440px, 92%);
+		max-width: 440px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.pega-hero__actions,
+	.pega-hero__actions.is-row,
+	.pega-hero__actions > .wp-block-group__inner-container,
+	.pega-hero__actions.is-layout-flex,
+	.pega-hero__actions.is-layout-flex.is-row {
+		width: min(480px, 90%);
+		max-width: 480px;
+	}
+}
+
+@media (min-width: 1440px) {
+	.pega-hero__actions,
+	.pega-hero__actions.is-row,
+	.pega-hero__actions > .wp-block-group__inner-container,
+	.pega-hero__actions.is-layout-flex,
+	.pega-hero__actions.is-layout-flex.is-row {
+		width: max-content;
+		max-width: min(520px, 100%);
 	}
 }
 
@@ -460,6 +592,7 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: clamp(12px, 2vw, 16px);
+	min-width: 0;
 }
 
 .pega-concerns__item > .wp-block-group__inner-container {
@@ -528,8 +661,8 @@
 	max-width: none;
 	padding: 0;
 	margin: 0;
-	display: grid;
-	grid-template-rows: 7fr 3fr;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	min-height: inherit;
 }
@@ -539,8 +672,8 @@
 	width: 100%;
 	position: relative;
 	overflow: hidden;
+	flex: 1 1 auto;
 	min-height: 0;
-	height: 100%;
 }
 
 .pega-bridge__pillar-img::after {
@@ -556,8 +689,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
-	min-height: 0;
+	flex: 0 0 auto;
+	min-height: 112px;
 	padding: 12px clamp(14px, 3vw, 20px) 16px;
 	box-sizing: border-box;
 }
@@ -567,6 +700,12 @@
 	padding: 0;
 	margin: 0;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 4px;
+	min-height: 88px;
 }
 
 .pega-bridge__closing > .wp-block-group__inner-container {
@@ -625,7 +764,11 @@
 	}
 
 	.pega-bridge__pillar {
-		min-height: 360px;
+		min-height: 380px;
+	}
+
+	.pega-bridge__pillar-body {
+		min-height: 112px;
 	}
 
 	.pega-bridge__details.wp-block-columns {
@@ -830,15 +973,18 @@
 .pega-reasons__sub > .wp-block-column {
 	margin: 0;
 	display: flex;
+	min-width: 0;
 }
 
 .pega-reasons__card > .wp-block-group__inner-container {
-	max-width: none;
+	max-width: none !important;
 	padding: 0;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	width: 100%;
+	min-width: 0;
 }
 
 .pega-reasons__card--featured > .wp-block-group__inner-container {
@@ -879,12 +1025,15 @@
 .pega-reasons__card-body,
 .pega-reasons__card-body > .wp-block-group__inner-container {
 	flex: 1 1 auto;
+	width: 100%;
+	max-width: none !important;
+	min-width: 0;
 	padding: clamp(18px, 3vw, 24px) clamp(18px, 3.2vw, 22px) clamp(22px, 3.5vw, 26px);
+	box-sizing: border-box;
 }
 
 .pega-reasons__card-body > .wp-block-group__inner-container {
-	max-width: none;
-	padding: inherit;
+	padding: 0;
 	margin: 0;
 }
 
@@ -920,14 +1069,48 @@
 		grid-template-columns: repeat(2, 1fr);
 		align-items: stretch;
 	}
+}
 
+@media (min-width: 960px) {
 	.pega-reasons__extras.wp-block-columns {
 		grid-template-columns: repeat(2, 1fr);
 		align-items: stretch;
 	}
 }
 
-@media (min-width: 768px) {
+.pega-reasons__card--featured .pega-reasons__card-img {
+	width: 100%;
+}
+
+/* 768〜959px：理由①は画像を全幅表示（横並びにしない） */
+@media (min-width: 768px) and (max-width: 959px) {
+	.pega-reasons__card-split.wp-block-columns {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.pega-reasons__card-split > .wp-block-column:first-child,
+	.pega-reasons__card-split > .wp-block-column:last-child {
+		flex: 1 1 auto;
+		max-width: none;
+		width: 100%;
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-img {
+		width: 100%;
+		height: auto;
+		min-height: 0;
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-img img {
+		width: 100%;
+		height: clamp(220px, 42vw, 300px);
+		min-height: 0;
+		object-fit: cover;
+	}
+}
+
+@media (min-width: 960px) {
 	.pega-reasons__card-split.wp-block-columns {
 		flex-direction: row;
 		align-items: stretch;
@@ -936,6 +1119,7 @@
 	.pega-reasons__card-split > .wp-block-column:first-child {
 		flex: 0 0 46%;
 		max-width: 46%;
+		display: flex;
 	}
 
 	.pega-reasons__card-split > .wp-block-column:last-child {
@@ -943,8 +1127,16 @@
 	}
 
 	.pega-reasons__card--featured .pega-reasons__card-img {
+		flex: 1 1 auto;
 		height: 100%;
 		min-height: 260px;
+	}
+
+	.pega-reasons__card--featured .pega-reasons__card-img img {
+		width: 100%;
+		height: 100%;
+		min-height: 260px;
+		object-fit: cover;
 	}
 
 	.pega-reasons__card--featured .pega-reasons__card-body,
@@ -1798,7 +1990,7 @@
 	.pega-sticky-cta__btn {
 		width: 100%;
 		font-size: 14px;
-		min-height: 42px;
+		min-height: 44px;
 	}
 }
 
