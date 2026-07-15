@@ -13,49 +13,13 @@
 */
 
 /* =========================================================
-   ペガサス ブランドカラー（Phase 5/7）
+   ペガサス ブランドカラー / 設計トークン（:root 変数）は
+   Code Snippets の「pega-css-00-tokens」に一元管理（唯一の定義元）。
+   色・余白・フォント等の調整は同スニペットで行う。
+   （子テーマ側の重複 :root は削除。フォールバックは持たない＝主入口を一本化）
    ========================================================= */
-:root {
-	--pega-base:        #1067D6;
-	--pega-second:      #FD757C;
-	--pega-accent:      #8DC73C;
-	--pega-base-ink:    #0a4aa8;
-	--pega-base-dark:   #0b3d8a;
-	--pega-text:        #1A1A1A;
-	--pega-text-sub:    #4a5568;
-	--pega-font:        "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-	--pega-header-h:    72px;
-
-	/* 柔らかい派生色（広い面・背景用） */
-	--pega-soft-bg:     #f7f9fc;
-	--pega-soft-blue:   #eef3f9;
-	--pega-soft-green:  #f4f8ef;
-	--pega-border:      rgba(16, 103, 214, 0.14);
-	--pega-border-strong: rgba(16, 103, 214, 0.24);
-	--pega-card-shadow: 0 2px 8px rgba(16, 103, 214, 0.08);
-	--pega-card-radius: 12px;
-	--pega-card-padding: clamp(18px, 3vw, 24px);
-
-	/* SWELL 準拠レイアウト — 全セクション同一幅 */
-	--pega-section-px:  clamp(16px, 4vw, var(--swl-pad_container, 48px));
-	--pega-section-py:  clamp(56px, 7vw, 80px);
-	--pega-section-py-sm: clamp(32px, 4vw, 48px);
-	--pega-wrap-content: min(960px, 100%);
-	--pega-wrap-narrow: var(--pega-wrap-content);
-	--pega-wrap-wide:   var(--pega-wrap-content);
-	--pega-wrap-banner: var(--pega-wrap-content);
-
-	/* 見出し階層（SWELL post_content 基準） */
-	--pega-h2:          clamp(24px, 4vw, 1.75rem);
-	--pega-h3:          clamp(18px, 2.6vw, 1.25rem);
-	--pega-lead:        clamp(15px, 2.1vw, 17px);
-	--pega-body:        clamp(14px, 2vw, 16px);
-}
 
 @media (min-width: 960px) {
-	:root {
-		--pega-header-h: 84px;
-	}
 	.pega-br-pc {
 		display: inline;
 	}
