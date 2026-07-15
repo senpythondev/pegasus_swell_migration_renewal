@@ -250,12 +250,12 @@
 
 ## フェーズ11：CSS3層構造 と SWELL内部クラス上書き（SWELL更新時の再点検）★橋本様ご指摘対応
 
-CSS を3層化（`docs/CSS_LAYER_MIGRATION_LOG.md`）。装飾は **Code Snippets（site-css）** に集約、子テーマ style.css は**構造のみ**。本番移行時・SWELL更新時に以下を点検する。
+CSS を3層化（`docs/CSS_LAYER_MIGRATION_LOG.md`）。装飾は **無料版 Code Snippets の PHPスニペット14本**（`wp_enqueue_scripts`＋`wp_add_inline_style`で出力・**ライセンス不要**）に集約、子テーマ style.css は**構造のみ**（`:root` 変数も持たない＝色定義は `pega-css-00-tokens` が唯一）。Pro版は解除・削除済（`docs/CODE_SNIPPETS_PRO_TO_FREE_20260715.md`）。本番移行時・SWELL更新時に以下を点検する。
 
 ### 11-1. スコープ方針（競合回避）
 - トップ限定の上書きは **`.pega-top`** でスコープ（`functions.php` の `pega_body_class_top()`／`body_class`フィルタ・`is_front_page()`限定で **#body_wrap** に付与）。WPコア `.home` と同一要素のため付け替えは挙動不変。
 - 全ページ共有の上書き（SPメニュー `.p-spMenu*`・連絡先 `.pega-header-contact` base・ハンバーガーアイコン色）は **bare で据え置き**（テンプレートoverrideで全ページ出力される共有要素のため。`.pega-top`に閉じるとサブページの見た目が変わる）。
-- 物理層：`pega-tokens(1)` → `pega-sec-*/pega-header-deco(10)` → `pega-global-*(30/31)`。
+- 物理層（読込順）：`pega-css-00-tokens` → `pega-css-01〜10`（各セクション） → `pega-css-20/21/22`（横断）。各スニペットは `child_style` のみ依存＋`add_action` の固有hook優先度（tokens=12／section=13〜22／global=30〜32）で順序保証。相互依存なしのため**個別ON/OFF可**・ID非依存（詳細は移行記録 §10）。
 
 ### 11-2. 上書きしている SWELL 内部クラス（**SWELL更新でクラス名/DOM/既定が変わると競合・失効**）
 - **ヘッダー（`.pega-top #header …` トップ限定）**：`#header`/`#fix_header`/`.l-header__inner`/`.l-header__logo`/`.l-header__bar`/`.l-header__gnav`/`.l-header__menuBtn`/`.l-header__customBtn`/`.c-headLogo__link`/`.c-headLogo__img`/`.c-gnav`/`.c-gnavWrap`/`.sub-menu`/`.ttl`/`.c-iconBtn`(`__icon`)/`.current-menu-item`/`.l-container`
@@ -277,6 +277,14 @@ SWELLにフックが無いため子テーマでコアテンプレを**最小上�
 - [ ] 全ページ200・サブページのヘッダー（SWELL既定）が壊れていない
 - [ ] `#body_wrap` に `.pega-top`（トップのみ）
 
-### 11-5. 本番のCode Snippets
-- 本番でも **Code Snippets Pro のライセンス認証**（サイト単位上限あり／ステージング解除→本番認証）が必要。site-css スニペット（pega-tokens/pega-sec-*/pega-global-*/pega-header-deco）を**同名・同優先度で移送**し、`code_snippets_assets_rev` が加算される保存操作を行う。
+### 11-5. 本番のCode Snippets（無料版＋PHPスニペット14本・ライセンス不要）
+**Pro版は不要になった**（無料版へ移行済・`docs/CODE_SNIPPETS_PRO_TO_FREE_20260715.md`）。本番でも以下でライセンス無しに同一の見た目を再現できる。
+
+- [ ] 本番に **無料版「Code Snippets」** を導入・有効化（Pro版は入れない）。
+- [ ] **PHPスニペット14本を投入**：`scripts/code-snippets/php/pega-css-*.php`（00-tokens／01-commute〜10-header／20-global-layout・21-global-deco・22-global-motion）。Code Snippets の「インポート」またはスニペット新規作成で、各ファイルの内容（`<?php` 直後の本体）を貼り付け、**scope=「サイト全体で実行(global)」・有効化**。
+  - 各スニペットは `wp_register_style( '<name>', false, array('child_style'), null )`＋`wp_add_inline_style()` で CSS を inline 出力。読込順は**コード内にハードコードした hook優先度**（`}, 12);` 等）で決まり、**インポートでIDが変わっても順序は保たれる**（ライセンス／`code_snippets_assets_rev` 不要）。
+- [ ] 前提：子テーマ `functions.php` が `child_style` を優先度11で enqueue していること（14本はこれに依存して直後に読み込まれる）。
+- [ ] 投入後の確認：レンダHTMLで `child_style` → `pega-css-00-tokens` → … → `pega-css-22-global-motion` の順に `<style>` が出ること／全ページ200／トップの見た目がステージングと一致すること。
+- [ ] 運用周知：装飾の微調整は「スニペット → pega-css-00-tokens（色・余白の共通設定）／01〜10（各セクション）／20〜22（横断）」で編集・保存。**pega-css-00-tokens は土台のためオフにしない**（各スニペット冒頭の日本語ガイド参照）。
+- [ ] 既存PHPスニペット（CF7確認欄 id5相当／メールリンク id7相当／サイトマップ id8相当）も本番で作成・有効化（id6 テストSMTP は入れない＝§フェーズ3・最重要#3）。
 </content>
