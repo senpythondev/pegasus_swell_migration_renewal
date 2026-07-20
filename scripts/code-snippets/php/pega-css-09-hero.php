@@ -1,15 +1,12 @@
 <?php
 /*
- * ▼ペガサス様 編集ガイド ─ 「ヒーロー（FV）＋信頼指標バー」セクションの装飾
- *
- *   色や余白を変えたい時は、下の  $css = <<<'CSS'  から  CSS;  までの間を書き換えて
- *   「変更を保存」を押してください。
- *   ・このスニペットは、この1セクションだけの見た目です。オフにすると、このセクションの
- *     装飾だけが外れます（他のセクションやサイト全体には影響しません）。
- *   ・色そのものの共通設定は「pega-css-00-tokens」にあります。
+ * ▼ペガサス様 編集ガイド ─ 「FV（ヒーロー）」の装飾
+ *   色や背景を変える時は、下の CSS を書き換えて保存。
+ *   本文・画像・ボタンはSWELL標準ブロック側で編集。
  */
 add_action( 'wp_enqueue_scripts', function () {
 	$css = <<<'CSS'
+/* FV背景 — SP/PC出し分け（明るい写真・青被りなし） */
 .pega-hero-wrap .swell-block-fullWide,
 .pega-hero-wrap .wp-block-loos-full-wide,
 .pega-hero-wrap .pega-hero-fv-bg {
@@ -21,355 +18,273 @@ add_action( 'wp_enqueue_scripts', function () {
 	margin: 0 !important;
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
-	background-color: #dce8f5;
-	background-image: url("/wp-content/uploads/2026/07/pega-hero-fv-20260712.jpg") !important;
+	background-color: #eef3f9;
+	background-image: url("/wp-content/uploads/2026/07/woman-top-sp.jpg") !important;
 	background-size: cover !important;
 	background-repeat: no-repeat !important;
-	background-position: 24% center;
+	background-position: center 18%;
 }
-/* モバイル横〜小タブレット：右側を多く見せる（position のみ・cover は維持） */
-@media (min-width: 600px) and (max-width: 767px) {
+@media (min-width: 768px) {
 	.pega-hero-wrap .swell-block-fullWide,
 	.pega-hero-wrap .wp-block-loos-full-wide,
 	.pega-hero-wrap .pega-hero-fv-bg {
-		background-position: 12% center;
-	}
-}
-/* タブレット：右側を多く見せ、コピー用スペースを確保 */
-@media (min-width: 768px) and (max-width: 1023px) {
-	.pega-hero-wrap .swell-block-fullWide,
-	.pega-hero-wrap .wp-block-loos-full-wide,
-	.pega-hero-wrap .pega-hero-fv-bg {
-		background-position: 10% center;
-	}
-}
-@media (min-width: 1024px) and (max-width: 1199px) {
-	.pega-hero-wrap .swell-block-fullWide,
-	.pega-hero-wrap .wp-block-loos-full-wide,
-	.pega-hero-wrap .pega-hero-fv-bg {
-		background-position: 14% center;
+		background-image: url("/wp-content/uploads/2026/07/woman-top-pc.jpg") !important;
+		background-position: 72% center;
+		min-height: min(86vh, 780px);
 	}
 }
 @media (min-width: 1200px) {
 	.pega-hero-wrap .swell-block-fullWide,
 	.pega-hero-wrap .wp-block-loos-full-wide,
 	.pega-hero-wrap .pega-hero-fv-bg {
-		background-position: 16% center;
-	}
-}
-@media (min-width: 1440px) {
-	.pega-hero-wrap .swell-block-fullWide,
-	.pega-hero-wrap .wp-block-loos-full-wide,
-	.pega-hero-wrap .pega-hero-fv-bg {
-		background-position: 16% center;
+		min-height: min(88vh, 820px);
+		background-position: 68% center;
 	}
 }
 .pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
 .pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	z-index: 1;
-	pointer-events: none;
-	/* ヘッダー青(--pega-base)と調和する、明るい画像向けの右寄せスクリーン */
-	background:
-		linear-gradient(180deg, rgba(16, 103, 214, 0.2) 0%, rgba(16, 103, 214, 0.05) 10%, transparent 20%),
-		linear-gradient(
-			270deg,
-			rgba(16, 103, 214, 0.56) 0%,
-			rgba(16, 103, 214, 0.34) 24%,
-			rgba(255, 255, 255, 0.08) 44%,
-			transparent 62%
-		);
+	display: none !important;
+	content: none !important;
 }
-.pega-hero__title {
-	margin: 0 0 14px;
-	color: #fff;
-	font-weight: 800;
-	font-size: 33px;
-	line-height: 1.42;
-	letter-spacing: 0.03em;
-	text-align: center;
-	line-break: strict;
-	word-break: normal;
-	overflow-wrap: normal;
-	text-wrap: pretty;
-	hanging-punctuation: allow-end first;
-	text-shadow: 0 2px 14px rgba(8, 40, 100, 0.32), 0 1px 4px rgba(0, 0, 0, 0.18);
-}
-.pega-hero__eyebrow {
-	margin: 0 0 12px;
-	color: rgba(255, 255, 255, 0.96);
-	font-weight: 700;
-	font-size: 22px;
-	line-height: 1.65;
-	letter-spacing: 0.05em;
-	text-align: center;
-	line-break: strict;
-	word-break: normal;
-	overflow-wrap: normal;
-	text-wrap: pretty;
-	hanging-punctuation: allow-end first;
-	text-shadow: 0 1px 10px rgba(8, 40, 100, 0.28);
-}
-.pega-hero__desc {
-	margin: 0 auto 36px;
-	color: rgba(255, 255, 255, 0.92);
-	font-weight: 500;
-	font-size: 20px;
-	line-height: 1.8;
-	max-width: 32em;
-	text-align: center;
-	line-break: strict;
-	word-break: normal;
-	overflow-wrap: normal;
-	text-wrap: pretty;
-	hanging-punctuation: allow-end first;
-	text-shadow: 0 1px 10px rgba(8, 40, 100, 0.26);
-}
-@media (min-width: 600px) {
-	.pega-hero__title { font-size: 39px; }
-	.pega-hero__eyebrow { font-size: 24px; }
-	.pega-hero__desc { font-size: 21px; margin-bottom: 32px; }
-}
-@media (min-width: 768px) and (max-width: 959px) {
-	.pega-hero__title {
-		font-size: 20px;
-		line-height: 1.35;
-		letter-spacing: 0;
-		text-wrap: wrap;
-		white-space: nowrap;
-	}
-	.pega-hero__eyebrow { font-size: 20px; letter-spacing: 0.02em; }
-	.pega-hero__desc { font-size: 14px; line-height: 1.7; letter-spacing: 0; }
-}
-@media (min-width: 960px) {
+@media (max-width: 767px) {
 	.pega-hero-wrap .swell-block-fullWide,
 	.pega-hero-wrap .wp-block-loos-full-wide,
 	.pega-hero-wrap .pega-hero-fv-bg {
-		min-height: min(90vh, 860px);
+		min-height: min(92vh, 760px);
 	}
-	.pega-hero__title { font-size: 51px; margin-bottom: 18px; }
-	.pega-hero__eyebrow { font-size: 28px; margin-bottom: 14px; }
-	.pega-hero__desc { font-size: 22px; margin-bottom: 0; }
-}
-@media (min-width: 960px) and (max-width: 1199px) {
-	.pega-hero__desc {
-		font-size: 16px;
-		line-height: 1.7;
-		letter-spacing: 0;
-		text-wrap: wrap;
+	.pega-hero__content::before {
+		content: "";
+		position: absolute;
+		inset: auto 0 0;
+		height: 68%;
+		background: linear-gradient(to top, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.62) 52%, transparent 100%);
+		pointer-events: none;
+		z-index: -1;
 	}
 }
-@media (min-width: 1200px) {
-	.pega-hero__title { font-size: 57px; }
-	.pega-hero__eyebrow { font-size: 30px; }
-	.pega-hero__desc { font-size: 23px; }
+
+/* タイポ・バッジ（イメージ.png：左寄せ・白地枠バッジ） */
+@media (min-width: 768px) {
+	.pega-hero__copy .has-text-align-center,
+	.pega-hero__title.has-text-align-center {
+		text-align: left;
+	}
+}
+.pega-hero__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0 0 16px;
+	padding: 8px 16px;
+	border-radius: 999px;
+	background: #fff;
+	color: var(--pega-base);
+	border: 2px solid var(--pega-base);
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 1.2;
+	letter-spacing: 0.06em;
+	box-shadow: 0 2px 10px rgba(16, 103, 214, 0.12);
+}
+.pega-hero__badge-icon {
+	flex: 0 0 auto;
+	display: block;
+}
+.pega-hero__title {
+	margin: 0 0 10px;
+	color: var(--pega-base-dark);
+	font-weight: 800;
+	font-size: 28px;
+	line-height: 1.45;
+	letter-spacing: 0.04em;
+	text-align: center;
+	line-break: strict;
+	text-wrap: pretty;
+}
+.pega-hero__eyebrow {
+	margin: 0 0 14px;
+	color: var(--pega-base-dark);
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 1.55;
+	letter-spacing: 0.04em;
+	text-align: center;
+	text-wrap: pretty;
+}
+.pega-hero__accent {
+	color: var(--pega-base);
+	font-weight: 800;
+}
+.pega-hero__desc {
+	margin: 0 0 28px;
+	color: var(--pega-text-sub);
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 1.85;
+	max-width: 28em;
+	text-align: center;
+	text-wrap: pretty;
+}
+@media (min-width: 768px) {
+	.pega-hero__title { font-size: clamp(32px, 3.2vw, 44px); margin-bottom: 12px; }
+	.pega-hero__eyebrow { font-size: clamp(22px, 2.2vw, 30px); margin-bottom: 16px; }
+	.pega-hero__desc { font-size: clamp(15px, 1.35vw, 17px); margin-bottom: 28px; max-width: 22em; }
+	.pega-hero__badge { font-size: 14px; margin-bottom: 18px; }
 }
 @media (min-width: 1440px) {
-	.pega-hero__title {
-		font-size: 56px;
-		line-height: 1.38;
-		letter-spacing: 0.02em;
-		text-wrap: pretty;
-	}
-	.pega-hero__eyebrow { font-size: 33px; }
-	.pega-hero__desc { font-size: 25px; max-width: none; }
+	.pega-hero__title { font-size: 46px; }
+	.pega-hero__eyebrow { font-size: 32px; }
+	.pega-hero__desc { font-size: 17px; }
 }
-@media (min-width: 1600px) {
-	.pega-hero__title { font-size: 67px; }
-	.pega-hero__eyebrow { font-size: 34px; }
-	.pega-hero__desc { font-size: 26px; }
+@media (max-width: 425px) {
+	.pega-hero__title { font-size: 24px; }
+	.pega-hero__eyebrow { font-size: 18px; }
+	.pega-hero__desc { font-size: 14px; }
+	.pega-hero__badge { font-size: 12px; padding: 7px 14px; }
 }
-@media (min-width: 1920px) {
-	.pega-hero__title { font-size: 71px; }
-	.pega-hero__eyebrow { font-size: 35px; }
-	.pega-hero__desc { font-size: 27px; }
-}
-@media (min-width: 1900px) {
-	.pega-hero__desc {
-		font-size: 24px;
-		line-height: 1.75;
-		letter-spacing: 0;
-		text-wrap: wrap;
-		white-space: nowrap;
-	}
-}
+
+/* CTA：緑・コーラル＋アイコン */
 .pega-hero__actions .swell-block-button__link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.35em;
+	gap: 0.45em;
 	width: 100%;
 	min-height: 52px;
-	min-width: 44px;
-	padding: 16px 28px;
+	padding: 14px 22px;
 	border-radius: 999px;
 	font-family: var(--pega-font);
 	font-weight: 700;
-	font-size: 15px;
+	font-size: 14px;
 	line-height: 1.4;
 	text-decoration: none;
 	border: 2px solid transparent;
-	white-space: nowrap;
 	box-sizing: border-box;
 	transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
-.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link {
-	background: var(--pega-base);
-	color: #fff;
-	box-shadow: 0 4px 18px rgba(16, 103, 214, 0.35);
-	border-color: rgba(255, 255, 255, 0.2);
+.pega-hero__btn--primary .swell-block-button__link {
+	background: var(--pega-accent) !important;
+	color: #fff !important;
+	box-shadow: 0 4px 16px rgba(141, 199, 60, 0.38);
 }
-.pega-hero__actions .swell-block-button:first-of-type .swell-block-button__link:hover {
-	box-shadow: 0 8px 24px rgba(16, 103, 214, 0.45);
-}
-.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link {
-	background: var(--pega-accent);
-	color: #fff;
-	box-shadow: 0 4px 18px rgba(141, 199, 60, 0.42);
-	border-color: rgba(255, 255, 255, 0.25);
-}
-.pega-hero__actions .swell-block-button:last-of-type .swell-block-button__link:hover {
-	box-shadow: 0 8px 24px rgba(141, 199, 60, 0.52);
+.pega-hero__btn--secondary .swell-block-button__link {
+	background: var(--pega-second) !important;
+	color: #fff !important;
+	box-shadow: 0 4px 16px rgba(253, 117, 124, 0.34);
 }
 .pega-hero__actions .swell-block-button__link:hover {
 	transform: translateY(-2px);
 	filter: brightness(1.04);
 }
-.pega-hero__actions .swell-block-button__link:focus-visible {
-	outline: 3px solid #fff;
-	outline-offset: 3px;
+.pega-hero__btn--primary .swell-block-button__link span::before {
+	content: "";
+	display: inline-block;
+	width: 1.15em;
+	height: 1.15em;
+	margin-right: 0.15em;
+	vertical-align: -0.2em;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Crect x='3' y='5' width='18' height='12' rx='1'/%3E%3Cpath d='M8 19h8'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-@media (min-width: 960px) {
-	.pega-hero__actions .swell-block-button__link { font-size: 16px; padding: 16px 32px; }
+.pega-hero__btn--secondary .swell-block-button__link span::before {
+	content: "";
+	display: inline-block;
+	width: 1.15em;
+	height: 1.15em;
+	margin-right: 0.15em;
+	vertical-align: -0.2em;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Ccircle cx='9' cy='8' r='3'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M3 19c0-3 2.5-5 6-5s6 2 6 5M13 19c0-2.5 2-4 5-4'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-@media (min-width: 1280px) {
-	.pega-hero__actions .swell-block-button__link { font-size: 16px; }
-}
-@media (min-width: 1440px) {
-	.pega-hero__actions .swell-block-button__link {
-		font-size: 16px;
-		padding: 14px 26px;
-		min-height: 48px;
-	}
-}
+
+/* 実績バー — 青地・白文字・月桂樹＋アイコン */
 .pega-trust {
 	position: relative;
 	z-index: 3;
-	background: #fff;
-	border-top: 1px solid rgba(16, 103, 214, 0.1);
-	box-shadow: 0 4px 20px rgba(16, 103, 214, 0.06);
+	background: var(--pega-base);
+	color: #fff;
+	border-top: none;
+	box-shadow: none;
+	padding-bottom: 0;
 }
-.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
-	border-left: 1px solid rgba(16, 103, 214, 0.12);
+.pega-trust::after {
+	content: "";
+	display: block;
+	height: 28px;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 56' preserveAspectRatio='none'%3E%3Cpath fill='%23f7f9fc' d='M0 28C180 56 360 0 540 28s360 28 540 0 360-28 540 0v28H0z'/%3E%3C/svg%3E") center bottom / 100% 100% no-repeat;
+}
+.pega-trust__inner > .wp-block-column + .wp-block-column {
+	border-left: 1px solid rgba(255, 255, 255, 0.28);
+}
+.pega-trust__item {
+	color: #fff;
+}
+.pega-trust__item.wp-block-paragraph {
+	display: flex;
+	margin: 0;
+}
+.pega-trust__visual {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	color: #fff;
+}
+.pega-trust__laurel {
+	flex: 0 0 auto;
+	display: block;
+}
+.pega-trust__laurel--right {
+	transform: scaleX(-1);
+}
+.pega-trust__icon {
+	flex: 0 0 auto;
+	display: block;
+}
+.pega-trust__label {
+	display: block;
+	color: rgba(255, 255, 255, 0.95);
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 1.3;
+	letter-spacing: 0.06em;
 }
 .pega-trust__num {
-	display: inline-block;
-	position: relative;
-	padding-bottom: 12px;
-	color: var(--pega-base);
+	display: block;
+	color: #fff;
 	font-family: var(--pega-font);
 	font-weight: 800;
-	font-size: 34px;
+	font-size: clamp(34px, 4.5vw, 48px);
 	line-height: 1;
 	letter-spacing: -0.02em;
 }
-
-/* 実績数字：数字幅いっぱいの青→オレンジ下線 */
-.pega-trust__num::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 3px;
-	border-radius: 999px;
-	background: linear-gradient(90deg, var(--pega-base) 0%, var(--pega-orange) 100%);
-	opacity: 0.9;
-}
 .pega-trust__suffix {
-	font-size: 0.46em;
+	font-size: 0.42em;
 	font-weight: 700;
-	margin-left: 2px;
+	margin-left: 1px;
 }
-.pega-trust__label {
-	color: var(--pega-text-sub);
-	font-family: var(--pega-font);
-	font-weight: 600;
-	font-size: 13px;
-	line-height: 1.65;
-	max-width: 18em;
+.pega-trust__note {
+	margin: 0;
+	padding: 6px 16px 14px;
+	color: rgba(255, 255, 255, 0.82);
+	font-size: 11px;
+	line-height: 1.5;
+	text-align: center;
 }
-@media (min-width: 600px) {
-	.pega-trust__num { font-size: 42px; }
+@media (max-width: 767px) {
+	.pega-trust__inner > .wp-block-column + .wp-block-column {
+		border-left: none;
+		border-top: 1px solid rgba(255, 255, 255, 0.24);
+	}
+	.pega-trust__laurel { width: 16px; height: 44px; }
+	.pega-trust__icon { width: 28px; height: 28px; }
+	.pega-trust__num { font-size: 36px; }
+}
+@media (min-width: 768px) {
 	.pega-trust__label { font-size: 14px; }
 }
-@media (min-width: 960px) {
-	.pega-trust__num { font-size: 48px; }
-	.pega-trust__label { font-size: 15px; }
-}
-@media (max-width: 599px) {
-.pega-hero-wrap .swell-block-fullWide,
-.pega-hero-wrap .wp-block-loos-full-wide {
-		min-height: min(86vh, 720px);
-		background-position: center 32%;
-	}
-	.pega-hero__title {
-		font-size: 27px;
-		line-height: 1.4;
-		letter-spacing: 0.02em;
-	}
-	.pega-hero__eyebrow {
-		font-size: 20px;
-		line-height: 1.55;
-	}
-	.pega-hero__desc {
-		font-size: 17px;
-		line-height: 1.75;
-		max-width: none;
-	}
-	.pega-hero-wrap .swell-block-fullWide.has-bg-img::after,
-	.pega-hero-wrap .wp-block-loos-full-wide.has-bg-img::after {
-		background:
-			linear-gradient(180deg, rgba(16, 103, 214, 0.18) 0%, transparent 12%),
-			linear-gradient(
-				180deg,
-				rgba(12, 58, 140, 0.68) 0%,
-				rgba(12, 58, 140, 0.46) 48%,
-				rgba(12, 58, 140, 0.18) 78%,
-				transparent 100%
-			);
-	}
-	.pega-hero__actions .swell-block-button__link {
-		width: 100%;
-		display: flex;
-		box-sizing: border-box;
-		padding: 15px 20px;
-	}
-	.pega-trust__inner > .wp-block-column + .wp-block-column .pega-trust__item {
-		border-left: none;
-		border-top: 1px solid rgba(16, 103, 214, 0.12);
-	}
-}
-@media (max-width: 425px) {
-	.pega-hero__title {
-		font-size: 22px;
-		line-height: 1.38;
-		letter-spacing: 0;
-		text-wrap: wrap;
-	}
-	.pega-hero__eyebrow {
-		font-size: 18px;
-	}
-	.pega-hero__desc {
-		font-size: 16px;
-	}
-	.pega-hero__actions .swell-block-button__link {
-		padding: 14px 18px;
-		min-height: 48px;
-	}
+
+/* 悩みセクションとの繋がり（波形下を concerns 背景色へ） */
+.home section.pega-hero-wrap + section.pega-concerns {
+	margin-top: 0 !important;
+	padding-top: clamp(36px, 5vw, 52px);
 }
 CSS;
 	wp_register_style( 'pega-css-09-hero', false, array( 'child_style' ), null );

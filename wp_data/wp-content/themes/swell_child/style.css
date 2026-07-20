@@ -273,7 +273,7 @@
 	z-index: 2;
 	width: 100%;
 	box-sizing: border-box;
-	padding: clamp(24px, 5vh, 56px) clamp(16px, 3vw, 40px) clamp(36px, 6vh, 72px);
+	padding: clamp(24px, 5vh, 56px) clamp(16px, 3vw, 40px) clamp(28px, 4vh, 48px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -316,77 +316,37 @@
 
 /* タイポ：ブレークポイント別（clamp だけに頼らない） */
 
-/* 600px〜767px */
-@media (min-width: 600px) and (max-width: 767px) {
-	.pega-hero__content {
-		padding-left: 52%;
-	}
-}
-
-/* 600px〜：右側カラム（人物と非重複・コピー＋CTAを右エリア中央に） */
-@media (min-width: 600px) {
-	.pega-hero__content {
-		align-items: center;
-		justify-content: center;
-		padding-left: 48%;
-		padding-right: clamp(16px, 3vw, 36px);
-	}
-
-	.pega-hero__copy {
-		width: min(400px, 92%);
-		max-width: 400px;
-		margin-left: auto;
-		margin-right: auto;
-		align-items: center;
-		text-align: center;
-	}
-}
-
-/* 768px〜959px：タブレット縦（コピー幅をわずかに拡張） */
-@media (min-width: 768px) and (max-width: 959px) {
-	.pega-hero__content {
-		padding-left: 52%;
-	}
-
-	.pega-hero__copy {
-		width: 100%;
-		max-width: none;
-	}
-}
-
-/* 768px〜1023px：タブレット（人物を隠さないよう右エリアを広く） */
+/* 768px〜：左コピー（人物は右・イメージ.png 準拠） */
 @media (min-width: 768px) {
 	.pega-hero__content {
-		padding-left: 54%;
-		padding-right: clamp(20px, 3.5vw, 40px);
-	}
-}
-
-@media (min-width: 1024px) and (max-width: 1199px) {
-	.pega-hero__content {
-		padding-left: 52%;
-	}
-}
-
-@media (min-width: 960px) {
-	.pega-hero__content {
-		padding-right: clamp(24px, 4vw, 56px);
+		align-items: flex-start;
+		justify-content: center;
+		padding-left: clamp(20px, 4.5vw, 72px);
+		padding-right: min(46%, 520px);
 	}
 
 	.pega-hero__copy {
-		width: min(440px, 92%);
-		max-width: 440px;
+		width: min(520px, 100%);
+		max-width: 520px;
+		margin: 0;
+		align-items: flex-start;
+		text-align: left;
+	}
+
+	.pega-hero__copy > .wp-block-group__inner-container {
+		align-items: flex-start;
 	}
 }
 
 @media (min-width: 1200px) {
 	.pega-hero__content {
-		padding-left: 48%;
+		padding-left: clamp(32px, 5vw, 88px);
+		padding-right: 44%;
 	}
 
 	.pega-hero__copy {
-		width: min(480px, 90%);
-		max-width: 480px;
+		width: min(560px, 52%);
+		max-width: 560px;
 	}
 }
 
@@ -396,46 +356,16 @@
 	}
 }
 
-@media (min-width: 1440px) {
-	.pega-hero__content {
-		padding-left: 50%;
-	}
-
-	.pega-hero__copy {
-		width: min(520px, 38vw);
-		max-width: 520px;
-	}
-
-	.pega-hero__copy > .wp-block-group__inner-container {
-		width: 100%;
-	}
-
-	.pega-hero__title,
-	.pega-hero__eyebrow,
-	.pega-hero__desc {
-		width: 100%;
-		max-width: none;
-		white-space: normal;
-	}
-}
-
-@media (min-width: 1900px) {
-	.pega-hero__copy {
-		width: min(580px, 36vw);
-		max-width: 580px;
-	}
-}
-
 .pega-hero__actions {
 	display: flex;
 	flex-direction: column !important;
 	flex-wrap: nowrap !important;
 	gap: 12px;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: stretch;
 	width: 100%;
-	max-width: 640px;
-	margin: clamp(28px, 4vh, 44px) auto 0;
+	max-width: 100%;
+	margin: clamp(24px, 3.5vh, 36px) 0 0;
 }
 
 .pega-hero__actions.is-row,
@@ -464,7 +394,7 @@
 	justify-content: center;
 }
 
-/* 信頼指標バー */
+/* 信頼指標バー（構造） */
 
 .pega-trust > .wp-block-group__inner-container {
 	max-width: none;
@@ -473,28 +403,45 @@
 }
 
 .pega-trust__inner.wp-block-columns {
-	max-width: 920px;
+	max-width: 1080px;
 	margin: 0 auto;
 	padding: 0;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 0;
 }
 
 .pega-trust__inner.wp-block-columns > .wp-block-column {
 	display: flex;
+	min-width: 0;
 }
 
 .pega-trust__item {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 8px;
+	gap: clamp(10px, 2vw, 18px);
 	width: 100%;
 	margin: 0;
-	padding: clamp(22px, 3.5vw, 30px) clamp(16px, 4vw, 32px);
-	text-align: center;
+	padding: clamp(18px, 3vw, 28px) clamp(12px, 2.5vw, 24px);
+	text-align: left;
+}
+
+.pega-trust__visual {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	color: #fff;
+}
+
+.pega-trust__body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	min-width: 0;
 }
 
 /* モバイル */
@@ -502,7 +449,7 @@
 	.pega-hero__content {
 		justify-content: flex-end;
 		align-items: center;
-		padding-bottom: clamp(32px, 6vh, 56px);
+		padding-bottom: clamp(24px, 5vh, 48px);
 		padding-left: clamp(16px, 5vw, 24px);
 		padding-right: clamp(16px, 5vw, 24px);
 	}
@@ -513,7 +460,6 @@
 	}
 
 	.pega-hero__actions {
-		flex-direction: column;
 		width: 100%;
 		max-width: 100%;
 	}
@@ -522,58 +468,42 @@
 		width: 100%;
 	}
 
-	/* 既に base CSS で display: none を設定済み */
 	.pega-trust__inner.wp-block-columns {
 		grid-template-columns: 1fr;
 	}
+
+	.pega-trust__item {
+		flex-direction: row;
+		justify-content: flex-start;
+		text-align: left;
+		padding: 18px 20px;
+	}
+
+	.pega-trust__body {
+		align-items: flex-start;
+	}
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
 	.pega-hero__actions,
 	.pega-hero__actions.is-row,
 	.pega-hero__actions > .wp-block-group__inner-container,
 	.pega-hero__actions.is-layout-flex,
 	.pega-hero__actions.is-layout-flex.is-row {
-		flex-direction: column !important;
-		flex-wrap: nowrap !important;
-		width: min(400px, 92%);
-		max-width: 400px;
-		margin-left: auto;
-		margin-right: auto;
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 		align-items: stretch;
+		gap: 12px;
 	}
-}
 
-@media (min-width: 960px) {
-	.pega-hero__actions,
-	.pega-hero__actions.is-row,
-	.pega-hero__actions > .wp-block-group__inner-container,
-	.pega-hero__actions.is-layout-flex,
-	.pega-hero__actions.is-layout-flex.is-row {
-		width: min(440px, 92%);
-		max-width: 440px;
-	}
-}
-
-@media (min-width: 1200px) {
-	.pega-hero__actions,
-	.pega-hero__actions.is-row,
-	.pega-hero__actions > .wp-block-group__inner-container,
-	.pega-hero__actions.is-layout-flex,
-	.pega-hero__actions.is-layout-flex.is-row {
-		width: min(480px, 90%);
-		max-width: 480px;
-	}
-}
-
-@media (min-width: 1440px) {
-	.pega-hero__actions,
-	.pega-hero__actions.is-row,
-	.pega-hero__actions > .wp-block-group__inner-container,
-	.pega-hero__actions.is-layout-flex,
-	.pega-hero__actions.is-layout-flex.is-row {
-		width: max-content;
-		max-width: min(520px, 100%);
+	.pega-hero__actions .swell-block-button {
+		flex: 1 1 220px;
+		width: auto;
+		max-width: none;
 	}
 }
 

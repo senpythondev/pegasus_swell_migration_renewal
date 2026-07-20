@@ -19,6 +19,7 @@ WordPress DB `post_content` に投入する各セクションの **Gutenberg ブ
 - **本番の実体**は WordPress DB（固定ページ 4865）です。
 - DB 喪失時の復元用バックアップとして Git で管理します。
 - セクション単体更新: `scripts/update-concerns-post.py`（concerns 専用）を参照。
+- ヒーロー（FV）単体更新: `scripts/update-hero-post.py`。
 - 全セクション結合・投入は WP-CLI または管理画面で手動結合。
 
 ## 子テーマとの関係
