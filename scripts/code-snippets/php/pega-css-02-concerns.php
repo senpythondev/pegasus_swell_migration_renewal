@@ -196,6 +196,31 @@ add_action( 'wp_enqueue_scripts', function () {
 		width: 100% !important;
 	}
 }
+
+/* swell-page (4929) — 1440px お悩みカード高さ統一（項目6） */
+@media (min-width: 1440px) {
+	.page-id-4929 .wave-section .wp-block-columns.are-vertically-aligned-center {
+		align-items: stretch !important;
+	}
+
+	.page-id-4929 .wave-section .wp-block-columns > .wp-block-column {
+		display: flex !important;
+		align-self: stretch !important;
+	}
+
+	.page-id-4929 .wave-section .wp-block-column.is-vertically-aligned-center {
+		align-self: stretch !important;
+	}
+
+	.page-id-4929 .wave-section .wave-box {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-02-concerns', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-02-concerns' );

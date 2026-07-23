@@ -291,6 +291,19 @@ add_action( 'wp_enqueue_scripts', function () {
 .page-id-4929 .main-text .wp-block-group.u-mb-0 > .wp-block-paragraph.u-mb-10:first-of-type {
 	width: fit-content;
 }
+
+/* swell-page (4929) — 1440px FV CTA 約10%拡大（項目1） */
+@media (min-width: 1440px) {
+	.page-id-4929 .main-text .wp-block-buttons {
+		gap: 13px !important;
+	}
+
+	.page-id-4929 .main-text .btn-apply .wp-block-button__link,
+	.page-id-4929 .main-text .btn-contact .wp-block-button__link {
+		font-size: 15px !important;
+		padding: 15px 31px !important;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-09-hero', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-09-hero' );

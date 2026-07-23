@@ -254,6 +254,78 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	margin: 0 !important;
 	padding: 0 !important;
 }
+
+/* swell-page (4929) — 1440px 実績バー調整（項目2・3・4・5） */
+@media (min-width: 1440px) {
+	.page-id-4929 .pega-stats.u-mb-ctrl {
+		padding: 0 10px 10px !important;
+		background: transparent !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement {
+		padding: 14px 20px 12px !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
+		gap: 8px !important;
+		justify-content: center;
+		width: fit-content;
+		max-width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-columns > .wp-block-column {
+		flex-basis: auto !important;
+		flex-grow: 0;
+		width: auto !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image {
+		margin: 0 !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image img {
+		display: block;
+		width: auto;
+		max-height: 52px;
+		height: auto;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center p + p {
+		margin-top: 2px;
+	}
+
+	.page-id-4929 .pega-stats .achivement .bottom-text {
+		margin-top: 8px !important;
+		padding-bottom: 0;
+	}
+
+	/* 項目4: 末尾の区切り線を除去 */
+	.page-id-4929 .pega-stats .achivement .box-achievement:last-child {
+		border-right: none !important;
+	}
+
+	/* 項目5: 各区画を水平中央揃え */
+	.page-id-4929 .pega-stats .achivement .box-achievement {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* 項目3: FV 下端へ実績バーを約半分重ねる（項目2圧縮後の高さ基準） */
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -68px;
+		position: relative;
+		z-index: 5;
+	}
+
+	.page-id-4929 figure:has(.wp-image-5098),
+	.page-id-4929 .wp-block-image.wp-image-5098 {
+		position: relative;
+		z-index: 4;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-20-global-layout', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-20-global-layout' );

@@ -187,6 +187,34 @@ add_action( 'wp_enqueue_scripts', function () {
 .page-id-4929 .pega-service-intro .supports {
 	margin-top: 80px !important;
 }
+
+/* swell-page (4929) — 1440px 在宅支援画像の収まり（項目7） */
+@media (min-width: 1440px) {
+	.page-id-4929 .pega-service-intro .girl.wp-block-columns.alignwide {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		align-items: flex-start !important;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child {
+		min-width: 0;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child .wp-block-image.alignleft {
+		float: none;
+		display: block;
+		max-width: 100%;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child .wp-block-image img {
+		max-width: 100% !important;
+		max-height: 220px !important;
+		height: auto !important;
+		object-fit: contain;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-04-homeworker', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-04-homeworker' );
