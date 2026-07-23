@@ -8,7 +8,9 @@ import { join } from 'path';
 
 const BASE = process.env.PEGA_URL || 'http://pegasus:4CkYn2kHCoO5vh@220.158.21.114:8080';
 const OUT = process.env.PEGA_OUT || join(process.cwd(), 'docs', 'pc-sp-verify');
-const WIDTHS = [1440, 1024, 768, 425];
+const WIDTHS = [1440, 1024, 900, 800, 768, 425];
+const PC_WIDTHS = [1440, 1024];
+const SP_WIDTHS = [900, 800, 768, 425];
 
 mkdirSync(OUT, { recursive: true });
 
@@ -32,6 +34,7 @@ async function check(page) {
 				visible: st.display !== 'none' && st.visibility !== 'hidden' && r.height > 0,
 			};
 		};
+		const pcPara = document.querySelector('.pega-header__tel .pc_only');
 		return {
 			achievement: vis('.pega-stats .achivement'),
 			mobileImg: vis('.pega-stats .mobile-img'),
@@ -39,7 +42,14 @@ async function check(page) {
 			mobileGirl: vis('.pega-service-intro .mobile-girl'),
 			girl: vis('.pega-service-intro .girl'),
 			headerMobile: vis('.pega-header .mobile'),
-			headerTel: vis('.pega-header .pega-header__tel'),
+			headerPcPara: pcPara
+				? {
+						found: true,
+						visible:
+							getComputedStyle(pcPara).display !== 'none' &&
+							pcPara.getBoundingClientRect().height > 0,
+				  }
+				: { found: false, visible: false },
 		};
 	});
 }
@@ -61,24 +71,24 @@ async function main() {
 	await browser.close();
 
 	let ok = true;
-	for (const w of [1440, 1024]) {
+	for (const w of PC_WIDTHS) {
 		const r = results[w];
 		if (r.mobileImg.visible || r.mobileGirl.visible || r.headerMobile.visible) {
 			console.error(`FAIL PC ${w}: SP elements visible`, r);
 			ok = false;
 		}
-		if (!r.achievement.visible || !r.girl.visible) {
+		if (!r.achievement.visible || !r.girl.visible || !r.headerPcPara.visible) {
 			console.error(`FAIL PC ${w}: PC elements hidden`, r);
 			ok = false;
 		}
 	}
-	for (const w of [768, 425]) {
+	for (const w of SP_WIDTHS) {
 		const r = results[w];
-		if (r.achievement.visible || r.girl.visible || r.headerTel.visible) {
+		if (r.achievement.visible || r.girl.visible || r.headerPcPara.visible) {
 			console.error(`FAIL SP ${w}: PC elements visible`, r);
 			ok = false;
 		}
-		if (!r.mobileImg.visible || !r.mobileGirl.visible) {
+		if (!r.mobileImg.visible || !r.mobileGirl.visible || !r.headerMobile.visible) {
 			console.error(`FAIL SP ${w}: SP elements hidden`, r);
 			ok = false;
 		}
