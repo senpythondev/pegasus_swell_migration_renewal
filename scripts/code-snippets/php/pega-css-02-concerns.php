@@ -124,6 +124,78 @@ add_action( 'wp_enqueue_scripts', function () {
 	background: var(--pega-soft-green);
 	color: var(--pega-accent);
 }
+
+/* ── swell-page お悩み（wave-section / 4941） ── */
+.wave-section .wp-block-columns {
+	gap: clamp(12px, 2vw, 20px);
+}
+
+.wave-section .wp-block-column {
+	display: flex;
+}
+
+.wave-section .wave-box {
+	flex: 1;
+	width: 100%;
+}
+
+.wave-section .wave-box .wp-block-image {
+	display: flex;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wave-section .wave-box .wp-block-image img {
+	width: 75px;
+	height: auto;
+}
+
+.wave-section .wave-box h4 {
+	margin-bottom: 0.35em;
+}
+
+.wave-section .wave-box__desc-spacer {
+	visibility: hidden;
+	min-height: calc(12px * 1.7);
+	margin: 0;
+}
+
+@media (min-width: 782px) {
+	.wave-section .wave-cards-row-center {
+		max-width: calc(50% + 10px);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@media (max-width: 768px) and (min-width: 426px) {
+	.wave-section .wp-block-columns {
+		display: grid !important;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.wave-section .wp-block-columns > .wp-block-column {
+		width: auto !important;
+		flex-basis: auto !important;
+		margin-left: 0 !important;
+	}
+
+	.wave-section .wave-cards-row-center {
+		max-width: none;
+	}
+}
+
+@media (max-width: 425px) {
+	.wave-section .wp-block-columns {
+		display: flex !important;
+		flex-direction: column;
+	}
+
+	.wave-section .wp-block-columns > .wp-block-column {
+		width: 100% !important;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-02-concerns', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-02-concerns' );
