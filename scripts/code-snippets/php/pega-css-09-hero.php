@@ -294,8 +294,13 @@ add_action( 'wp_enqueue_scripts', function () {
 
 /* swell-page (4929) — デスクトップ帯域(1025px+) FV CTA 約10%拡大（項目1） */
 @media (min-width: 1025px) {
+	.page-id-4929 .main-text .wp-block-paragraph.has-text-color[style*="border-left"] {
+		margin-bottom: 8px !important;
+	}
+
 	.page-id-4929 .main-text .wp-block-buttons {
 		gap: 13px !important;
+		margin-top: 24px !important;
 	}
 
 	.page-id-4929 .main-text .btn-apply .wp-block-button__link,

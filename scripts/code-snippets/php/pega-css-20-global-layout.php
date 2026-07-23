@@ -263,11 +263,11 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	}
 
 	.page-id-4929 .pega-stats .achivement {
-		padding: 14px 20px 12px !important;
+		padding: 10px 18px 8px !important;
 	}
 
 	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
-		gap: 8px !important;
+		gap: 6px !important;
 		justify-content: center;
 		width: fit-content;
 		max-width: 100%;
@@ -288,17 +288,34 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image img {
 		display: block;
 		width: auto;
-		max-height: 52px;
+		max-height: 64px;
 		height: auto;
 	}
 
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center > p.has-text-align-left:first-of-type {
+		font-size: 13px !important;
+		line-height: 1.2 !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .number-text {
+		font-size: 38px !important;
+		line-height: 1 !important;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center > p.has-text-align-left + p {
+		font-size: 24px !important;
+		line-height: 1.05 !important;
+	}
+
 	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center p + p {
-		margin-top: 2px;
+		margin-top: 0 !important;
 	}
 
 	.page-id-4929 .pega-stats .achivement .bottom-text {
-		margin-top: 8px !important;
+		margin-top: 6px !important;
 		padding-bottom: 0;
+		font-size: 10px !important;
+		line-height: 1.3 !important;
 	}
 
 	/* 項目4: 末尾の区切り線を除去 */
@@ -313,9 +330,9 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		align-items: center;
 	}
 
-	/* 項目3: FV 下端へ実績バーを約半分重ねる（項目2圧縮後の高さ基準） */
+	/* FV 下端へ実績バーを約半分重ねる（高さ127px基準 → 50%） */
 	.page-id-4929 .pega-stats .achivement {
-		margin-top: -68px;
+		margin-top: -64px;
 		position: relative;
 		z-index: 5;
 	}

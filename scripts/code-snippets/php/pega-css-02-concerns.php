@@ -220,6 +220,25 @@ add_action( 'wp_enqueue_scripts', function () {
 		height: 100%;
 		box-sizing: border-box;
 	}
+
+	.page-id-4929 .wave-section .wave-box h4 {
+		font-size: 15px !important;
+		font-weight: 700 !important;
+		color: #0b3d8a !important;
+		line-height: 1.45 !important;
+		text-wrap: pretty;
+		word-break: normal;
+		overflow-wrap: anywhere;
+	}
+
+	.page-id-4929 .wave-section .wave-box > p.has-contrast-2-color:not(.wave-box__desc-spacer) {
+		font-size: 12px !important;
+		font-weight: 400 !important;
+		line-height: 1.7 !important;
+		color: #0b3d8a !important;
+		text-wrap: pretty;
+		overflow-wrap: anywhere;
+	}
 }
 CSS;
 	wp_register_style( 'pega-css-02-concerns', false, array( 'child_style' ), null );
