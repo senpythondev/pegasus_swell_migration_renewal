@@ -241,6 +241,60 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	margin-bottom: 0 !important;
 	padding-bottom: 0 !important;
 }
+
+/* =========================================================
+   swell-page (page-id-4929) — PC/SP 出し分け
+   ブロック内カスタムCSS（スコープ付き）の代替。同期パターン再保存で
+   style.css が失われても効くよう、className + メディアクエリで管理。
+   ========================================================= */
+
+/* 実績バー: PC=.achivement / SP=.mobile-img */
+@media (min-width: 769px) {
+	.page-id-4929 .pega-stats .mobile-img {
+		display: none !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.page-id-4929 .pega-stats .achivement {
+		display: none !important;
+	}
+}
+
+/* セクション間の波型装飾（PCのみ） */
+@media (max-width: 768px) {
+	.page-id-4929 .wp-block-image.wp-image-5098,
+	.page-id-4929 figure.wp-block-image.size-large.u-mb-ctrl.u-mb-0:has(.wp-image-5098) {
+		display: none !important;
+	}
+}
+
+/* 在宅支援: PC=.girl（2カラム） / SP=.mobile-girl（カバー） */
+@media (min-width: 769px) {
+	.page-id-4929 .pega-service-intro .mobile-girl {
+		display: none !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.page-id-4929 .pega-service-intro .wp-block-group:has(.girl),
+	.page-id-4929 .pega-service-intro .wp-block-columns.girl {
+		display: none !important;
+	}
+}
+
+/* ヘッダー（同期5210）: PC=.pega-header__tel / SP=.mobile */
+@media (min-width: 769px) {
+	.page-id-4929 .pega-header .mobile {
+		display: none !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.page-id-4929 .pega-header .pega-header__tel {
+		display: none !important;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-20-global-layout', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-20-global-layout' );
