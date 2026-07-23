@@ -286,6 +286,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	margin-top: 0 !important;
 	padding-top: clamp(36px, 5vw, 52px);
 }
+
+/* swell-page (4929) — FVバッジ（rev5239 ブロックCSS復旧） */
+.page-id-4929 .main-text .wp-block-group.u-mb-0 > .wp-block-paragraph.u-mb-10:first-of-type {
+	width: fit-content;
+}
 CSS;
 	wp_register_style( 'pega-css-09-hero', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-09-hero' );

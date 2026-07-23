@@ -167,6 +167,26 @@ add_action( 'wp_enqueue_scripts', function () {
 	transform: translateY(-1px);
 	box-shadow: 0 6px 22px rgba(16, 103, 214, 0.34);
 }
+
+/* swell-page (4929) — 在宅支援 .pega-service-intro（rev5240 ブロックCSS復旧） */
+.page-id-4929 .pega-service-intro {
+	padding: 40px 0 !important;
+}
+.page-id-4929 .pega-service-intro > .wp-block-group.u-mb-10 {
+	padding: 20px;
+	margin: 0 auto !important;
+}
+.page-id-4929 .pega-service-intro .pega-badge {
+	width: fit-content;
+	margin: 0 auto !important;
+	display: table !important;
+}
+.page-id-4929 .pega-service-intro > .wp-block-group.u-mb-0 {
+	padding: 0 !important;
+}
+.page-id-4929 .pega-service-intro .supports {
+	margin-top: 80px !important;
+}
 CSS;
 	wp_register_style( 'pega-css-04-homeworker', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-04-homeworker' );

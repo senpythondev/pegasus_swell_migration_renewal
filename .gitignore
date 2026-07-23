@@ -56,6 +56,9 @@ wp_data/wp-content/uploads-old-old/
 # UpdraftPlus backups (large, may contain DB dumps with secrets)
 wp_data/wp-content/updraft/
 
+# All-in-One WP Migration backups (large .wpress archives)
+wp_data/wp-content/ai1wm-backups/
+
 # Debug / error logs
 wp_data/wp-content/debug.log
 wp_data/wp-content/error_log
