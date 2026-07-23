@@ -188,8 +188,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	margin-top: 80px !important;
 }
 
-/* swell-page (4929) — 1440px 在宅支援画像の収まり（項目7） */
-@media (min-width: 1440px) {
+/* swell-page (4929) — デスクトップ帯域(1025px+) 在宅支援画像の収まり（項目7） */
+@media (min-width: 1025px) {
 	.page-id-4929 .pega-service-intro .girl.wp-block-columns.alignwide {
 		width: 100% !important;
 		max-width: 100% !important;

@@ -292,8 +292,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	width: fit-content;
 }
 
-/* swell-page (4929) — 1440px FV CTA 約10%拡大（項目1） */
-@media (min-width: 1440px) {
+/* swell-page (4929) — デスクトップ帯域(1025px+) FV CTA 約10%拡大（項目1） */
+@media (min-width: 1025px) {
 	.page-id-4929 .main-text .wp-block-buttons {
 		gap: 13px !important;
 	}

@@ -255,8 +255,8 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	padding: 0 !important;
 }
 
-/* swell-page (4929) — 1440px 実績バー調整（項目2・3・4・5） */
-@media (min-width: 1440px) {
+/* swell-page (4929) — デスクトップ帯域(1025px+) 実績バー調整（項目2・3・4・5） */
+@media (min-width: 1025px) {
 	.page-id-4929 .pega-stats.u-mb-ctrl {
 		padding: 0 10px 10px !important;
 		background: transparent !important;
