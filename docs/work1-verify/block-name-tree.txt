@@ -1,0 +1,44 @@
+
+=== 5210 ヘッダー ===
+ヘッダー (pega-header)
+  ヘッダー：メインレイアウト
+    ヘッダー：ロゴ・タグライン
+      ヘッダー：ロゴ
+    ヘッダー：電話・問い合わせ
+      ヘッダー：電話番号 (pega-header__tel)
+
+=== 5008 サービス紹介 ===
+在宅支援 (pega-service-intro u-mb-ctrl u-mb-0)
+  在宅支援：セクション見出し (u-mb-ctrl u-mb-10)
+  在宅支援：人物画像 (mobile-girl)
+    在宅支援：人物画像（テキスト）
+  在宅支援：リード文エリア (u-mb-ctrl u-mb-0)
+    在宅支援：リード文 (u-mb-ctrl u-mb-20 girl)
+  在宅支援：3つの強み (supports)
+    在宅支援：強み1
+    在宅支援：強み2
+    在宅支援：強み3
+    在宅支援：強み4
+
+=== 4941 完全版 ===
+ヘッダー（同期）
+FV (u-mb-ctrl u-mb-0)
+  FV：背景・コピー (u-mb-ctrl u-mb-0 main-text)
+    FV：レイアウト (alignfull )
+      FV：コンテンツ (u-mb-ctrl u-mb-0)
+実績バー (pega-stats u-mb-ctrl u-mb-0)
+  実績バー：実績数値 (u-mb-ctrl u-mb-0 achivement)
+    実績：項目1 (box-achievement)
+    実績：項目2 (box-achievement)
+    実績：項目3 (box-achievement)
+お悩み (wave-section)
+  お悩みカード01 (wave-box)
+  お悩みカード02 (wave-box)
+  お悩みカード03 (wave-box)
+  お悩みカード04 (wave-box)
+  お悩みカード05 (wave-box)
+  お悩みカード06 (wave-box)
+  お悩みカード07 (wave-box)
+  お悩みカード08 (wave-box)
+  お悩み：締め見出し (text-box)
+在宅支援（同期）
