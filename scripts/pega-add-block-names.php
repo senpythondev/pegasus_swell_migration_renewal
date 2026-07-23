@@ -118,9 +118,9 @@ function pega_name_post_4941( array &$blocks ): void {
 			if ( pega_is( $block, 'block' ) ) {
 				$ref = (int) ( $block['attrs']['ref'] ?? 0 );
 				if ( 5210 === $ref ) {
-					pega_set_name( $block, 'ヘッダー（同期）' );
+					pega_set_name( $block, 'ヘッダー' );
 				} elseif ( 5008 === $ref ) {
-					pega_set_name( $block, '在宅支援（同期）' );
+					pega_set_name( $block, '在宅支援' );
 				}
 				return;
 			}
@@ -163,6 +163,11 @@ function pega_name_post_4941( array &$blocks ): void {
 
 			if ( pega_is( $block, 'cover' ) && str_contains( $cls, 'main-text' ) ) {
 				pega_set_name( $block, 'FV：背景・コピー' );
+				return;
+			}
+
+			if ( pega_is( $block, 'image' ) && (int) ( $block['attrs']['id'] ?? 0 ) === 5098 ) {
+				pega_set_name( $block, '波型装飾' );
 				return;
 			}
 
