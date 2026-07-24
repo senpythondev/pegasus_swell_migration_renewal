@@ -292,8 +292,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	width: fit-content;
 }
 
-/* swell-page (4929) — デスクトップ帯域(1025px+) FV CTA 約10%拡大（項目1） */
-@media (min-width: 1025px) {
+/* swell-page (4929) — デスクトップ帯域(961px+) FV CTA 約10%拡大（項目1） */
+@media (min-width: 961px) {
 	.page-id-4929 .main-text .wp-block-paragraph.has-text-color[style*="border-left"] {
 		margin-bottom: 8px !important;
 	}
@@ -307,6 +307,16 @@ add_action( 'wp_enqueue_scripts', function () {
 	.page-id-4929 .main-text .btn-contact .wp-block-button__link {
 		font-size: 15px !important;
 		padding: 15px 31px !important;
+	}
+}
+
+/* swell-page (4929) — FVキャッチコピー（人物との重なり回避 + PC1行表示） */
+@media (min-width: 961px) {
+	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
+		/* ブロック inline style(font-size:44px) を上書きするため !important */
+		font-size: clamp(24px, 2.35vw, 36px) !important;
+		/* 17文字の見出しをフォントサイズに比例して1行化（500px 固定上限は 36px 時に再改行する） */
+		max-width: 18em;
 	}
 }
 CSS;

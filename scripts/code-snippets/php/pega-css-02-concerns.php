@@ -197,8 +197,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 }
 
-/* swell-page (4929) — デスクトップ帯域(1025px+) お悩みカード高さ統一（項目6） */
-@media (min-width: 1025px) {
+/* swell-page (4929) — デスクトップ帯域(961px+) お悩みカード高さ統一（項目6） */
+@media (min-width: 961px) {
 	.page-id-4929 .wave-section .wp-block-columns.are-vertically-aligned-center {
 		align-items: stretch !important;
 	}
