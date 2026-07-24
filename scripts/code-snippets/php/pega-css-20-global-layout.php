@@ -242,6 +242,11 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	padding-bottom: 0 !important;
 }
 
+/* swell-page (4929) — パンくず非表示（ペガサス全幅テンプレート） */
+.page-id-4929 #breadcrumb {
+	display: none;
+}
+
 /* swell-page (4929) — 実績バー・波型装飾（rev5239 ブロックCSS復旧） */
 .page-id-4929 .pega-stats.u-mb-ctrl {
 	padding: 10px !important;
