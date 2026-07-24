@@ -1,0 +1,176 @@
+{
+  "bodyWrapClasses": "wp-singular page-template page-template-page-pega-fullwidth page-template-page-pega-fullwidth-php page page-id-4929 wp-custom-logo wp-theme-swell wp-child-theme-swell_child sp-easy-accordion-enabled -body-solid -index-off -sidebar-off -frame-off id_4929",
+  "bodyClasses": "",
+  "hasHomeClass": false,
+  "hasPageTemplateClass": true,
+  "canvasChain": [
+    "div.pega-canvas",
+    "main#main_content.l-mainContent.l-article.pega-fullwidth-main",
+    "div#content.l-content.l-container",
+    "div#body_wrap.wp-singular.page-template.page-template-page-pega-fullwidth.page-template-page-pega-fullwidth-php.page.page-id-4929.wp-custom-logo.wp-theme-swell",
+    "body"
+  ],
+  "fvChain": [
+    "div.wp-block-cover.alignfull.is-light.has-custom-content-position.is-position-center-left.u-mb-ctrl.u-mb-0.main-text",
+    "div.wp-block-group__inner-container.is-layout-constrained.wp-block-group-is-layout-constrained",
+    "section.wp-block-group.alignfull.u-mb-ctrl.u-mb-0",
+    "div.pega-canvas",
+    "main#main_content.l-mainContent.l-article.pega-fullwidth-main",
+    "div#content.l-content.l-container",
+    "div#body_wrap.wp-singular.page-template.page-template-page-pega-fullwidth.page-template-page-pega-fullwidth-php.page.page-id-4929.wp-custom-logo.wp-theme-swell",
+    "body"
+  ],
+  "fvAlignfull": true,
+  "fvClasses": "wp-block-cover alignfull is-light has-custom-content-position is-position-center-left u-mb-ctrl u-mb-0 main-text",
+  "fvComputed": {
+    "width": "768px",
+    "maxWidth": "768px",
+    "marginLeft": "0px",
+    "marginRight": "0px",
+    "position": "relative",
+    "overflow": "hidden",
+    "minHeight": "520px",
+    "display": "flex",
+    "left": "0px",
+    "transform": "none",
+    "_rect": {
+      "x": 0,
+      "y": 112,
+      "w": 768,
+      "h": 520
+    }
+  },
+  "h1Exists": true,
+  "h1Text": "しあわせに働くために、生きている。在宅で、自分のペースで。",
+  "h1Computed": {
+    "display": "block",
+    "visibility": "visible",
+    "opacity": "1",
+    "color": "rgb(11, 61, 138)",
+    "fontSize": "22px",
+    "position": "static",
+    "left": "auto",
+    "top": "auto",
+    "zIndex": "auto",
+    "height": "111.062px",
+    "overflow": "visible",
+    "clipPath": "none",
+    "transform": "none",
+    "_rect": {
+      "x": 64,
+      "y": 225,
+      "w": 275,
+      "h": 111
+    }
+  },
+  "h1Chain": [
+    "h1.wp-block-heading.u-mb-ctrl.u-mb-10.is-style-default.wp-block-group__inner-container.is-layout-constrained.wp-container-core-group-is-layout-4c6d49f4.wp-block-group-is-layout-constrained",
+    "div.wp-block-group.is-stack.u-mb-ctrl.u-mb-0",
+    "div.wp-block-group__inner-container.is-layout-constrained.wp-container-core-group-is-layout-478e65b4.wp-block-group-is-layout-constrained",
+    "div.wp-block-group.alignfull",
+    "div.wp-block-cover__inner-container.is-layout-flow.wp-block-cover-is-layout-flow",
+    "div.wp-block-cover.alignfull.is-light.has-custom-content-position.is-position-center-left.u-mb-ctrl.u-mb-0.main-text",
+    "div.wp-block-group__inner-container.is-layout-constrained.wp-block-group-is-layout-constrained",
+    "section.wp-block-group.alignfull.u-mb-ctrl.u-mb-0"
+  ],
+  "statsComputed": {
+    "marginTop": "0px",
+    "position": "relative",
+    "zIndex": "auto",
+    "_rect": {
+      "x": 0,
+      "y": 632,
+      "w": 768,
+      "h": 230
+    }
+  },
+  "achComputed": {
+    "marginTop": "0px",
+    "position": "static",
+    "zIndex": "auto",
+    "_rect": {
+      "x": 10,
+      "y": 642,
+      "w": 748,
+      "h": 210
+    }
+  },
+  "overlap": {
+    "fvBottom": 632,
+    "statsTop": 632,
+    "gap": 0
+  },
+  "achOverlap": {
+    "fvBottom": 632,
+    "achTop": 642,
+    "achMT": "0px"
+  },
+  "parentOverflow": [
+    {
+      "tag": "DIV",
+      "cls": "wp-block-cover alignfull is-light has-custom-content-position is-position-center",
+      "overflow": "hidden",
+      "overflowX": "hidden",
+      "maxWidth": "768px",
+      "width": "768px"
+    },
+    {
+      "tag": "SECTION",
+      "cls": "wp-block-group alignfull u-mb-ctrl u-mb-0",
+      "overflow": "visible",
+      "overflowX": "visible",
+      "maxWidth": "768px",
+      "width": "768px"
+    },
+    {
+      "tag": "DIV",
+      "cls": "wp-singular page-template page-template-page-pega-fullwidth page-template-page-p",
+      "overflow": "clip visible",
+      "overflowX": "clip",
+      "maxWidth": "100%",
+      "width": "768px"
+    },
+    {
+      "tag": "BODY",
+      "cls": "",
+      "overflow": "clip visible",
+      "overflowX": "clip",
+      "maxWidth": "100%",
+      "width": "768px"
+    }
+  ],
+  "styleSheetHitCount": 7,
+  "styleSheetHits": [
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas { width: 100%; max-width: none; }"
+    },
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull, .page-template-page-pega-fullwidth .pega-canvas > .alignfull",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull, .page-template-page-pega-fullwidth .pega-ca"
+    },
+    {
+      "sel": ".page-id-4929 .main-text .wp-block-group.u-mb-0 > .wp-block-paragraph.u-mb-10:first-of-type",
+      "css": ".page-id-4929 .main-text .wp-block-group.u-mb-0 > .wp-block-paragraph.u-mb-10:first-of-type { width: fit-content; }"
+    },
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull, .page-template-page-pega-fullwidth .pega-canvas > .alignfull",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull, .page-template-page-pega-fullwidth .pega-ca"
+    },
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas .alignfull .alignfull",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas .alignfull .alignfull { width: 100%; max-width: none; margin-left: 0px; "
+    },
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull > .wp-block-group__inner-container",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull > .wp-block-group__inner-container { max-wid"
+    },
+    {
+      "sel": ".page-template-page-pega-fullwidth .pega-canvas .main-text.wp-block-cover.alignfull",
+      "css": ".page-template-page-pega-fullwidth .pega-canvas .main-text.wp-block-cover.alignfull { width: 100%; max-width: none; marg"
+    }
+  ],
+  "loadedChildStyle": [
+    "http://220.158.21.114:8080/wp-content/themes/swell_child/style.css?ver=2026072460518"
+  ]
+}

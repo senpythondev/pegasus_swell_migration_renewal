@@ -203,6 +203,31 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 }
 
+/* swell-page (4929) — SP お悩みカード高さ統一（PC と同様の stretch） */
+@media (max-width: 960px) {
+	.page-id-4929 .wave-section .wp-block-columns.are-vertically-aligned-center {
+		align-items: stretch;
+	}
+
+	.page-id-4929 .wave-section .wp-block-columns > .wp-block-column {
+		display: flex;
+		align-self: stretch;
+	}
+
+	.page-id-4929 .wave-section .wp-block-column.is-vertically-aligned-center {
+		align-self: stretch;
+	}
+
+	.page-id-4929 .wave-section .wave-box {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
+}
+
 /* swell-page (4929) — デスクトップ帯域(961px+) お悩みカード高さ統一（項目6） */
 @media (min-width: 961px) {
 	.page-id-4929 .wave-section .wp-block-columns.are-vertically-aligned-center {

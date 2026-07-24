@@ -247,6 +247,40 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	display: none;
 }
 
+/* =========================================================
+   page-pega-fullwidth — alignfull 修正
+   原因: .pega-canvas .alignfull が FV 内の alignfull にも breakout を適用し
+   margin-left: calc(50% - 50vw) が多重化 → FV左ズレ・h1 画面外
+   ========================================================= */
+.page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull,
+.page-template-page-pega-fullwidth .pega-canvas > .alignfull {
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
+
+.page-template-page-pega-fullwidth .pega-canvas .alignfull .alignfull {
+	width: 100%;
+	max-width: none;
+	margin-left: 0;
+	margin-right: 0;
+	left: auto;
+}
+
+.page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull:first-child > .wp-block-group__inner-container {
+	max-width: none;
+	width: 100%;
+}
+
+.page-template-page-pega-fullwidth .pega-canvas .main-text.wp-block-cover.alignfull {
+	width: 100%;
+	max-width: none;
+	margin-left: 0;
+	margin-right: 0;
+	left: auto;
+}
+
 /* swell-page (4929) — 実績バー・波型装飾（rev5239 ブロックCSS復旧） */
 .page-id-4929 .pega-stats.u-mb-ctrl {
 	padding: 10px !important;
