@@ -170,73 +170,71 @@ add_action( 'wp_enqueue_scripts', function () {
 
 /* swell-page (4929) — 在宅支援 .pega-service-intro（rev5240 ブロックCSS復旧） */
 .page-id-4929 .pega-service-intro {
-	padding: 40px 0 !important;
-}
-.page-id-4929 .pega-service-intro > .wp-block-group.u-mb-10 {
-	padding: 20px;
-	margin: 0 auto !important;
-}
-.page-id-4929 .pega-service-intro .pega-badge {
-	width: fit-content;
-	margin: 0 auto !important;
-	display: table !important;
+	padding: 40px 0;
 }
 .page-id-4929 .pega-service-intro > .wp-block-group.u-mb-0:not(.has-background) {
-	padding: 0 !important;
+	padding: 0;
 }
 .page-id-4929 .pega-service-intro .supports {
+	/* SWELL .u-mb-ctrl + * { margin-top:0!important } を上書き（青ボックス直後の columns） */
 	margin-top: 80px !important;
 }
 
-/* swell-page (4929) — デスクトップ帯域(1025px+) 在宅支援レイアウト */
-@media (min-width: 1025px) {
+/* swell-page (4929) — デスクトップ帯域(961px+) 在宅支援レイアウト */
+@media (min-width: 961px) {
 	.page-id-4929 .pega-service-intro .wp-block-group__inner-container > .wp-block-group.u-mb-10,
-	.page-id-4929 .pega-service-intro .wp-block-group.is-stack.u-mb-10 {
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		gap: 24px !important;
-		margin-bottom: 48px !important;
-		padding: 20px !important;
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 24px;
+		margin-bottom: 48px;
+		padding: 20px;
 	}
 
-	.page-id-4929 .pega-service-intro .wp-block-group.is-stack.u-mb-10 .pega-badge,
-	.page-id-4929 .pega-service-intro .wp-block-group.is-stack.u-mb-10 .is-style-section_ttl,
-	.page-id-4929 .pega-service-intro .wp-block-group.is-stack.u-mb-10 .sub-heading {
-		margin-top: 0 !important;
-		margin-bottom: 0 !important;
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .pega-badge,
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .is-style-section_ttl,
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .sub-heading {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .pega-badge {
+		display: block;
+		width: fit-content;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-0.has-background {
-		padding: 40px 36px !important;
-		margin-bottom: 48px !important;
+		padding: 40px 36px;
+		margin-bottom: 48px;
 	}
 
-	.page-id-4929 .pega-service-intro .girl.wp-block-columns.alignwide {
-		width: 100% !important;
-		max-width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		align-items: stretch !important;
-		gap: 32px !important;
-		margin-bottom: 0 !important;
+	.page-id-4929 .pega-service-intro .girl.wp-block-columns {
+		width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		align-items: stretch;
+		gap: 32px;
+		margin-bottom: 0;
 	}
 
 	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child {
-		flex-basis: 50% !important;
-		width: 50% !important;
+		flex-basis: 50%;
+		width: 50%;
 		min-width: 0;
 		box-sizing: border-box;
-		padding: 12px 8px !important;
-		overflow: hidden;
+		padding: 12px 8px;
 		border-radius: 12px;
 		display: flex;
 		align-items: center;
 	}
 
 	.page-id-4929 .pega-service-intro .girl .wp-block-column:last-child {
-		flex-basis: 50% !important;
-		width: 50% !important;
+		flex-basis: 50%;
+		width: 50%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -245,15 +243,15 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 
 	.page-id-4929 .pega-service-intro .girl .wp-block-column:last-child p {
-		margin-top: 0 !important;
-		margin-bottom: 0 !important;
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 
 	.page-id-4929 .pega-service-intro .girl .wp-block-column:last-child .wp-block-buttons {
-		margin-top: 4px !important;
+		margin-top: 4px;
 	}
 
-	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child .wp-block-image.alignleft {
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child figure.wp-block-image {
 		float: none;
 		display: block;
 		width: 100%;
@@ -264,32 +262,33 @@ add_action( 'wp_enqueue_scripts', function () {
 		overflow: hidden;
 	}
 
-	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child .wp-block-image img {
+	/* ブロックエディタの inline width/height — 詳細度では打ち消せない */
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child figure.wp-block-image img {
 		display: block;
 		width: 100% !important;
 		height: 100% !important;
-		max-width: none !important;
-		max-height: none !important;
-		object-fit: cover !important;
+		max-width: none;
+		max-height: none;
+		object-fit: cover;
 		object-position: center 22%;
 	}
 
 	.page-id-4929 .pega-service-intro .girl .wp-block-button.has-custom-width {
-		width: auto !important;
+		width: auto;
 		max-width: 100%;
 	}
 
 	.page-id-4929 .pega-service-intro .girl .pega-btn-primary .wp-block-button__link {
-		display: inline-flex !important;
-		align-items: center !important;
-		justify-content: center !important;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		gap: 0.35em;
-		width: auto !important;
+		width: auto;
 		min-width: 240px;
 		min-height: 50px;
-		padding: 14px 32px !important;
-		white-space: nowrap !important;
-		line-height: 1.4 !important;
+		padding: 14px 32px;
+		white-space: nowrap;
+		line-height: 1.4;
 		text-align: center;
 		box-sizing: border-box;
 	}
