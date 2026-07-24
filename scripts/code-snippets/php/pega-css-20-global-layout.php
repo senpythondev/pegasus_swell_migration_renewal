@@ -343,6 +343,83 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		z-index: 4;
 	}
 }
+
+/* swell-page (4929) — SP 実績バー（.achivement 統一・3区画横並び / 区内縦積み） */
+@media (max-width: 960px) {
+	.page-id-4929 .pega-stats.u-mb-ctrl {
+		padding: 24px 12px 32px;
+	}
+
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: 0;
+		padding: 20px 8px 16px;
+		border-radius: 10px;
+	}
+
+	.page-id-4929 .pega-stats .achivement > .wp-block-columns {
+		/* WP 782px 未満で columns が column 化するため !important */
+		flex-direction: row !important;
+		flex-wrap: nowrap;
+		gap: 0;
+		margin-bottom: 0;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement {
+		flex: 1 1 33.33%;
+		flex-basis: 33.33%;
+		max-width: 33.33%;
+		min-width: 0;
+		padding: 0 2px;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
+		flex-direction: column;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-columns > .wp-block-column {
+		flex-basis: 100%;
+		width: 100%;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image {
+		margin: 0 auto;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image img {
+		display: block;
+		width: auto;
+		max-height: 36px;
+		height: auto;
+		margin: 0 auto;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center > p.has-text-align-left:first-of-type {
+		font-size: 10px;
+		line-height: 1.2;
+		text-align: center;
+		margin-bottom: 0;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .number-text {
+		font-size: 22px;
+		line-height: 1;
+	}
+
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center > p.has-text-align-left + p {
+		font-size: 14px;
+		line-height: 1.1;
+		text-align: center;
+	}
+
+	.page-id-4929 .pega-stats .achivement .bottom-text {
+		margin-top: 10px;
+		font-size: 9px;
+		line-height: 1.3;
+		text-align: center;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-20-global-layout', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-20-global-layout' );

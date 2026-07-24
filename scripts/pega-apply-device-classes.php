@@ -105,12 +105,6 @@ function pega_apply_4941( array &$blocks ): int {
 		$blocks,
 		function ( array &$block ) {
 			$cls = pega_class( $block );
-			if ( pega_is( $block, 'group' ) && str_contains( $cls, 'achivement' ) ) {
-				return pega_add_device_class( $block, 'pc_only' );
-			}
-			if ( pega_is( $block, 'image' ) && str_contains( $cls, 'mobile-img' ) ) {
-				return pega_add_device_class( $block, 'sp_only' );
-			}
 			if ( pega_is( $block, 'image' ) && (int) ( $block['attrs']['id'] ?? 0 ) === 5098 ) {
 				return pega_add_device_class( $block, 'pc_only' );
 			}
@@ -123,13 +117,6 @@ function pega_apply_5008( array &$blocks ): int {
 	return pega_walk(
 		$blocks,
 		function ( array &$block ) {
-			$cls = pega_class( $block );
-			if ( pega_is( $block, 'columns' ) && str_contains( $cls, 'girl' ) ) {
-				return pega_add_device_class( $block, 'pc_only' );
-			}
-			if ( pega_is( $block, 'cover' ) && str_contains( $cls, 'mobile-girl' ) ) {
-				return pega_add_device_class( $block, 'sp_only' );
-			}
 			return false;
 		}
 	);

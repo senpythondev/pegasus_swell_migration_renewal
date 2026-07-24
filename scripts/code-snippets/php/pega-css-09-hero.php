@@ -319,6 +319,53 @@ add_action( 'wp_enqueue_scripts', function () {
 		max-width: 18em;
 	}
 }
+
+/* swell-page (4929) — SP FV（背景・タイポ・グラデーション可読性） */
+@media (max-width: 960px) {
+	.page-id-4929 .main-text.wp-block-cover {
+		min-height: min(88vh, 760px);
+		background-image: url("/wp-content/uploads/2026/07/woman-top-sp.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center 22%;
+	}
+
+	.page-id-4929 .main-text .wp-block-cover__image-background {
+		opacity: 0;
+	}
+
+	.page-id-4929 .main-text.wp-block-cover::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+		background: linear-gradient(
+			105deg,
+			rgba(255, 255, 255, 0.93) 0%,
+			rgba(255, 255, 255, 0.78) 36%,
+			rgba(255, 255, 255, 0.2) 56%,
+			rgba(255, 255, 255, 0) 70%
+		);
+	}
+
+	.page-id-4929 .main-text .wp-block-cover__inner-container {
+		position: relative;
+		z-index: 2;
+	}
+
+	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
+		/* ブロック inline style(font-size:44px) を上書きするため !important */
+		font-size: clamp(22px, 5.8vw, 32px) !important;
+		max-width: none;
+		line-height: 1.4;
+	}
+
+	.page-id-4929 .main-text .wp-block-paragraph.has-text-color[style*="border-left"] {
+		font-size: clamp(13px, 3.6vw, 15px);
+		line-height: 1.75;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-09-hero', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-09-hero' );

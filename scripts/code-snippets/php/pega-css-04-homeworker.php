@@ -297,6 +297,73 @@ add_action( 'wp_enqueue_scripts', function () {
 		margin-top: 56px !important;
 	}
 }
+
+/* swell-page (4929) — SP 在宅支援（タイトル余白・girl 縦積み） */
+@media (max-width: 960px) {
+	.page-id-4929 .pega-service-intro {
+		padding: 32px 16px;
+	}
+
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		margin-bottom: 32px;
+		padding: 0 4px;
+	}
+
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .pega-badge,
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .is-style-section_ttl,
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-10:not(.has-background) .sub-heading {
+		margin-top: 0;
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	.page-id-4929 .pega-service-intro .wp-block-group.u-mb-0.has-background {
+		padding: 28px 20px;
+		margin-bottom: 32px;
+	}
+
+	.page-id-4929 .pega-service-intro .girl.wp-block-columns {
+		flex-direction: column;
+		gap: 24px;
+		margin-bottom: 0;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child,
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:last-child {
+		flex-basis: 100%;
+		width: 100%;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child figure.wp-block-image {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 8px 24px rgba(16, 103, 214, 0.12);
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:first-child figure.wp-block-image img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+		object-position: center 22%;
+	}
+
+	.page-id-4929 .pega-service-intro .girl .wp-block-column:last-child {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding: 0;
+	}
+
+	.page-id-4929 .pega-service-intro .supports {
+		margin-top: 40px !important;
+	}
+}
 CSS;
 	wp_register_style( 'pega-css-04-homeworker', false, array( 'child_style' ), null );
 	wp_enqueue_style( 'pega-css-04-homeworker' );

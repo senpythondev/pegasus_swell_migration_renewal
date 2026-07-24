@@ -1,0 +1,118 @@
+<!-- wp:group {"tagName":"section","align":"full","className":"pega-service-intro u-mb-ctrl u-mb-0","style":{"spacing":{"padding":{"top":"80px","bottom":"80px","left":"16px","right":"16px"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1100px"},"metadata":{"name":"在宅支援"}} -->
+<section class="wp-block-group alignfull pega-service-intro u-mb-ctrl u-mb-0 has-custom-css has-white-background-color has-background" style="padding-top:80px;padding-right:16px;padding-bottom:80px;padding-left:16px"><!-- wp:group {"className":"u-mb-ctrl u-mb-10","layout":{"type":"flex","orientation":"vertical","justifyContent":"center","flexWrap":"nowrap"},"metadata":{"name":"在宅支援：セクション見出し"}} -->
+<div class="wp-block-group u-mb-ctrl u-mb-10 has-custom-css">
+<!-- wp:paragraph {"className":"pega-badge has-border-color has-text-color has-background u-mb-ctrl u-mb-10","style":{"typography":{"fontSize":"12px","fontStyle":"normal","fontWeight":"600","textAlign":"center"},"spacing":{"padding":{"top":"6px","bottom":"6px","left":"16px","right":"16px"}},"border":{"radius":"999px","color":"#bfdbfe","width":"1px"},"color":{"background":"#ffffff","text":"#0b3d8a"}}} -->
+<p class="has-text-align-center pega-badge has-border-color has-text-color has-background u-mb-ctrl u-mb-10 has-custom-css" style="border-color:#bfdbfe;border-width:1px;border-radius:999px;color:#0b3d8a;background-color:#ffffff;padding-top:6px;padding-right:16px;padding-bottom:6px;padding-left:16px;font-size:12px;font-style:normal;font-weight:600">在宅型就労移行支援</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"is-style-section_ttl","style":{"typography":{"fontSize":"36px","fontWeight":"700","letterSpacing":"1px","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<h2 class="wp-block-heading has-text-align-center is-style-section_ttl has-text-color" style="color:#0b3d8a;font-size:36px;font-weight:700;letter-spacing:1px"><span style="">ペガサス</span>の在宅型就労移行支援</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"has-text-color u-mb-ctrl u-mb-0 sub-heading","style":{"typography":{"fontSize":"14px","lineHeight":"2","textAlign":"center"},"color":{"text":"#475569"}}} -->
+<p class="has-text-align-center has-text-color u-mb-ctrl u-mb-0 sub-heading" style="color:#475569;font-size:14px;line-height:2"><strong>ご自宅で「働くための訓練」を行い、在宅勤務という目標を応援します。<br>あなたらしい働き方で、「働きたい」という気持ちを、私たちが支えます。</strong></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:cover {"url":"http://220.158.21.114:8080/wp-content/uploads/2026/07/woman-top-sp-1-690x683.png","id":5220,"dimRatio":0,"customOverlayColor":"#d4cac3","isUserOverlayColor":false,"focalPoint":{"x":0.55,"y":0.38},"isDark":false,"sizeSlug":"large","className":"mobile-girl sp_only","metadata":{"name":"在宅支援：人物画像"}} -->
+<div class="wp-block-cover is-light mobile-girl sp_only"><img class="wp-block-cover__image-background wp-image-5220 size-large" alt="" src="http://220.158.21.114:8080/wp-content/uploads/2026/07/woman-top-sp-1-690x683.png" style="object-position:55% 38%" data-object-fit="cover" data-object-position="55% 38%"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim" style="background-color:#d4cac3"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","layout":{"type":"constrained"},"metadata":{"name":"在宅支援：人物画像（テキスト）"}} -->
+<div class="wp-block-group alignwide"><!-- wp:paragraph {"className":"u-mb-ctrl u-mb-10","style":{"typography":{"fontSize":"16px","lineHeight":"2"},"color":{"text":"#334155"}}} -->
+<p class="u-mb-ctrl u-mb-10 has-text-color" style="color:#334155;font-size:16px;line-height:2"><strong>2022年から在宅型をスタート。</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"u-mb-ctrl u-mb-10","style":{"typography":{"fontSize":"16px","lineHeight":"2"},"color":{"text":"#334155"}}} -->
+<p class="u-mb-ctrl u-mb-10 has-text-color" style="color:#334155;font-size:16px;line-height:2">全国どこからでも、9割以上の方が自己負担なく利用できます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"style":{"color":{"background":"#0059b6"}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" style="background-color:#0059b6">在宅型を詳しく見る ›</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:group {"className":"u-mb-ctrl u-mb-0","style":{"spacing":{"padding":{"top":"40px","right":"36px","bottom":"40px","left":"36px"}},"border":{"radius":"16px"},"color":{"background":"#eff6ff"}},"layout":{"type":"constrained"},"metadata":{"name":"在宅支援：リード文エリア"}} -->
+<div class="wp-block-group u-mb-ctrl u-mb-0 has-custom-css has-background" style="border-radius:16px;background-color:#eff6ff;padding-top:40px;padding-right:36px;padding-bottom:40px;padding-left:36px"><!-- wp:columns {"verticalAlignment":"center","className":"u-mb-ctrl u-mb-20 girl pc_only","metadata":{"name":"在宅支援：リード文"}} -->
+<div class="wp-block-columns are-vertically-aligned-center u-mb-ctrl u-mb-20 girl pc_only"><!-- wp:column {"verticalAlignment":"center","width":"45%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%"><!-- wp:image {"id":4981,"width":"367px","height":"auto","aspectRatio":"1.0102645892119577","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/woman-top-sp-690x683.png" alt="" class="wp-image-4981" style="aspect-ratio:1.0102645892119577;width:367px;height:auto"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center","width":"55%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%"><!-- wp:paragraph {"style":{"typography":{"fontSize":"16px","lineHeight":"2"},"color":{"text":"#334155"}}} -->
+<p class="has-text-color" style="color:#334155;font-size:16px;line-height:2"><strong>2022年から在宅型をスタート。</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"16px","lineHeight":"2"},"color":{"text":"#334155"}}} -->
+<p class="has-text-color" style="color:#334155;font-size:16px;line-height:2">全国どこからでも、9割以上の方が自己負担なく利用できます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"textColor":"white","width":50,"className":"pega-btn-primary has-custom-font-size","style":{"border":{"radius":{"topLeft":"225px","topRight":"225px","bottomLeft":"225px","bottomRight":"225px"}},"typography":{"fontSize":"14px","fontWeight":"600"},"spacing":{"padding":{"top":"14px","bottom":"14px","left":"32px","right":"32px"}},"color":{"background":"#0059b6"}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-50 pega-btn-primary has-custom-font-size"><a class="wp-block-button__link has-white-color has-text-color has-background has-custom-font-size wp-element-button" href="#" style="border-top-left-radius:225px;border-top-right-radius:225px;border-bottom-left-radius:225px;border-bottom-right-radius:225px;background-color:#0059b6;padding-top:14px;padding-right:32px;padding-bottom:14px;padding-left:32px;font-size:14px;font-weight:600">在宅型を詳しく見る ›</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:columns {"align":"wide","className":"supports","metadata":{"name":"在宅支援：3つの強み"}} -->
+<div class="wp-block-columns alignwide supports has-custom-css"><!-- wp:column {"style":{"spacing":{"padding":{"top":"24px","bottom":"24px","left":"20px","right":"20px"}},"border":{"radius":"12px","color":"#e0f2fe","width":"1px"},"color":{"background":"#ffffff"}},"metadata":{"name":"在宅支援：強み1"}} -->
+<div class="wp-block-column has-border-color has-background" style="border-color:#e0f2fe;border-width:1px;border-radius:12px;background-color:#ffffff;padding-top:24px;padding-right:20px;padding-bottom:24px;padding-left:20px"><!-- wp:image {"id":5012,"width":"80px","sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full is-resized"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/laptop-1-1.png" alt="" class="wp-image-5012" style="width:80px"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"14px","fontWeight":"700","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<h4 class="wp-block-heading has-text-align-center has-text-color" style="color:#0b3d8a;font-size:14px;font-weight:700">本番の仕事を想定した訓練</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"has-text-color","style":{"typography":{"fontSize":"12px","lineHeight":"1.7","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#0b3d8a;font-size:12px;line-height:1.7">実際の業務に近い内容で、在宅勤務に必要な力を身につけます。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"style":{"spacing":{"padding":{"top":"24px","bottom":"24px","left":"20px","right":"20px"}},"border":{"radius":"12px","color":"#e0f2fe","width":"1px"},"color":{"background":"#ffffff"}},"metadata":{"name":"在宅支援：強み2"}} -->
+<div class="wp-block-column has-border-color has-background" style="border-color:#e0f2fe;border-width:1px;border-radius:12px;background-color:#ffffff;padding-top:24px;padding-right:20px;padding-bottom:24px;padding-left:20px"><!-- wp:image {"id":5013,"width":"80px","sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full is-resized"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/business-1.png" alt="" class="wp-image-5013" style="width:80px"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"14px","fontWeight":"700","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<h4 class="wp-block-heading has-text-align-center has-text-color" style="color:#0b3d8a;font-size:14px;font-weight:700">提携企業で「おためし就職」</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"has-text-color","style":{"typography":{"fontSize":"12px","lineHeight":"1.7","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#0b3d8a;font-size:12px;line-height:1.7">就職前に、本物の仕事を経験できるチャンスがあります。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"style":{"spacing":{"padding":{"top":"24px","bottom":"24px","left":"20px","right":"20px"}},"border":{"radius":"12px","color":"#e0f2fe","width":"1px"},"color":{"background":"#ffffff"}},"metadata":{"name":"在宅支援：強み3"}} -->
+<div class="wp-block-column has-border-color has-background" style="border-color:#e0f2fe;border-width:1px;border-radius:12px;background-color:#ffffff;padding-top:24px;padding-right:20px;padding-bottom:24px;padding-left:20px"><!-- wp:image {"id":5017,"width":"80px","sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full is-resized"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/headphones-2.png" alt="" class="wp-image-5017" style="width:80px"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"14px","fontWeight":"700","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<h4 class="wp-block-heading has-text-align-center has-text-color" style="color:#0b3d8a;font-size:14px;font-weight:700">手厚いサポート</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"has-text-color","style":{"typography":{"fontSize":"12px","lineHeight":"1.7","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#0b3d8a;font-size:12px;line-height:1.7">月1回の対面、週1回のZOOM、毎日の電話で伴走します。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"style":{"spacing":{"padding":{"top":"24px","bottom":"24px","left":"20px","right":"20px"}},"border":{"radius":"12px","color":"#e0f2fe","width":"1px"},"color":{"background":"#ffffff"}},"metadata":{"name":"在宅支援：強み4"}} -->
+<div class="wp-block-column has-border-color has-background" style="border-color:#e0f2fe;border-width:1px;border-radius:12px;background-color:#ffffff;padding-top:24px;padding-right:20px;padding-bottom:24px;padding-left:20px"><!-- wp:image {"id":5015,"width":"80px","height":"auto","sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full is-resized"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/online-meeting-1.png" alt="" class="wp-image-5015" style="width:80px;height:auto"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"14px","fontWeight":"700","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<h4 class="wp-block-heading has-text-align-center has-text-color" style="color:#0b3d8a;font-size:14px;font-weight:700">充実した訓練プログラム</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"has-text-color","style":{"typography":{"fontSize":"12px","lineHeight":"1.7","textAlign":"center"},"color":{"text":"#0b3d8a"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#0b3d8a;font-size:12px;line-height:1.7">ZOOMでの訓練は、カメラオフでも参加できます。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></section>
+<!-- /wp:group -->
