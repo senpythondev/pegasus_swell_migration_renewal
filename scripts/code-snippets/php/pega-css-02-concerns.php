@@ -195,6 +195,12 @@ add_action( 'wp_enqueue_scripts', function () {
 	.wave-section .wp-block-columns > .wp-block-column {
 		width: 100% !important;
 	}
+
+	/* セクション見出し: 「か？」だけが孤立改行されるのを防ぐ（425px幅） */
+	.page-id-4929 .wave-section h2.is-style-section_ttl.has-text-color {
+		/* ブロック inline font-size:32px を上書きするため !important */
+		font-size: 28px !important;
+	}
 }
 
 /* swell-page (4929) — デスクトップ帯域(961px+) お悩みカード高さ統一（項目6） */

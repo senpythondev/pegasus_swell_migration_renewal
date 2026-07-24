@@ -320,6 +320,29 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 }
 
+/* swell-page (4929) — FVキャッチコピー SP改行（1文目2行・2文目1行） */
+@media (max-width: 960px) {
+	.page-id-4929 .main-text h1 .pega-br-sp {
+		display: inline;
+	}
+
+	.page-id-4929 .main-text h1 .pega-hero-catch-sub {
+		display: block;
+		white-space: nowrap;
+	}
+}
+
+@media (min-width: 961px) {
+	.page-id-4929 .main-text h1 .pega-br-sp {
+		display: none;
+	}
+
+	.page-id-4929 .main-text h1 .pega-hero-catch-sub {
+		display: inline;
+		white-space: normal;
+	}
+}
+
 /* swell-page (4929) — SP FV（背景・タイポ・グラデーション可読性） */
 @media (max-width: 960px) {
 	.page-id-4929 .main-text.wp-block-cover {
@@ -356,14 +379,41 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
 		/* ブロック inline style(font-size:44px) を上書きするため !important */
-		font-size: clamp(22px, 5.8vw, 32px) !important;
-		max-width: none;
-		line-height: 1.4;
+		font-size: clamp(16px, 3.4vw, 22px) !important;
+		max-width: min(100%, 12.5em);
+		line-height: 1.45;
 	}
 
 	.page-id-4929 .main-text .wp-block-paragraph.has-text-color[style*="border-left"] {
 		font-size: clamp(13px, 3.6vw, 15px);
 		line-height: 1.75;
+	}
+
+	.page-id-4929 .main-text .wp-block-buttons {
+		flex-direction: column;
+		align-items: stretch;
+		gap: clamp(10px, 2.5vw, 14px);
+		width: min(100%, calc(100vw - 48px));
+		max-width: 360px;
+		margin-top: clamp(16px, 4vw, 24px);
+	}
+
+	.page-id-4929 .main-text .wp-block-buttons > .wp-block-button {
+		width: 100%;
+		margin: 0;
+	}
+
+	.page-id-4929 .main-text .wp-block-buttons .wp-block-button__link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-height: 48px;
+		padding: 14px 20px;
+		box-sizing: border-box;
+		white-space: nowrap;
+		font-size: clamp(13px, 3.5vw, 14px);
+		line-height: 1.35;
 	}
 }
 CSS;

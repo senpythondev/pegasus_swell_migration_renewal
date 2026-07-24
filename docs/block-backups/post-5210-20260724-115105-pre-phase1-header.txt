@@ -1,0 +1,45 @@
+<!-- wp:group {"tagName":"header","align":"full","className":"pega-header","style":{"spacing":{"padding":{"top":"12px","bottom":"12px","left":"16px","right":"16px"}},"color":{"background":"#ffffff"},"border":{"bottom":{"color":"#f1f5f9","width":"1px"}}},"layout":{"type":"constrained","contentSize":"1200px"},"metadata":{"name":"ヘッダー"}} -->
+<header class="wp-block-group alignfull pega-header has-background" style="border-bottom-color:#f1f5f9;border-bottom-width:1px;background-color:#ffffff;padding-top:12px;padding-right:16px;padding-bottom:12px;padding-left:16px"><!-- wp:group {"style":{"spacing":{"blockGap":"16px"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"},"metadata":{"name":"ヘッダー：メインレイアウト"}} -->
+<div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"12px"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"metadata":{"name":"ヘッダー：ロゴ・タグライン"}} -->
+<div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"metadata":{"name":"ヘッダー：ロゴ"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontSize":"11px","lineHeight":"1"},"color":{"text":"#64748b"},"spacing":{"margin":{"top":"0","bottom":"2px"}}}} -->
+<p class="has-text-color" style="color:#64748b;margin-top:0;margin-bottom:2px;font-size:11px;line-height:1"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":5211,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="http://220.158.21.114:8080/wp-content/uploads/2026/07/7-logo-e1617063016472-1.png" alt="" class="wp-image-5211"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"className":"pega-header__tagline","style":{"typography":{"fontSize":"11px"},"color":{"text":"#475569"},"border":{"left":{"color":"#e2e8f0","width":"1px"}},"spacing":{"padding":{"left":"12px"},"margin":{"top":"0","bottom":"0"}}}} -->
+<p class="pega-header__tagline has-text-color" style="border-left-color:#e2e8f0;border-left-width:1px;color:#475569;margin-top:0;margin-bottom:0;padding-left:12px;font-size:11px">障害がある方向けの在宅型就労支援サービス</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"12px"}},"layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"center"},"metadata":{"name":"ヘッダー：電話・問い合わせ"}} -->
+<div class="wp-block-group"><!-- wp:group {"className":"pega-header__tel","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"metadata":{"name":"ヘッダー：電話番号"}} -->
+<div class="wp-block-group pega-header__tel"><!-- wp:paragraph {"className":"mobile sp_only","style":{"typography":{"fontSize":"20px","fontStyle":"normal","fontWeight":"700","lineHeight":"1"},"color":{"text":"#2563eb"},"spacing":{"margin":{"top":"0","bottom":"2px"}}}} -->
+<p class="mobile has-text-color sp_only" style="color:#2563eb;margin-top:0;margin-bottom:2px;font-size:20px;font-style:normal;font-weight:700;line-height:1">📞 047-406-3477</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"10px","textAlign":"left"},"color":{"text":"#64748b"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"className":"pc_only"} -->
+<p class="has-text-align-left has-text-color pc_only" style="color:#64748b;margin-top:0;margin-bottom:0;font-size:10px">受付時間 9:00〜17:30</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"","textColor":"","className":"has-custom-font-size btn-docs is-style-outline","style":{"color":{"background":"#ecfdf5","text":"#047857"},"border":{"radius":"6px","color":"#a7f3d0","width":"1px"},"typography":{"fontSize":"12px","fontStyle":"normal","fontWeight":"600"},"spacing":{"padding":{"top":"8px","bottom":"8px","left":"14px","right":"14px"}}}} -->
+<div class="wp-block-button has-custom-font-size btn-docs is-style-outline"><a class="wp-block-button__link has-text-color has-background has-border-color has-custom-font-size wp-element-button" style="border-color:#a7f3d0;border-width:1px;border-radius:6px;color:#047857;background-color:#ecfdf5;padding-top:8px;padding-right:14px;padding-bottom:8px;padding-left:14px;font-size:12px;font-style:normal;font-weight:600">資料請求</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"has-custom-font-size btn-contact is-style-outline","style":{"color":{"background":"#fff1f2","text":"#be123c"},"border":{"radius":"6px","color":"#fecdd3","width":"1px"},"typography":{"fontSize":"12px","fontStyle":"normal","fontWeight":"600"},"spacing":{"padding":{"top":"8px","bottom":"8px","left":"14px","right":"14px"}}}} -->
+<div class="wp-block-button has-custom-font-size btn-contact is-style-outline"><a class="wp-block-button__link has-text-color has-background has-border-color has-custom-font-size wp-element-button" style="border-color:#fecdd3;border-width:1px;border-radius:6px;color:#be123c;background-color:#fff1f2;padding-top:8px;padding-right:14px;padding-bottom:8px;padding-left:14px;font-size:12px;font-style:normal;font-weight:600">個別説明会</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"has-custom-font-size btn-menu","style":{"color":{"background":"#2563eb","text":"#ffffff"},"border":{"radius":"6px"},"typography":{"fontSize":"14px","fontWeight":"700"},"spacing":{"padding":{"top":"8px","bottom":"8px","left":"12px","right":"12px"}}}} -->
+<div class="wp-block-button has-custom-font-size btn-menu"><a class="wp-block-button__link has-text-color has-background has-custom-font-size wp-element-button" style="border-radius:6px;color:#ffffff;background-color:#2563eb;padding-top:8px;padding-right:12px;padding-bottom:8px;padding-left:12px;font-size:14px;font-weight:700">☰</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></header>
+<!-- /wp:group -->
