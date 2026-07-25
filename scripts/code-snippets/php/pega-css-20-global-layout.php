@@ -281,9 +281,14 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	left: auto;
 }
 
-/* swell-page (4929) — 実績バー・波型装飾（rev5239 ブロックCSS復旧） */
+/* swell-page (4929) — 実績バー・波型装飾（ブロック inline → CSS 集約） */
 .page-id-4929 .pega-stats.u-mb-ctrl {
-	padding: 10px !important;
+	background-color: #ffffff;
+	padding: 10px;
+}
+.page-id-4929 .pega-stats .achivement {
+	background-color: #1e6fdc;
+	border-radius: 10px;
 }
 .page-id-4929 .pega-stats .achivement .wp-block-columns {
 	display: flex !important;
@@ -302,12 +307,17 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 /* swell-page (4929) — デスクトップ帯域(961px+) 実績バー調整（項目2・3・4・5） */
 @media (min-width: 961px) {
 	.page-id-4929 .pega-stats.u-mb-ctrl {
-		padding: 0 10px 10px !important;
-		background: transparent !important;
+		padding: 0 10px 10px;
+		background: transparent;
 	}
 
 	.page-id-4929 .pega-stats .achivement {
-		padding: 10px 18px 8px !important;
+		padding: 10px 18px 8px;
+	}
+
+	.page-id-4929 .pega-stats .achivement .wp-block-columns.are-vertically-aligned-center > .box-achievement {
+		flex: 0 1 33.33%;
+		max-width: 33.33%;
 	}
 
 	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
@@ -320,9 +330,9 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	}
 
 	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-columns > .wp-block-column {
-		flex-basis: auto !important;
+		flex-basis: auto;
 		flex-grow: 0;
-		width: auto !important;
+		width: auto;
 	}
 
 	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-image {
@@ -386,10 +396,10 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 /* swell-page (4929) — SP 実績バー（3区画横並び / 区内縦積み） */
 @media (max-width: 960px) {
 	.page-id-4929 .pega-stats.u-mb-ctrl {
-		padding-top: clamp(8px, 2vw, 12px) !important;
-		padding-right: 16px !important;
-		padding-bottom: clamp(24px, 5vw, 32px) !important;
-		padding-left: 16px !important;
+		padding-top: clamp(8px, 2vw, 12px);
+		padding-right: 16px;
+		padding-bottom: clamp(24px, 5vw, 32px);
+		padding-left: 16px;
 	}
 
 	.page-id-4929 .pega-stats .achivement {
@@ -397,8 +407,7 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		margin-top: -81px;
 		position: relative;
 		z-index: 5;
-		/* ブロック inline padding(32/28px)より優先 — 上下を少しずつ詰める */
-		padding: clamp(6px, 1.5vw, 10px) clamp(1px, 0.5vw, 4px) clamp(5px, 1.2vw, 8px) !important;
+		padding: clamp(6px, 1.5vw, 10px) clamp(1px, 0.5vw, 4px) clamp(5px, 1.2vw, 8px);
 		border-radius: 10px;
 	}
 
@@ -421,7 +430,7 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
 		flex-direction: column;
 		align-items: center;
-		/* ブロック blockGap(24px)より優先 — アイコンとラベルの間を少し狭める */
+		/* テーマ既定 gap(24px)より優先 — inline 除去後も !important 必要 */
 		gap: clamp(2px, 0.6vw, 4px) !important;
 	}
 

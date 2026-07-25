@@ -292,6 +292,21 @@ add_action( 'wp_enqueue_scripts', function () {
 	width: fit-content;
 }
 
+/* swell-page (4929) — FV h1 / ボタン（ブロック inline → CSS 集約） */
+.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
+	color: #0b3d8a;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.page-id-4929 .main-text .wp-block-buttons {
+	gap: 12px;
+}
+
+.page-id-4929 .main-text .btn-contact .wp-block-button__link {
+	padding: 14px 28px;
+}
+
 /* swell-page (4929) — デスクトップ帯域(961px+) FV CTA 約10%拡大（項目1） */
 @media (min-width: 961px) {
 	.page-id-4929 .main-text .wp-block-paragraph.has-text-color[style*="border-left"] {
@@ -299,22 +314,25 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 
 	.page-id-4929 .main-text .wp-block-buttons {
-		gap: 13px !important;
+		gap: 13px;
 		margin-top: 24px !important;
 	}
 
-	.page-id-4929 .main-text .btn-apply .wp-block-button__link,
-	.page-id-4929 .main-text .btn-contact .wp-block-button__link {
+	.page-id-4929 .main-text .btn-apply .wp-block-button__link {
 		font-size: 15px !important;
 		padding: 15px 31px !important;
+	}
+
+	.page-id-4929 .main-text .btn-contact .wp-block-button__link {
+		font-size: 15px !important;
+		padding: 15px 31px;
 	}
 }
 
 /* swell-page (4929) — FVキャッチコピー（人物との重なり回避 + PC1行表示） */
 @media (min-width: 961px) {
 	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
-		/* ブロック inline style(font-size:44px) を上書きするため !important */
-		font-size: clamp(24px, 2.35vw, 36px) !important;
+		font-size: clamp(24px, 2.35vw, 36px);
 		/* 17文字の見出しをフォントサイズに比例して1行化（500px 固定上限は 36px 時に再改行する） */
 		max-width: 18em;
 	}
@@ -390,8 +408,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 
 	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
-		/* ブロック inline style(font-size:44px) を上書きするため !important */
-		font-size: clamp(16px, 3.4vw, 22px) !important;
+		font-size: clamp(16px, 3.4vw, 22px);
 		max-width: min(100%, 12.5em);
 		line-height: 1.45;
 	}
@@ -421,11 +438,14 @@ add_action( 'wp_enqueue_scripts', function () {
 		justify-content: center;
 		width: 100%;
 		min-height: 48px;
-		padding: 14px 20px;
 		box-sizing: border-box;
 		white-space: nowrap;
 		font-size: clamp(13px, 3.5vw, 14px);
 		line-height: 1.35;
+	}
+
+	.page-id-4929 .main-text .btn-contact .wp-block-button__link {
+		padding: 14px 28px;
 	}
 }
 CSS;
