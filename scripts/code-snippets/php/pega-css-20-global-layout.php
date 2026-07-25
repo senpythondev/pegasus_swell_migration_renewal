@@ -390,8 +390,8 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	}
 
 	.page-id-4929 .pega-stats .achivement {
-		/* SP: 実績バー高さの約50%をFVへ重ねる（768≈-105px / 425≈-102px / 375≈-96px） */
-		margin-top: clamp(-105px, -25vw, -96px);
+		/* SP: 実測バー高の50%がFVと重なるよう margin-top を設定（stats上padding分を加算） */
+		margin-top: -81px;
 		position: relative;
 		z-index: 5;
 		/* ブロック inline padding(32/28px)より優先 — 上下を少しずつ詰める */
@@ -466,6 +466,36 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		font-size: clamp(8px, 2.2vw, 9px);
 		line-height: 1.3;
 		text-align: center;
+	}
+}
+
+@media (max-width: 600px) {
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -79px;
+	}
+}
+
+@media (max-width: 480px) {
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -77px;
+	}
+}
+
+@media (max-width: 430px) {
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -72px;
+	}
+}
+
+@media (max-width: 390px) {
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -68px;
+	}
+}
+
+@media (max-width: 340px) {
+	.page-id-4929 .pega-stats .achivement {
+		margin-top: -65px;
 	}
 }
 CSS;
