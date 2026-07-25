@@ -394,7 +394,8 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		margin-top: clamp(-105px, -25vw, -96px);
 		position: relative;
 		z-index: 5;
-		padding: clamp(8px, 2vw, 14px) clamp(1px, 0.5vw, 4px) clamp(8px, 2vw, 12px);
+		/* ブロック inline padding(32/28px)より優先 — 上下を少しずつ詰める */
+		padding: clamp(6px, 1.5vw, 10px) clamp(1px, 0.5vw, 4px) clamp(5px, 1.2vw, 8px) !important;
 		border-radius: 10px;
 	}
 
@@ -417,7 +418,8 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 	.page-id-4929 .pega-stats .achivement .box-achievement > .wp-block-columns {
 		flex-direction: column;
 		align-items: center;
-		gap: clamp(2px, 0.8vw, 4px);
+		/* ブロック blockGap(24px)より優先 — アイコンとラベルの間を少し狭める */
+		gap: clamp(2px, 0.6vw, 4px) !important;
 	}
 
 	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-columns > .wp-block-column {
@@ -455,8 +457,12 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 		text-align: center;
 	}
 
+	.page-id-4929 .pega-stats .achivement .box-achievement .wp-block-column.is-vertically-aligned-center p + p {
+		margin-top: 0 !important;
+	}
+
 	.page-id-4929 .pega-stats .achivement .bottom-text {
-		margin-top: clamp(6px, 1.5vw, 10px);
+		margin-top: clamp(4px, 1vw, 7px) !important;
 		font-size: clamp(8px, 2.2vw, 9px);
 		line-height: 1.3;
 		text-align: center;
