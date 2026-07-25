@@ -386,7 +386,10 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 /* swell-page (4929) — SP 実績バー（3区画横並び / 区内縦積み） */
 @media (max-width: 960px) {
 	.page-id-4929 .pega-stats.u-mb-ctrl {
-		padding: clamp(8px, 2vw, 12px) clamp(8px, 2.5vw, 12px) clamp(24px, 5vw, 32px);
+		padding-top: clamp(8px, 2vw, 12px) !important;
+		padding-right: 16px !important;
+		padding-bottom: clamp(24px, 5vw, 32px) !important;
+		padding-left: 16px !important;
 	}
 
 	.page-id-4929 .pega-stats .achivement {

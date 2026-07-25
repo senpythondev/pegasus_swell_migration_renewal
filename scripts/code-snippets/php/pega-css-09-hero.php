@@ -377,6 +377,18 @@ add_action( 'wp_enqueue_scripts', function () {
 		z-index: 2;
 	}
 
+	/* ブロック inline padding(48px)を他セクションと同じ --pega-section-px に統一 */
+	.page-id-4929 .main-text.wp-block-cover {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	.page-id-4929 .main-text .wp-block-cover__inner-container > .wp-block-group.alignfull {
+		/* wave-section 等のブロック inline 16px と揃える */
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+	}
+
 	.page-id-4929 .main-text h1.wp-block-heading.has-text-color {
 		/* ブロック inline style(font-size:44px) を上書きするため !important */
 		font-size: clamp(16px, 3.4vw, 22px) !important;
@@ -393,7 +405,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		flex-direction: column;
 		align-items: stretch;
 		gap: clamp(10px, 2.5vw, 14px);
-		width: min(100%, calc(100vw - 48px));
+		width: 100%;
 		max-width: 360px;
 		margin-top: clamp(16px, 4vw, 24px);
 	}
