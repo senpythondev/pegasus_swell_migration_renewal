@@ -100,6 +100,9 @@ docs/pega-*.png
 docs/pega-*.jpg
 docs/aftercare-*.png
 
+# 一時調査用スクショ・JSON（変更なし診断。再実行可能な scripts/*-investigate*.mjs は追跡）
+docs/*-investigate/
+
 # 不採用 JS（ヘッダー scroll-hide 試作・functions.php 未 enqueue。コンテナ上の実体は手動削除可）
 wp_data/wp-content/themes/swell_child/pega-header-scroll.js
 

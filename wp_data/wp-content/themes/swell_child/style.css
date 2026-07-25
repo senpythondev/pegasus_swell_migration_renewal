@@ -1811,3 +1811,39 @@
    幅統一・余白・constrained上書き・カード枠/影/左線・タイトル装飾リセット等は
    そちらで最終上書き（section スニペットより後に読込）。
    ========================================================= */
+
+/* =========================================================
+   ペガサス全幅テンプレート（page-pega-fullwidth.php）— 構造のみ
+   post_content を使わず .pega-canvas で包む（SWELL 余白強制回避）
+   ========================================================= */
+.page-template-page-pega-fullwidth #body_wrap {
+	overflow-x: hidden;
+}
+
+.page-template-page-pega-fullwidth #content.l-content.l-container {
+	max-width: none;
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.page-template-page-pega-fullwidth .pega-fullwidth-main {
+	width: 100%;
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+
+.page-template-page-pega-fullwidth .pega-canvas {
+	width: 100%;
+	max-width: none;
+}
+
+/* alignfull breakout は .pega-canvas 直下のみ（ネスト要素は Code Snippets でリセット） */
+.page-template-page-pega-fullwidth .pega-canvas > .wp-block-group.alignfull,
+.page-template-page-pega-fullwidth .pega-canvas > .alignfull {
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
