@@ -53,7 +53,7 @@ add_action('wp_enqueue_scripts', function() {
 		true
 	);
 
-	if ( is_front_page() ) {
+	if ( is_front_page() || is_page( 4929 ) ) { // PREVIEW: page_on_front=4929化で「 || is_page( 4929 )」を除去
 		wp_enqueue_script(
 			'pega-sticky-cta',
 			get_stylesheet_directory_uri() . '/pega-sticky-cta.js',
@@ -232,7 +232,7 @@ function pega_footer_x_icon() {
  * スクロール追従CTA（トップページのみ・ヒーロー後〜フッター前）
  */
 function pega_render_sticky_cta() {
-	if ( ! is_front_page() ) {
+	if ( ! is_front_page() && ! is_page( 4929 ) ) { // PREVIEW: page_on_front=4929化で「 && ! is_page( 4929 )」を除去
 		return;
 	}
 
@@ -264,7 +264,7 @@ add_action( 'wp_footer', 'pega_render_sticky_cta', 5 );
  * 注意: .home（WPコア）と同一要素に付くため .home→.pega-top の付け替えは挙動不変。
  */
 function pega_body_class_top( $classes ) {
-	if ( is_front_page() ) {
+	if ( is_front_page() || is_page( 4929 ) ) { // PREVIEW: page_on_front=4929化で「 || is_page( 4929 )」を除去
 		$classes[] = 'pega-top';
 	}
 	return $classes;
