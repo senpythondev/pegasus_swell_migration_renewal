@@ -386,11 +386,14 @@ body.pega-has-sticky-cta .home .p-fixBtnWrap {
 /* swell-page (4929) — SP 実績バー（3区画横並び / 区内縦積み） */
 @media (max-width: 960px) {
 	.page-id-4929 .pega-stats.u-mb-ctrl {
-		padding: clamp(16px, 4vw, 24px) clamp(8px, 2.5vw, 12px) clamp(24px, 5vw, 32px);
+		padding: clamp(8px, 2vw, 12px) clamp(8px, 2.5vw, 12px) clamp(24px, 5vw, 32px);
 	}
 
 	.page-id-4929 .pega-stats .achivement {
-		margin-top: 0;
+		/* SP: 実績バー高さの約50%をFVへ重ねる（768≈-105px / 425≈-102px / 375≈-96px） */
+		margin-top: clamp(-105px, -25vw, -96px);
+		position: relative;
+		z-index: 5;
 		padding: clamp(8px, 2vw, 14px) clamp(1px, 0.5vw, 4px) clamp(8px, 2vw, 12px);
 		border-radius: 10px;
 	}
