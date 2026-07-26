@@ -100,10 +100,7 @@ add_action( 'after_setup_theme', function() {
 		$settings['spmenu_main_title'] = 'メニュー';
 		$updated = true;
 	}
-	if ( empty( $settings['acc_submenu'] ) ) {
-		$settings['acc_submenu'] = true;
-		$updated = true;
-	}
+	// acc_submenu はカスタマイザー正式保存へ移行（customize_save_after でキャッシュ自動破棄が効くため、ここでの一括投入は撤去）
 	if ( ! empty( $settings['fix_header'] ) ) {
 		$settings['fix_header'] = '0';
 		$updated                = true;
