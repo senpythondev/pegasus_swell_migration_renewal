@@ -40,22 +40,35 @@
 	overflow-x: hidden;
 }
 
+
 /* =========================================================
-   ヘッダー（トップページ）— 1本化
+   ヘッダー（トップページ）— 白背景1行 / ハンバーガーのみ / 賢い追従
    SWELL は #header + #fix_header の2要素構成。
-   トップでは fix_header を非表示。header は relative（先頭のみ表示）。
+   トップでは fix_header を非表示。#header は sticky（FV密着・本文オフセット増やさない）。
    ========================================================= */
-/* 装飾(色・背景・グラデ・影・枠・角丸・drop-shadow・フォント)は Code Snippets「pega-header-deco」(③/優先度10) へ移行。
-   以下は構造(display/flex/grid/order/position/幅/余白・SPメニュー機能上書き)のみ。
-   スコープ改名(.home→.pega-top)と SWELL上書き一覧は別コミット・docs/PRODUCTION_CUTOVER_CHECKLIST.md 参照。 */
+/* 装飾(色・背景・グラデ・影・枠・角丸・drop-shadow・フォント)は Code Snippets「pega-css-10-header」(優先度22) へ。
+   以下は構造(display/flex/order/position/幅/余白・SPメニュー機能上書き)のみ。 */
 .pega-top #fix_header {
 	display: none !important;
+}
+
+.pega-top #header {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	transition: transform 0.28s ease;
+	will-change: transform;
+}
+
+.pega-top.pega-headhide #header {
+	transform: translateY(-100%);
 }
 
 .pega-top #header .l-header__inner.l-container {
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
+	gap: clamp(8px, 1.5vw, 16px);
 	padding-left: clamp(16px, 3vw, 52px);
 	padding-right: clamp(16px, 3vw, 52px);
 }
@@ -66,24 +79,34 @@
 }
 
 .pega-top #header .l-header__gnav.c-gnavWrap {
-	flex: 1 1 auto;
-	min-width: 0;
+	display: none;
+	flex: 0 0 auto;
 }
 
 .pega-top #header .pega-header-contact {
 	flex: 0 0 auto;
+	margin-left: auto;
 }
 
-/* ロゴ：白背景を外し、ドロップシャドウでグラデーション上でも視認性を確保 */
+.pega-top #header .pega-header__actions {
+	display: flex;
+	align-items: center;
+	flex: 0 0 auto;
+	gap: clamp(6px, 1vw, 12px);
+	min-width: 0;
+}
 
-/* ドロップダウン：白文字×白背景を避け、ヘッダーと調和する配色 */
+.pega-top #header .pega-header__cta {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: clamp(6px, 0.8vw, 10px);
+	min-width: 0;
+}
 
 .pega-top #header .l-header__bar {
 	display: none;
 }
-
-/* ハンバーガー表示時の連絡先（全ページ: ~959px / トップ: 960–1349px）
-   ロゴ左・連絡先右（1行）。連絡先内はテキスト左・ボタン右。 */
 
 .pega-header-contact__info {
 	display: flex;
@@ -92,6 +115,48 @@
 	gap: 1px;
 	min-width: 0;
 	text-align: right;
+}
+
+.pega-header-contact__tel-icon {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+/* CTA 段階縮退: 1024↓お問い合わせ / 768↓資料請求 / 600↓CTA全消 */
+.pega-top .pega-header__cta-item--contact {
+	display: none;
+}
+
+@media (min-width: 1025px) {
+	.pega-top .pega-header__cta-item--contact {
+		display: inline-flex;
+	}
+}
+
+@media (max-width: 768px) {
+	.pega-top .pega-header__cta-item--download {
+		display: none;
+	}
+}
+
+@media (max-width: 600px) {
+	.pega-top #header .pega-header__cta {
+		display: none;
+	}
+
+	.pega-top .pega-header-contact {
+		display: flex;
+	}
+
+	.pega-top .pega-header-contact__info {
+		display: none;
+	}
+
+	.pega-top .pega-header-contact__tel-icon {
+		display: inline-flex;
+	}
 }
 
 @media (max-width: 600px) {
@@ -128,7 +193,7 @@
 		margin-right: 0;
 	}
 
-	#header .pega-header-contact {
+	.pega-top #header .pega-header-contact {
 		margin-left: auto;
 	}
 
@@ -143,23 +208,11 @@
 	}
 }
 
-@media (min-width: 960px) and (max-width: 1349px) {
-	.pega-top .pega-header-contact {
-		display: flex;
-	}
-}
-
-/* ハンバーガーメニュー — 白系パネル＋ブランド色テキスト（SWELL 標準に近い見慣れた構成） */
-
-/* SWELL 既定の ::before をパネル用オーバーレイとして活用（白〜薄グレーの面） */
-
 .p-spMenu__body {
 	position: relative;
 	z-index: 1;
 }
 
-/* SWELL 既定: .c-listMenu { min-height:8em; overflow-y:auto!important } が
-   ドロワー内で高さを抑え、HOME だけ見える状態になるため上書き */
 .p-spMenu .c-listMenu.c-spnav {
 	min-height: 0 !important;
 	height: auto !important;
@@ -167,42 +220,31 @@
 	overflow: visible !important;
 }
 
-/* 背面: 画面全体を白くせず、元画像を残したままぼかし＋薄いトーン */
+/* トップ: 全幅でハンバーガー＋SPメニュー（PCナビ横展開なし） */
+.pega-top #sp_menu.p-spMenu {
+	display: block !important;
+}
 
-/* 960〜1349px：ナビ項目数が多いためハンバーガー表示。
-   SWELL の DOM 順: logo → gnav → customBtn → menuBtn
-   Grid の自動配置はカーソルが戻れないため、flex + order で並べ直す */
-@media (min-width: 960px) and (max-width: 1349px) {
-	/* SWELL PC CSS が .p-spMenu { display:none } のため、タブレット幅で開閉不能になる */
-	.pega-top #sp_menu.p-spMenu {
-		display: block !important;
-	}
+.pega-top #header .l-header__menuBtn.sp_ {
+	display: flex;
+	flex-shrink: 0;
+	position: relative;
+	z-index: 25;
+	touch-action: manipulation;
+}
 
-	.pega-top #header .l-header__gnav.c-gnavWrap {
-		display: none !important;
-	}
+.pega-top #header .l-header__menuBtn .c-iconBtn {
+	min-width: 44px;
+	min-height: 44px;
+}
 
-	/* ハンバーガー: DOM 最後だが order: -1 で最左に */
-	.pega-top #header .l-header__menuBtn.sp_ {
-		display: flex !important;
-		order: -1;
-		flex-shrink: 0;
-		position: relative;
-		z-index: 25;
-		touch-action: manipulation;
-	}
+.pega-top #header .l-header__customBtn.sp_ {
+	flex-shrink: 0;
+}
 
-	.pega-top #header .l-header__menuBtn .c-iconBtn {
-		min-width: 44px;
-		min-height: 44px;
-	}
-
-	/* ロゴ左・連絡先右（1行） */
-	
-	/* カスタムボタン（検索等）: 最右 */
-	.pega-top #header .l-header__customBtn.sp_ {
-		order: 1;
-		flex-shrink: 0;
+@media (min-width: 960px) {
+	.pega-top .pega-header-contact {
+		display: flex;
 	}
 }
 

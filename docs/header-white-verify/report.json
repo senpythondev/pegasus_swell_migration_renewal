@@ -1,0 +1,134 @@
+{
+  "swell": {
+    "425": {
+      "hasPegaTop": true,
+      "headerBg": "rgb(255, 255, 255)",
+      "gnavDisplay": "none",
+      "ctaCount": 0,
+      "ctaLabels": [],
+      "contactInfoVisible": false,
+      "telIconVisible": true,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "0px",
+      "fvGap": 0
+    },
+    "768": {
+      "hasPegaTop": true,
+      "headerBg": "rgb(255, 255, 255)",
+      "gnavDisplay": "none",
+      "ctaCount": 1,
+      "ctaLabels": [
+        "個別説明会"
+      ],
+      "contactInfoVisible": true,
+      "telIconVisible": false,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "0px",
+      "fvGap": 0
+    },
+    "1024": {
+      "hasPegaTop": true,
+      "headerBg": "rgb(255, 255, 255)",
+      "gnavDisplay": "none",
+      "ctaCount": 2,
+      "ctaLabels": [
+        "個別説明会",
+        "資料請求"
+      ],
+      "contactInfoVisible": true,
+      "telIconVisible": false,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "0px",
+      "fvGap": 0
+    },
+    "1440": {
+      "hasPegaTop": true,
+      "headerBg": "rgb(255, 255, 255)",
+      "gnavDisplay": "none",
+      "ctaCount": 3,
+      "ctaLabels": [
+        "個別説明会",
+        "資料請求",
+        "お問い合わせ"
+      ],
+      "contactInfoVisible": true,
+      "telIconVisible": false,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "0px",
+      "fvGap": 0
+    }
+  },
+  "about": {
+    "425": {
+      "hasPegaTop": false,
+      "headerBg": "rgb(253, 253, 253)",
+      "gnavDisplay": "none",
+      "ctaCount": 0,
+      "ctaLabels": [],
+      "contactInfoVisible": false,
+      "telIconVisible": false,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "30.6px",
+      "fvGap": null
+    },
+    "768": {
+      "hasPegaTop": false,
+      "headerBg": "rgb(253, 253, 253)",
+      "gnavDisplay": "none",
+      "ctaCount": 0,
+      "ctaLabels": [],
+      "contactInfoVisible": false,
+      "telIconVisible": false,
+      "menuVisible": true,
+      "fixHeaderHidden": true,
+      "contentPadTop": "64px",
+      "fvGap": null
+    },
+    "1024": {
+      "hasPegaTop": false,
+      "headerBg": "rgb(253, 253, 253)",
+      "gnavDisplay": "block",
+      "ctaCount": 0,
+      "ctaLabels": [],
+      "contactInfoVisible": false,
+      "telIconVisible": false,
+      "menuVisible": false,
+      "fixHeaderHidden": true,
+      "contentPadTop": "64px",
+      "fvGap": null
+    },
+    "1440": {
+      "hasPegaTop": false,
+      "headerBg": "rgb(253, 253, 253)",
+      "gnavDisplay": "block",
+      "ctaCount": 0,
+      "ctaLabels": [],
+      "contactInfoVisible": false,
+      "telIconVisible": false,
+      "menuVisible": false,
+      "fixHeaderHidden": true,
+      "contentPadTop": "64px",
+      "fvGap": null
+    }
+  },
+  "hideScroll": {
+    "hiddenDown": true,
+    "shownUp": true
+  },
+  "spMenu": {
+    "open": false,
+    "topItems": [
+      "在宅型就労移行支援",
+      "サービス・サポート",
+      "実績・お声",
+      "コラム・ブログ",
+      "ペガサスについて"
+    ]
+  },
+  "out": "docs/header-white-verify"
+}

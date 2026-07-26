@@ -6,9 +6,9 @@ $header_class = SWELL_Theme::get_header_class();
 
 if ( $SETTING['info_bar_pos'] === 'head_top' ) SWELL_Theme::get_parts( 'parts/header/info_bar' );
 ?>
-<header id="header" class="l-header <?=esc_attr( $header_class )?>" data-spfix="<?=$SETTING['fix_header_sp'] ? '1' : '0'?>">
+<header id="header" class="l-header <?=esc_attr( $header_class )?>" data-spfix="0">
 	<?php if ( SWELL_Theme::is_use( 'head_bar' ) ) SWELL_Theme::get_parts( 'parts/header/head_bar' ); ?>
-	<div class="l-header__inner l-container">
+	<div class="l-header__inner l-container pega-header__inner">
 		<div class="l-header__logo">
 			<?php echo SWELL_PARTS::head_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php if ( $SETTING['phrase_pos'] === 'head_wrap' ) : ?>
@@ -23,14 +23,10 @@ if ( $SETTING['info_bar_pos'] === 'head_top' ) SWELL_Theme::get_parts( 'parts/he
 			?>
 		</nav>
 		<?php if ( function_exists( 'pega_render_header_contact' ) ) pega_render_header_contact(); ?>
-		<?php
-			\SWELL_Theme::outuput_widgets( 'head_box', [
-				'before' => '<div class="w-header pc_"><div class="w-header__inner">',
-				'after'  => '</div></div>',
-			] );
-
-			SWELL_Theme::get_parts( 'parts/header/sp_btns' );
-		?>
+		<div class="pega-header__actions">
+			<?php if ( function_exists( 'pega_render_header_cta_area' ) ) pega_render_header_cta_area(); ?>
+			<?php SWELL_Theme::get_parts( 'parts/header/sp_btns' ); ?>
+		</div>
 	</div>
 	<?php
 	if ( SWELL_Theme::is_use( 'sp_head_nav' ) ) :
@@ -39,7 +35,5 @@ if ( $SETTING['info_bar_pos'] === 'head_top' ) SWELL_Theme::get_parts( 'parts/he
 	?>
 </header>
 <?php
-
-if ( SWELL_Theme::is_use( 'fix_header' ) ) SWELL_Theme::get_parts( 'parts/header/fix_header', $header_class );
 
 if ( $SETTING['info_bar_pos'] === 'head_bottom' ) SWELL_Theme::get_parts( 'parts/header/info_bar' );

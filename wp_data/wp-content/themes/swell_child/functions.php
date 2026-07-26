@@ -53,6 +53,14 @@ add_action('wp_enqueue_scripts', function() {
 		true
 	);
 
+	wp_enqueue_script(
+		'pega-header-hide',
+		get_stylesheet_directory_uri() . '/pega-header-hide.js',
+		[],
+		filemtime( get_stylesheet_directory() . '/pega-header-hide.js' ),
+		true
+	);
+
 	if ( is_front_page() || is_page( 4929 ) ) { // PREVIEW: page_on_front=4929化で「 || is_page( 4929 )」を除去
 		wp_enqueue_script(
 			'pega-sticky-cta',
@@ -96,23 +104,32 @@ add_action( 'after_setup_theme', function() {
 		$settings['acc_submenu'] = true;
 		$updated = true;
 	}
+	if ( ! empty( $settings['fix_header'] ) ) {
+		$settings['fix_header'] = '0';
+		$updated                = true;
+	}
+	if ( ! empty( $settings['fix_header_sp'] ) ) {
+		$settings['fix_header_sp'] = '0';
+		$updated                   = true;
+	}
 	if ( ! empty( $updated ) ) {
 		update_option( 'loos_customizer', $settings );
 	}
 }, 20 );
 
 /**
- * ヘッダー連絡先（ハンバーガー表示時）
- * 電話: 現サイトアクセスページより 0463-74-6683
- * 受付時間: サイトに明示なし → 暫定 平日 9:00〜18:00
+ * ヘッダー連絡先（電話 + 受付時間）。CTA のお問い合わせとは別。
  */
 function pega_render_header_contact() {
+	if ( ! is_front_page() && ! is_page( 4929 ) ) {
+		return;
+	}
+
 	$tel_display = '0463-74-6683';
 	$tel_href    = 'tel:0463746683';
 	$hours       = '平日 9:00〜18:00';
-	$inquiry_url = home_url( '/contact/' );
 	?>
-	<div class="pega-header-contact" aria-label="受付時間・お問い合わせ">
+	<div class="pega-header-contact" aria-label="受付時間・電話">
 		<div class="pega-header-contact__info">
 			<p class="pega-header-contact__hours">
 				<span class="pega-header-contact__label">受付</span>
@@ -122,8 +139,68 @@ function pega_render_header_contact() {
 				<a href="<?php echo esc_attr( $tel_href ); ?>"><?php echo esc_html( $tel_display ); ?></a>
 			</p>
 		</div>
-		<a class="pega-header-contact__link" href="<?php echo esc_url( $inquiry_url ); ?>">お問い合わせ</a>
+		<a class="pega-header-contact__tel-icon" href="<?php echo esc_attr( $tel_href ); ?>" aria-label="電話 <?php echo esc_attr( $tel_display ); ?>">
+			<i class="icon-phone" aria-hidden="true"></i>
+		</a>
 	</div>
+	<?php
+}
+
+/**
+ * ヘッダー CTA（ウィジェット head_box 優先、未設定時は PHP フォールバック）
+ */
+function pega_render_header_cta_area() {
+	if ( ! is_front_page() && ! is_page( 4929 ) ) {
+		return;
+	}
+
+	ob_start();
+	\SWELL_Theme::outuput_widgets(
+		'head_box',
+		[
+			'before' => '<div class="w-header pc_ pega-header__cta pega-header__cta--widget"><div class="w-header__inner">',
+			'after'  => '</div></div>',
+		]
+	);
+	$widget_html = trim( ob_get_clean() );
+
+	if ( $widget_html !== '' ) {
+		echo $widget_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		return;
+	}
+
+	pega_render_header_cta_fallback();
+}
+
+/**
+ * head_box 未設定時の CTA 3 ボタン（ラベル・リンクは FV CTA と一致）
+ */
+function pega_render_header_cta_fallback() {
+	$items = [
+		[
+			'class' => 'pega-header__cta-item--apply',
+			'label' => '個別説明会',
+			'url'   => home_url( '/application/' ),
+		],
+		[
+			'class' => 'pega-header__cta-item--download',
+			'label' => '資料請求',
+			'url'   => home_url( '/download/' ),
+		],
+		[
+			'class' => 'pega-header__cta-item--contact',
+			'label' => 'お問い合わせ',
+			'url'   => home_url( '/contact/' ),
+		],
+	];
+	?>
+	<nav class="pega-header__cta pega-header__cta--fallback" aria-label="ヘッダーCTA">
+		<?php foreach ( $items as $item ) : ?>
+			<a class="pega-header__cta-item <?php echo esc_attr( $item['class'] ); ?>" href="<?php echo esc_url( $item['url'] ); ?>">
+				<?php echo esc_html( $item['label'] ); ?>
+			</a>
+		<?php endforeach; ?>
+	</nav>
 	<?php
 }
 
