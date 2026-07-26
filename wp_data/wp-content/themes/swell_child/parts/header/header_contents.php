@@ -14,7 +14,6 @@ if ( $SETTING['info_bar_pos'] === 'head_top' ) SWELL_Theme::get_parts( 'parts/he
 			<?php if ( $SETTING['phrase_pos'] === 'head_wrap' ) : ?>
 				<div class="c-catchphrase u-thin"><?=esc_html( SWELL_Theme::site_data( 'catchphrase' ) )?></div>
 			<?php endif; ?>
-			<?php if ( function_exists( 'pega_render_header_contact' ) ) pega_render_header_contact(); ?>
 		</div>
 		<nav id="gnav" class="l-header__gnav c-gnavWrap">
 			<?php
@@ -23,6 +22,7 @@ if ( $SETTING['info_bar_pos'] === 'head_top' ) SWELL_Theme::get_parts( 'parts/he
 				] );
 			?>
 		</nav>
+		<?php if ( function_exists( 'pega_render_header_contact' ) ) pega_render_header_contact(); ?>
 		<?php
 			\SWELL_Theme::outuput_widgets( 'head_box', [
 				'before' => '<div class="w-header pc_"><div class="w-header__inner">',
